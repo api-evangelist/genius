@@ -1,0 +1,23 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.genius.com/web_pages/lookup?raw_annotatable_url=https%3A%2F%2Fexample.com%2Farticle",
+    "headers": { "Authorization": "Bearer YOUR_CLIENT_ACCESS_TOKEN" }
+  },
+  "response": {
+    "meta": { "status": 200 },
+    "response": {
+      "web_page": {
+        "id": 1234,
+        "url": "https://example.com/article",
+        "canonical_url": "https://example.com/article",
+        "normalized_url": "https://example.com/article",
+        "domain": "example.com",
+        "title": "Example Article",
+        "annotation_count": 7,
+        "share_url": "https://genius.com/web/example.com/article",
+        "api_path": "/web_pages/1234"
+      }
+    }
+  }
+}

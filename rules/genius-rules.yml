@@ -1,0 +1,153 @@
+extends:
+  - spectral:oas
+formats:
+  - oas3
+functions: []
+rules:
+  # ─── Genius API style: snake_case identifiers everywhere ──────────────
+  genius-snake-case-paths:
+    description: Path segments must use snake_case (e.g. /web_pages/lookup, /artists/{id}/songs).
+    message: "{{property}} must use snake_case"
+    severity: error
+    given: $.paths.*~
+    then:
+      function: pattern
+      functionOptions:
+        match: "^/[a-z0-9_/{}]+$"
+
+  genius-snake-case-query-params:
+    description: Query and path parameter names must be snake_case (Genius uses per_page, text_format, raw_annotatable_url, etc.).
+    message: "Parameter '{{value}}' must be snake_case"
+    severity: error
+    given: $.paths[*][*].parameters[?(@.in == 'query' || @.in == 'path')].name
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-z0-9_]*$"
+
+  # ─── Operation hygiene ───────────────────────────────────────────────
+  genius-operation-id:
+    description: Every operation must have an operationId in camelCase.
+    severity: error
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      - field: operationId
+        function: truthy
+      - field: operationId
+        function: pattern
+        functionOptions:
+          match: "^[a-z][a-zA-Z0-9]+$"
+
+  genius-operation-summary-title-case:
+    description: Operation summaries must be Title Case.
+    severity: warn
+    given: $.paths[*][*].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: "^([A-Z][a-zA-Z0-9]*)(\\s[A-Z][a-zA-Z0-9]*)*$"
+
+  genius-operation-tags-required:
+    description: Every operation must declare at least one tag.
+    severity: error
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      field: tags
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          minItems: 1
+
+  genius-operation-description:
+    description: Every operation must have a description.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      field: description
+      function: truthy
+
+  # ─── Envelope conventions (Genius wraps every response in meta + response) ─
+  genius-response-meta-envelope:
+    description: All 2xx JSON responses must reference a schema that envelopes the payload under `meta` + `response`.
+    severity: warn
+    given: $.components.schemas[?(@property.match(/Response$/i))]
+    then:
+      field: properties
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required: [meta, response]
+
+  genius-meta-shape:
+    description: The Meta envelope schema must include a numeric `status` field.
+    severity: error
+    given: $.components.schemas.Meta
+    then:
+      field: properties.status
+      function: truthy
+
+  # ─── Security ────────────────────────────────────────────────────────
+  genius-security-defined:
+    description: Genius uses OAuth2 and a bearer client access token. Both must be defined.
+    severity: error
+    given: $.components.securitySchemes
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required: [GeniusOAuth2, ClientAccessToken]
+
+  genius-oauth2-scopes:
+    description: The OAuth2 scheme must declare the four canonical Genius scopes.
+    severity: error
+    given: $.components.securitySchemes.GeniusOAuth2.flows.authorizationCode.scopes
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required: [me, create_annotation, manage_annotation, vote]
+
+  # ─── Pagination ──────────────────────────────────────────────────────
+  genius-pagination-params:
+    description: Collection-listing operations should support `per_page` and `page`.
+    severity: info
+    given: $.paths[?(@property.match(/\\/(songs|artists|albums|annotations|referents|comments|activity|albums|users|followers|leaderboard|tracks|edits|contributions)$/) || @property.match(/\\/(songs|artists|albums|referents|web_pages)$/))][get].parameters
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          contains:
+            type: object
+            properties:
+              name:
+                enum: [per_page, page]
+
+  # ─── Text format consistency ─────────────────────────────────────────
+  genius-text-format-enum:
+    description: The `text_format` parameter must enumerate dom, html, markdown, plain.
+    severity: warn
+    given: $.paths[*][*].parameters[?(@.name == 'text_format')].schema
+    then:
+      field: enum
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          items:
+            enum: [dom, html, markdown, plain]
+
+  # ─── Identifier types ────────────────────────────────────────────────
+  genius-numeric-id-paths:
+    description: Path `{id}` parameters for resources (songs, artists, albums, annotations, users) must be integers.
+    severity: error
+    given: $.paths[*][*].parameters[?(@.in == 'path' && @.name == 'id')].schema
+    then:
+      field: type
+      function: enumeration
+      functionOptions:
+        values: [integer]

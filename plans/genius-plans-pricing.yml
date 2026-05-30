@@ -1,0 +1,65 @@
+apiCommonsPlans: 0.1
+provider:
+  id: genius
+  name: Genius
+  url: https://docs.genius.com/
+  signup: https://genius.com/api-clients
+
+source:
+  - https://docs.genius.com/
+  - https://genius.com/api-clients
+
+modified: '2026-05-29'
+
+summary: >-
+  Genius offers a single free public API. Apps are registered at
+  https://genius.com/api-clients, which issues a client ID, client secret,
+  and a long-lived client access token suitable for read-only requests. User
+  tokens issued via the OAuth2 authorization-code flow are required for
+  account, voting, and annotation-write actions. There is no paid tier
+  documented by Genius; the platform is free at point of use, subject to
+  terms of service and unpublished fair-use limits.
+
+plans:
+  - id: free
+    name: Free Developer
+    description: >-
+      The default and only published plan. Free registration at
+      https://genius.com/api-clients yields a client_id, client_secret, and
+      a non-expiring client access token. All published endpoints are
+      available. Authenticated write actions (createAnnotation, vote,
+      delete) require a user-context OAuth2 token with the appropriate
+      scope.
+    price:
+      currency: USD
+      amount: 0
+      period: month
+    eligibility: public
+    signup:
+      type: self-serve
+      url: https://genius.com/api-clients
+    quotas:
+      requestsPerMonth: unmetered-fair-use
+      seats: 1
+    features:
+      - "All read endpoints: /search, /songs/{id}, /artists/{id}, /albums/{id}, /annotations/{id}, /referents, /web_pages/lookup, /users/{id}, etc."
+      - "Write endpoints with OAuth2 user tokens: createAnnotation, deleteAnnotation, vote/downvote."
+      - "OAuth2 authorization-code flow."
+      - "Client-only access token for read-only server-side use."
+    limits:
+      - "Search results capped at 5 per page."
+      - "Other paginated endpoints capped at 50 per page."
+      - "No documented hard rate limit; expect soft per-IP / per-token throttling under abuse."
+    support: community-only
+
+monetization:
+  model: free
+  notes: >-
+    Genius itself monetizes through advertising and brand partnerships on
+    genius.com; the developer API has no published commercial tier.
+
+terms:
+  url: https://genius.com/static/terms
+  notes:
+    - "Attribution to Genius is required when displaying scraped lyrics or annotations."
+    - "Genius does not license lyrics through this API; lyric licensing is handled separately by music publishers."

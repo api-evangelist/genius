@@ -1,0 +1,50 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "genius": "https://api.genius.com/vocab#",
+    "music":   "http://purl.org/ontology/mo/",
+    "foaf":    "http://xmlns.com/foaf/0.1/",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "GeniusSong":       { "@id": "genius:Song",       "@type": "schema:MusicComposition" },
+    "GeniusArtist":     { "@id": "genius:Artist",     "@type": "schema:MusicGroup" },
+    "GeniusAlbum":      { "@id": "genius:Album",      "@type": "schema:MusicAlbum" },
+    "GeniusAnnotation": { "@id": "genius:Annotation", "@type": "schema:Comment" },
+    "GeniusReferent":   { "@id": "genius:Referent",   "@type": "schema:CreativeWorkSeries" },
+    "GeniusWebPage":    { "@id": "genius:WebPage",    "@type": "schema:WebPage" },
+    "GeniusUser":       { "@id": "genius:User",       "@type": "schema:Person" },
+
+    "id":              { "@id": "schema:identifier" },
+    "title":           { "@id": "schema:name" },
+    "name":            { "@id": "schema:name" },
+    "url":             { "@id": "schema:url", "@type": "@id" },
+    "api_path":        { "@id": "genius:apiPath" },
+    "image_url":       { "@id": "schema:image", "@type": "@id" },
+    "header_image_url":{ "@id": "genius:headerImage", "@type": "@id" },
+    "release_date":    { "@id": "schema:datePublished", "@type": "schema:Date" },
+
+    "primary_artist":    { "@id": "schema:byArtist",        "@type": "@id" },
+    "featured_artists":  { "@id": "schema:contributor",     "@type": "@id", "@container": "@set" },
+    "producer_artists":  { "@id": "schema:producer",        "@type": "@id", "@container": "@set" },
+    "writer_artists":    { "@id": "schema:author",          "@type": "@id", "@container": "@set" },
+    "album":             { "@id": "schema:inAlbum",         "@type": "@id" },
+
+    "annotation":         { "@id": "genius:annotation",       "@type": "@id" },
+    "referent":           { "@id": "genius:referent",         "@type": "@id" },
+    "fragment":           { "@id": "schema:text" },
+    "body":               { "@id": "schema:articleBody" },
+    "comment_count":      { "@id": "schema:commentCount" },
+    "votes_total":        { "@id": "genius:votesTotal" },
+    "verified":           { "@id": "genius:verified" },
+    "is_verified":        { "@id": "genius:verifiedArtist" },
+    "followers_count":    { "@id": "genius:followersCount" },
+    "lyrics_state":       { "@id": "genius:lyricsState" },
+    "annotation_count":   { "@id": "genius:annotationCount" },
+    "created_at":         { "@id": "schema:dateCreated",       "@type": "schema:DateTime" },
+
+    "instagram_name":  { "@id": "genius:instagramHandle" },
+    "twitter_name":    { "@id": "genius:twitterHandle" },
+    "facebook_name":   { "@id": "genius:facebookHandle" }
+  }
+}

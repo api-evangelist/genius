@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/genius/blob/main/json-schema/genius-user-schema.json",
+  "title": "GeniusUser",
+  "description": "A Genius user / contributor.",
+  "type": "object",
+  "required": ["id", "login"],
+  "properties": {
+    "id":                              { "type": "integer" },
+    "login":                           { "type": "string" },
+    "name":                            { "type": "string" },
+    "about_me_summary":                { "type": ["string","null"] },
+    "iq":                              { "type": "integer" },
+    "header_image_url":                { "type": "string", "format": "uri" },
+    "human_readable_role_for_display": { "type": ["string","null"] },
+    "identity_provider":               { "type": ["string","null"] },
+    "roles_for_display":               { "type": "array", "items": { "type": "string" } },
+    "url":                             { "type": "string", "format": "uri" },
+    "api_path":                        { "type": "string" }
+  }
+}

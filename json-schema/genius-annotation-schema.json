@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/genius/blob/main/json-schema/genius-annotation-schema.json",
+  "title": "GeniusAnnotation",
+  "description": "A Genius annotation — a community- or artist-authored explanation attached to a referent.",
+  "type": "object",
+  "required": ["id", "body", "state"],
+  "properties": {
+    "id":            { "type": "integer" },
+    "api_path":      { "type": "string" },
+    "body": {
+      "type": "object",
+      "description": "Annotation body in the format requested via text_format.",
+      "properties": {
+        "dom":      { "type": "object", "additionalProperties": true },
+        "html":     { "type": "string" },
+        "markdown": { "type": "string" },
+        "plain":    { "type": "string" }
+      }
+    },
+    "comment_count": { "type": "integer", "minimum": 0 },
+    "community":     { "type": "boolean" },
+    "custom_preview":{ "type": ["string","null"] },
+    "has_voters":    { "type": "boolean" },
+    "votes_total":   { "type": "integer" },
+    "verified":      { "type": "boolean", "description": "True if a trusted editor or artist verified the annotation." },
+    "state":         { "type": "string", "enum": ["accepted","pending","deleted","needs_exegesis"] },
+    "url":           { "type": "string", "format": "uri" },
+    "share_url":     { "type": "string", "format": "uri" },
+    "source":        { "type": ["string","null"] },
+    "pinned":        { "type": "boolean" },
+    "created_at":    { "type": "string", "format": "date-time" },
+    "authors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "attribution": { "type": "number" },
+          "pinned_role": { "type": ["string","null"] },
+          "user":        { "$ref": "genius-user-schema.json" }
+        }
+      }
+    }
+  }
+}

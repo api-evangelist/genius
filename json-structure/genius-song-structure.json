@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.github.io/schemas/draft-01/",
+  "title": "GeniusSong",
+  "description": "JSON Structure for a Genius song record (the core resource of the Genius API).",
+  "type": "object",
+  "fields": {
+    "id":               { "type": "integer", "required": true, "description": "Numeric Genius song ID." },
+    "title":            { "type": "string",  "required": true, "description": "Song title." },
+    "full_title":       { "type": "string",  "description": "Full display title with primary artist." },
+    "artist_names":     { "type": "string",  "description": "Comma-joined artist display." },
+    "primary_artist":   { "type": "object",  "ref": "GeniusArtist" },
+    "featured_artists": { "type": "array",   "items": { "ref": "GeniusArtist" } },
+    "album":            { "type": "object",  "ref": "GeniusAlbum" },
+    "url":              { "type": "string",  "format": "uri", "description": "Public song page URL; lyrics are scraped from this page (API does not expose raw lyrics)." },
+    "release_date":     { "type": "string",  "format": "date" },
+    "lyrics_state":     { "type": "string",  "enum": ["complete","incomplete","unreleased","not_for_release","none"] },
+    "annotation_count": { "type": "integer", "minimum": 0 },
+    "media":            { "type": "array",   "items": { "type": "object" }, "description": "External media (YouTube, SoundCloud, etc.)." }
+  },
+  "metadata": {
+    "source": "https://docs.genius.com/",
+    "lifecycle": "public-stable",
+    "notes": "Pagination uses page + per_page. Textual fields render in dom|html|markdown|plain per text_format."
+  }
+}

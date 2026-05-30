@@ -1,0 +1,38 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.genius.com/search?q=Kendrick%20Lamar%20Alright",
+    "headers": {
+      "Authorization": "Bearer YOUR_CLIENT_ACCESS_TOKEN",
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "meta": { "status": 200 },
+    "response": {
+      "hits": [
+        {
+          "type": "song",
+          "index": "song",
+          "result": {
+            "id": 1234567,
+            "title": "Alright",
+            "full_title": "Alright by Kendrick Lamar",
+            "artist_names": "Kendrick Lamar",
+            "primary_artist": {
+              "id": 1421,
+              "name": "Kendrick Lamar",
+              "url": "https://genius.com/artists/Kendrick-lamar",
+              "is_verified": true
+            },
+            "url": "https://genius.com/Kendrick-lamar-alright-lyrics",
+            "release_date": "2015-06-30",
+            "song_art_image_thumbnail_url": "https://images.genius.com/abc.jpg",
+            "lyrics_state": "complete",
+            "annotation_count": 142
+          }
+        }
+      ]
+    }
+  }
+}

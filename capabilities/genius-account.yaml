@@ -1,0 +1,86 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Genius API — Account"
+  description: >-
+    Account — authenticated user surface. 1 operation. Lead operation: Get Current Account.
+    Self-contained Naftiko capability covering one Genius business surface.
+  tags:
+    - Genius
+    - Music
+    - Account
+  created: "2026-05-29"
+  modified: "2026-05-29"
+
+binds:
+  - namespace: env
+    keys:
+      GENIUS_ACCESS_TOKEN: GENIUS_ACCESS_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "genius-account"
+      baseUri: "https://api.genius.com"
+      description: "Genius API — Account business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.GENIUS_ACCESS_TOKEN}}"
+      resources:
+        - name: "account"
+          path: "/account"
+          operations:
+            - name: "getAccount"
+              method: GET
+              description: "Returns details about the authenticated user."
+              inputParameters:
+                - name: "text_format"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Format for textual fields (dom, html, markdown, plain)."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "genius-account-rest"
+      port: 8080
+      description: "REST adapter for Genius — Account. One Spectral-compliant resource per consumed operation, prefixed with /v1."
+      resources:
+        - path: "/v1/account"
+          name: "account"
+          description: "REST surface for the authenticated Genius user account."
+          operations:
+            - method: GET
+              name: "getAccount"
+              description: "Returns details about the authenticated user."
+              call: "genius-account.getAccount"
+              with:
+                "text_format": "rest.text_format"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "genius-account-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Genius — Account. One tool per consumed operation, routed inline through this capability's consumes block."
+      tools:
+        - name: "get-account"
+          description: "Get the authenticated Genius user account."
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "genius-account.getAccount"
+          with:
+            "text_format": "tools.text_format"
+          outputParameters:
+            - type: object
+              mapping: "$."

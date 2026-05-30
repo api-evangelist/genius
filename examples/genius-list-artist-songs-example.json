@@ -1,0 +1,17 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.genius.com/artists/16775/songs?sort=popularity&per_page=5&page=1",
+    "headers": { "Authorization": "Bearer YOUR_CLIENT_ACCESS_TOKEN" }
+  },
+  "response": {
+    "meta": { "status": 200 },
+    "response": {
+      "songs": [
+        { "id": 81159, "title": "Hotline Bling", "full_title": "Hotline Bling by Drake", "url": "https://genius.com/Drake-hotline-bling-lyrics", "annotation_count": 213 },
+        { "id": 90235, "title": "God's Plan",    "full_title": "God's Plan by Drake",    "url": "https://genius.com/Drake-gods-plan-lyrics",    "annotation_count": 187 }
+      ],
+      "next_page": 2
+    }
+  }
+}

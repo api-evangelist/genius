@@ -1,0 +1,73 @@
+apiCommonsRateLimits: 0.1
+provider:
+  id: genius
+  name: Genius
+  url: https://docs.genius.com/
+
+source:
+  - https://docs.genius.com/
+  - https://github.com/johnwmillr/LyricsGenius/issues/32
+
+modified: '2026-05-29'
+
+summary: >-
+  Genius does not publish a formal rate-limit table. In practice the API
+  enforces soft fair-use throttling per access token and per IP. Heavy
+  clients (bulk crawlers, scrapers) frequently report intermittent 429s
+  and connection resets; the consensus community guidance is to space
+  requests at roughly 1 per second per token and to back off exponentially
+  on transient errors. There is no published quota, no published burst
+  limit, and no rate-limit headers documented in the official reference.
+
+scopes:
+  - applies-to: all-endpoints
+    plan: free
+    limits:
+      requestsPerSecond: ~1
+      requestsPerMinute: ~60
+      requestsPerHour: not-documented
+      requestsPerDay:  not-documented
+      concurrentConnections: not-documented
+    notes: >-
+      Empirically observed; not documented by Genius. The platform appears
+      to share a global fair-use budget across the free developer tier.
+
+  - applies-to: /search
+    plan: free
+    limits:
+      perPageMax: 5
+    notes: >-
+      Search results are hard-capped at 5 per page regardless of the
+      requested per_page value.
+
+  - applies-to: all-paginated-collections
+    plan: free
+    limits:
+      perPageMax: 50
+    notes: >-
+      Other paginated collections (artist songs, comments, contributions,
+      etc.) accept per_page up to 50.
+
+quotas: []
+
+headers:
+  - name: X-RateLimit-Limit
+    documented: false
+  - name: X-RateLimit-Remaining
+    documented: false
+  - name: Retry-After
+    documented: false
+    notes: May be returned on 429 responses but is not contractual.
+
+errors:
+  - status: 429
+    meaning: Too Many Requests
+    recovery: Exponential backoff starting at ~1 second; honor Retry-After if present.
+  - status: 401
+    meaning: Invalid or expired access token; refresh the token.
+
+guidance:
+  - "Cache aggressively — Genius records (songs, artists, albums) change rarely."
+  - "For bulk profiling jobs (e.g. walking an artist's full discography), throttle to 1 request per second per token."
+  - "Use the read-only client access token for server-side data ingestion; reserve user tokens for write operations."
+  - "Lyrics scraping from genius.com itself is throttled by Cloudflare and is even more aggressive than the API."

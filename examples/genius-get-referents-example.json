@@ -1,0 +1,38 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.genius.com/referents?song_id=378195&text_format=plain&per_page=2&page=1",
+    "headers": { "Authorization": "Bearer YOUR_CLIENT_ACCESS_TOKEN" }
+  },
+  "response": {
+    "meta": { "status": 200 },
+    "response": {
+      "referents": [
+        {
+          "id": 10225840,
+          "annotator_id": 1842,
+          "annotator_login": "scholar1",
+          "fragment": "We gon' be alright",
+          "is_description": false,
+          "classification": "accepted",
+          "url": "https://genius.com/10225840",
+          "annotatable": {
+            "id": 378195,
+            "type": "song",
+            "title": "Alright",
+            "url": "https://genius.com/Kendrick-lamar-alright-lyrics"
+          },
+          "annotations": [
+            {
+              "id": 9988776,
+              "body": { "plain": "Repeated mantra used as a rallying cry for the Black Lives Matter movement." },
+              "votes_total": 312,
+              "verified": true,
+              "state": "accepted"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

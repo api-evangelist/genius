@@ -1,0 +1,28 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.genius.com/artists/16775?text_format=plain",
+    "headers": {
+      "Authorization": "Bearer YOUR_CLIENT_ACCESS_TOKEN"
+    }
+  },
+  "response": {
+    "meta": { "status": 200 },
+    "response": {
+      "artist": {
+        "id": 16775,
+        "name": "Drake",
+        "url": "https://genius.com/artists/Drake",
+        "image_url": "https://images.genius.com/drake.jpg",
+        "is_verified": true,
+        "is_meme_verified": false,
+        "followers_count": 8675309,
+        "iq": 0,
+        "alternate_names": ["Aubrey Drake Graham", "Champagne Papi"],
+        "instagram_name": "champagnepapi",
+        "twitter_name": "Drake",
+        "description": { "plain": "Canadian rapper, singer, and actor." }
+      }
+    }
+  }
+}

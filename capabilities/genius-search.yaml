@@ -1,0 +1,100 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Genius API — Search"
+  description: >-
+    Search — full-text search across the Genius corpus. 1 operation. Lead operation: Search Genius.
+    Self-contained Naftiko capability covering one Genius business surface.
+  tags:
+    - Genius
+    - Music
+    - Search
+  created: "2026-05-29"
+  modified: "2026-05-29"
+
+binds:
+  - namespace: env
+    keys:
+      GENIUS_ACCESS_TOKEN: GENIUS_ACCESS_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "genius-search"
+      baseUri: "https://api.genius.com"
+      description: "Genius API — Search business capability. Self-contained, no shared references."
+      authentication:
+        type: bearer
+        token: "{{env.GENIUS_ACCESS_TOKEN}}"
+      resources:
+        - name: "search"
+          path: "/search"
+          operations:
+            - name: "search"
+              method: GET
+              description: "Search across songs, artists, and lyrics."
+              inputParameters:
+                - name: "q"
+                  in: query
+                  type: string
+                  required: true
+                  description: "The search query."
+                - name: "per_page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Number of results per page (max 5)."
+                - name: "page"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Page of results to return."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "genius-search-rest"
+      port: 8080
+      description: "REST adapter for Genius — Search."
+      resources:
+        - path: "/v1/search"
+          name: "search"
+          description: "REST surface for Genius search."
+          operations:
+            - method: GET
+              name: "search"
+              description: "Search across songs, artists, and lyrics."
+              call: "genius-search.search"
+              with:
+                "q": "rest.q"
+                "per_page": "rest.per_page"
+                "page": "rest.page"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "genius-search-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Genius — Search."
+      tools:
+        - name: "search-genius"
+          description: "Search across songs, artists, and lyrics on Genius."
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "genius-search.search"
+          with:
+            "q": "tools.q"
+            "per_page": "tools.per_page"
+            "page": "tools.page"
+          outputParameters:
+            - type: object
+              mapping: "$."

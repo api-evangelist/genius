@@ -1,0 +1,98 @@
+vocabulary:
+  name: Genius API Vocabulary
+  description: >-
+    Operational and capability vocabulary for the Genius API — the crowdsourced
+    music knowledge platform behind genius.com. The API exposes structured
+    metadata about songs, artists, albums, annotations, referents, and
+    contributors. Raw lyric text is NOT served by the API; consumers receive
+    the public song page URL and scrape lyrics from there.
+  version: 1.0.0
+  modified: '2026-05-29'
+  source: https://docs.genius.com/
+  provider: Genius
+  domain: Music
+
+  concepts:
+    - id: song
+      label: Song
+      description: A musical composition with associated lyrics, metadata, and annotations.
+      schema:org: MusicComposition
+    - id: artist
+      label: Artist
+      description: A performer, producer, or writer associated with songs and albums.
+      schema:org: MusicGroup
+    - id: album
+      label: Album
+      description: A release containing one or more tracks (songs).
+      schema:org: MusicAlbum
+    - id: annotation
+      label: Annotation
+      description: A community- or artist-authored explanation attached to a referent.
+    - id: referent
+      label: Referent
+      description: A specific fragment of text on a page that one or more annotations are attached to.
+    - id: web_page
+      label: Web Page
+      description: A non-song surface (any URL) where Genius annotations can live.
+    - id: user
+      label: User / Contributor
+      description: A Genius account that contributes annotations, transcriptions, or comments.
+    - id: lyrics_state
+      label: Lyrics State
+      description: Lifecycle status of a song's lyrics on Genius (complete, incomplete, unreleased, etc.).
+    - id: iq
+      label: IQ
+      description: Genius's contributor reputation score.
+
+  operations:
+    read:
+      - search
+      - getSong
+      - getArtist
+      - getArtistSongs
+      - getAlbum
+      - getAnnotation
+      - listReferents
+      - getReferents
+      - lookupWebPage
+      - getUser
+      - getUserContributions
+      - getAccount
+    write:
+      - createAnnotation
+      - deleteAnnotation
+      - upvoteAnnotation
+      - downvoteAnnotation
+      - removeAnnotationVote
+
+  scopes:
+    - id: me
+      description: Access the authenticated user's account.
+    - id: create_annotation
+      description: Create new annotations.
+    - id: manage_annotation
+      description: Edit or delete the authenticated user's annotations.
+    - id: vote
+      description: Upvote, downvote, or remove a vote from an annotation.
+
+  classifications:
+    text_format:    [dom, html, markdown, plain]
+    sort_order:     [title, popularity, release_date]
+    annotation_state: [accepted, pending, deleted, needs_exegesis]
+    lyrics_state:   [complete, incomplete, unreleased, not_for_release, none]
+
+  capabilities:
+    - Discover songs, artists, and albums via full-text search.
+    - Retrieve rich song metadata (album, artists, media links, release date, annotation counts).
+    - Walk an artist's discography sorted by popularity, title, or release date.
+    - Read community annotations and editor-verified explanations of lyric fragments.
+    - Author and moderate new annotations on songs OR arbitrary web pages.
+    - Vote, downvote, or retract votes on annotations.
+    - Look up Genius web-page records by canonical, og, or raw URL.
+    - Inspect contributor profiles, IQ scores, and contribution histories.
+
+  caveats:
+    - "Raw lyrics are NOT returned by the API. Use Song.url to fetch the public song page and scrape lyrics from there."
+    - "Search returns at most 5 results per page."
+    - "All write operations require OAuth2 user tokens with the matching scope; read-only operations accept a client access token."
+    - "Rate limits are not heavily documented; treat the API as soft fair-use."

@@ -1,0 +1,165 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Genius API — Songs"
+  description: >-
+    Songs — song metadata, contributors, comments, and activity. 4 operations. Lead operation: Get Song.
+    Self-contained Naftiko capability covering one Genius business surface.
+  tags:
+    - Genius
+    - Music
+    - Songs
+  created: "2026-05-29"
+  modified: "2026-05-29"
+
+binds:
+  - namespace: env
+    keys:
+      GENIUS_ACCESS_TOKEN: GENIUS_ACCESS_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "genius-songs"
+      baseUri: "https://api.genius.com"
+      description: "Genius API — Songs business capability."
+      authentication:
+        type: bearer
+        token: "{{env.GENIUS_ACCESS_TOKEN}}"
+      resources:
+        - name: "song"
+          path: "/songs/{id}"
+          operations:
+            - name: "getSong"
+              method: GET
+              description: "Returns full song metadata."
+              inputParameters:
+                - name: "id"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Genius song ID."
+                - name: "text_format"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Format for textual fields."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "song-comments"
+          path: "/songs/{id}/comments"
+          operations:
+            - name: "getSongComments"
+              method: GET
+              description: "Lists comments left on a song page."
+              inputParameters:
+                - { name: "id",         in: path,  type: integer, required: true,  description: "Genius song ID." }
+                - { name: "per_page",   in: query, type: integer, required: false, description: "Results per page." }
+                - { name: "page",       in: query, type: integer, required: false, description: "Page index." }
+                - { name: "text_format",in: query, type: string,  required: false, description: "Format for textual fields." }
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: "$." }]
+        - name: "song-activity"
+          path: "/songs/{id}/activity"
+          operations:
+            - name: "getSongActivity"
+              method: GET
+              description: "Activity stream for a song."
+              inputParameters:
+                - { name: "id",       in: path,  type: integer, required: true,  description: "Genius song ID." }
+                - { name: "per_page", in: query, type: integer, required: false, description: "Results per page." }
+                - { name: "page",     in: query, type: integer, required: false, description: "Page index." }
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: "$." }]
+        - name: "song-contributors"
+          path: "/songs/{id}/contributors"
+          operations:
+            - name: "getSongContributors"
+              method: GET
+              description: "List of users who have contributed to the song."
+              inputParameters:
+                - { name: "id", in: path, type: integer, required: true, description: "Genius song ID." }
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: "$." }]
+
+  exposes:
+    - type: rest
+      namespace: "genius-songs-rest"
+      port: 8080
+      description: "REST adapter for Genius — Songs."
+      resources:
+        - path: "/v1/songs/{id}"
+          name: "song"
+          description: "Song detail."
+          operations:
+            - method: GET
+              name: "getSong"
+              description: "Get a song by ID."
+              call: "genius-songs.getSong"
+              with: { "id": "rest.id", "text_format": "rest.text_format" }
+              outputParameters: [{ type: object, mapping: "$." }]
+        - path: "/v1/songs/{id}/comments"
+          name: "song-comments"
+          description: "Song comments."
+          operations:
+            - method: GET
+              name: "getSongComments"
+              description: "List comments on a song."
+              call: "genius-songs.getSongComments"
+              with: { "id": "rest.id", "per_page": "rest.per_page", "page": "rest.page", "text_format": "rest.text_format" }
+              outputParameters: [{ type: object, mapping: "$." }]
+        - path: "/v1/songs/{id}/activity"
+          name: "song-activity"
+          description: "Activity stream for a song."
+          operations:
+            - method: GET
+              name: "getSongActivity"
+              description: "Activity stream for a song."
+              call: "genius-songs.getSongActivity"
+              with: { "id": "rest.id", "per_page": "rest.per_page", "page": "rest.page" }
+              outputParameters: [{ type: object, mapping: "$." }]
+        - path: "/v1/songs/{id}/contributors"
+          name: "song-contributors"
+          description: "Song contributors."
+          operations:
+            - method: GET
+              name: "getSongContributors"
+              description: "List song contributors."
+              call: "genius-songs.getSongContributors"
+              with: { "id": "rest.id" }
+              outputParameters: [{ type: object, mapping: "$." }]
+
+    - type: mcp
+      namespace: "genius-songs-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Genius — Songs."
+      tools:
+        - name: "get-song"
+          description: "Get a Genius song by ID."
+          hints: { readOnly: true, destructive: false, idempotent: true }
+          call: "genius-songs.getSong"
+          with: { "id": "tools.id", "text_format": "tools.text_format" }
+          outputParameters: [{ type: object, mapping: "$." }]
+        - name: "list-song-comments"
+          description: "List comments on a Genius song."
+          hints: { readOnly: true, destructive: false, idempotent: true }
+          call: "genius-songs.getSongComments"
+          with: { "id": "tools.id", "per_page": "tools.per_page", "page": "tools.page", "text_format": "tools.text_format" }
+          outputParameters: [{ type: object, mapping: "$." }]
+        - name: "get-song-activity"
+          description: "Get activity feed for a Genius song."
+          hints: { readOnly: true, destructive: false, idempotent: true }
+          call: "genius-songs.getSongActivity"
+          with: { "id": "tools.id", "per_page": "tools.per_page", "page": "tools.page" }
+          outputParameters: [{ type: object, mapping: "$." }]
+        - name: "list-song-contributors"
+          description: "List contributors to a Genius song."
+          hints: { readOnly: true, destructive: false, idempotent: true }
+          call: "genius-songs.getSongContributors"
+          with: { "id": "tools.id" }
+          outputParameters: [{ type: object, mapping: "$." }]

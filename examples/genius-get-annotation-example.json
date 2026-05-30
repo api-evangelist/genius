@@ -1,0 +1,32 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.genius.com/annotations/9988776?text_format=markdown",
+    "headers": { "Authorization": "Bearer YOUR_CLIENT_ACCESS_TOKEN" }
+  },
+  "response": {
+    "meta": { "status": 200 },
+    "response": {
+      "annotation": {
+        "id": 9988776,
+        "api_path": "/annotations/9988776",
+        "body": { "markdown": "Repeated mantra used as a rallying cry for the **Black Lives Matter** movement." },
+        "comment_count": 4,
+        "votes_total": 312,
+        "verified": true,
+        "state": "accepted",
+        "url": "https://genius.com/9988776",
+        "share_url": "https://genius.com/9988776",
+        "community": false,
+        "authors": [
+          { "attribution": 1.0, "user": { "id": 1842, "login": "scholar1", "name": "Big Scholar" } }
+        ]
+      },
+      "referent": {
+        "id": 10225840,
+        "fragment": "We gon' be alright",
+        "annotatable": { "id": 378195, "type": "song", "title": "Alright" }
+      }
+    }
+  }
+}

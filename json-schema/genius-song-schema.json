@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/genius/blob/main/json-schema/genius-song-schema.json",
+  "title": "GeniusSong",
+  "description": "A Genius song record returned by /songs/{id} and embedded in many list responses.",
+  "type": "object",
+  "required": ["id", "title", "url"],
+  "properties": {
+    "id":                            { "type": "integer", "description": "Genius numeric song ID." },
+    "title":                         { "type": "string",  "description": "Song title." },
+    "title_with_featured":           { "type": "string" },
+    "full_title":                    { "type": "string",  "description": "Title rendered with primary artist." },
+    "artist_names":                  { "type": "string" },
+    "primary_artist":                { "$ref": "genius-artist-schema.json" },
+    "featured_artists":              { "type": "array", "items": { "$ref": "genius-artist-schema.json" } },
+    "album":                         { "$ref": "genius-album-schema.json" },
+    "url":                           { "type": "string", "format": "uri", "description": "Public song page URL (source of lyric HTML)." },
+    "path":                          { "type": "string" },
+    "release_date":                  { "type": ["string","null"], "format": "date" },
+    "release_date_for_display":      { "type": ["string","null"] },
+    "song_art_image_url":            { "type": "string", "format": "uri" },
+    "song_art_image_thumbnail_url":  { "type": "string", "format": "uri" },
+    "header_image_url":              { "type": "string", "format": "uri" },
+    "header_image_thumbnail_url":    { "type": "string", "format": "uri" },
+    "lyrics_state":                  { "type": "string", "enum": ["complete","incomplete","unreleased","not_for_release","none"] },
+    "lyrics_owner_id":               { "type": "integer" },
+    "annotation_count":              { "type": "integer", "minimum": 0 },
+    "api_path":                      { "type": "string" },
+    "pyongs_count":                  { "type": ["integer","null"] },
+    "stats": {
+      "type": "object",
+      "properties": {
+        "unreviewed_annotations":    { "type": "integer" },
+        "hot":                       { "type": "boolean" },
+        "pageviews":                 { "type": ["integer","null"] }
+      }
+    },
+    "media": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "provider":   { "type": "string" },
+          "type":       { "type": "string", "enum": ["video","audio"] },
+          "url":        { "type": "string", "format": "uri" },
+          "start":      { "type": ["integer","null"] },
+          "native_uri": { "type": ["string","null"] }
+        }
+      }
+    },
+    "producer_artists": { "type": "array", "items": { "$ref": "genius-artist-schema.json" } },
+    "writer_artists":   { "type": "array", "items": { "$ref": "genius-artist-schema.json" } }
+  }
+}

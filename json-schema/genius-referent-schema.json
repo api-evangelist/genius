@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/genius/blob/main/json-schema/genius-referent-schema.json",
+  "title": "GeniusReferent",
+  "description": "A referent is a fragment of text on a page (most commonly a song lyric line) that one or more annotations are attached to.",
+  "type": "object",
+  "required": ["id", "fragment"],
+  "properties": {
+    "id":                      { "type": "integer" },
+    "annotator_id":            { "type": "integer" },
+    "annotator_login":         { "type": "string" },
+    "api_path":                { "type": "string" },
+    "classification":          { "type": "string", "enum": ["accepted","unreviewed","verified","deleted"] },
+    "fragment":                { "type": "string", "description": "The exact text being annotated." },
+    "is_description":          { "type": "boolean" },
+    "path":                    { "type": "string" },
+    "range":                   { "type": "object", "additionalProperties": true, "description": "DOM range locating the fragment on the source page." },
+    "song_id":                 { "type": ["integer","null"] },
+    "url":                     { "type": "string", "format": "uri" },
+    "verified_annotator_ids":  { "type": "array", "items": { "type": "integer" } },
+    "annotatable": {
+      "type": "object",
+      "properties": {
+        "id":        { "type": "integer" },
+        "type":      { "type": "string", "enum": ["song","web_page","album","article"] },
+        "title":     { "type": "string" },
+        "url":       { "type": "string", "format": "uri" },
+        "api_path":  { "type": "string" },
+        "image_url": { "type": "string", "format": "uri" },
+        "context":   { "type": "string" }
+      }
+    },
+    "annotations": { "type": "array", "items": { "$ref": "genius-annotation-schema.json" } }
+  }
+}

@@ -1,0 +1,242 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Genius API — Annotations"
+  description: >-
+    Annotations — community annotations attached to lyric fragments. 8 operations covering read,
+    create, delete, edits, comments, and voting. Lead operation: Get Annotation.
+    Self-contained Naftiko capability covering one Genius business surface.
+  tags:
+    - Genius
+    - Music
+    - Annotations
+  created: "2026-05-29"
+  modified: "2026-05-29"
+
+binds:
+  - namespace: env
+    keys:
+      GENIUS_ACCESS_TOKEN: GENIUS_ACCESS_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "genius-annotations"
+      baseUri: "https://api.genius.com"
+      description: "Genius API — Annotations business capability."
+      authentication:
+        type: bearer
+        token: "{{env.GENIUS_ACCESS_TOKEN}}"
+      resources:
+        - name: "annotation"
+          path: "/annotations/{id}"
+          operations:
+            - name: "getAnnotation"
+              method: GET
+              description: "Returns the full content of an annotation."
+              inputParameters:
+                - { name: "id",         in: path,  type: integer, required: true,  description: "Annotation ID." }
+                - { name: "text_format",in: query, type: string,  required: false, description: "Format for textual fields." }
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: "$." }]
+            - name: "deleteAnnotation"
+              method: DELETE
+              description: "Deletes an annotation owned by the authenticated user."
+              inputParameters:
+                - { name: "id", in: path, type: integer, required: true, description: "Annotation ID." }
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: "$." }]
+        - name: "annotations"
+          path: "/annotations"
+          operations:
+            - name: "createAnnotation"
+              method: POST
+              description: "Creates a new annotation."
+              inputParameters:
+                - { name: "body", in: body, type: object, required: true, description: "CreateAnnotationRequest payload." }
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: "$." }]
+        - name: "annotation-edits"
+          path: "/annotations/{id}/edits"
+          operations:
+            - name: "getAnnotationEdits"
+              method: GET
+              description: "Returns the version history of an annotation."
+              inputParameters:
+                - { name: "id", in: path, type: integer, required: true, description: "Annotation ID." }
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: "$." }]
+        - name: "annotation-comments"
+          path: "/annotations/{id}/comments"
+          operations:
+            - name: "getAnnotationComments"
+              method: GET
+              description: "Returns comments left on an annotation."
+              inputParameters:
+                - { name: "id",       in: path,  type: integer, required: true,  description: "Annotation ID." }
+                - { name: "per_page", in: query, type: integer, required: false, description: "Results per page." }
+                - { name: "page",     in: query, type: integer, required: false, description: "Page index." }
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: "$." }]
+        - name: "annotation-vote"
+          path: "/annotations/{id}/vote"
+          operations:
+            - name: "upvoteAnnotation"
+              method: PUT
+              description: "Upvotes an annotation as the authenticated user."
+              inputParameters:
+                - { name: "id", in: path, type: integer, required: true, description: "Annotation ID." }
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: "$." }]
+            - name: "removeAnnotationVote"
+              method: DELETE
+              description: "Removes the authenticated user's vote from the annotation."
+              inputParameters:
+                - { name: "id", in: path, type: integer, required: true, description: "Annotation ID." }
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: "$." }]
+        - name: "annotation-downvote"
+          path: "/annotations/{id}/downvote"
+          operations:
+            - name: "downvoteAnnotation"
+              method: PUT
+              description: "Downvotes an annotation as the authenticated user."
+              inputParameters:
+                - { name: "id", in: path, type: integer, required: true, description: "Annotation ID." }
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: "$." }]
+
+  exposes:
+    - type: rest
+      namespace: "genius-annotations-rest"
+      port: 8080
+      description: "REST adapter for Genius — Annotations."
+      resources:
+        - path: "/v1/annotations/{id}"
+          name: "annotation"
+          description: "Annotation detail."
+          operations:
+            - method: GET
+              name: "getAnnotation"
+              description: "Get an annotation by ID."
+              call: "genius-annotations.getAnnotation"
+              with: { "id": "rest.id", "text_format": "rest.text_format" }
+              outputParameters: [{ type: object, mapping: "$." }]
+            - method: DELETE
+              name: "deleteAnnotation"
+              description: "Delete an annotation."
+              call: "genius-annotations.deleteAnnotation"
+              with: { "id": "rest.id" }
+              outputParameters: [{ type: object, mapping: "$." }]
+        - path: "/v1/annotations"
+          name: "annotations"
+          description: "Annotation collection."
+          operations:
+            - method: POST
+              name: "createAnnotation"
+              description: "Create a new annotation."
+              call: "genius-annotations.createAnnotation"
+              with: { "body": "rest.body" }
+              outputParameters: [{ type: object, mapping: "$." }]
+        - path: "/v1/annotations/{id}/edits"
+          name: "annotation-edits"
+          description: "Annotation version history."
+          operations:
+            - method: GET
+              name: "getAnnotationEdits"
+              description: "Get annotation version history."
+              call: "genius-annotations.getAnnotationEdits"
+              with: { "id": "rest.id" }
+              outputParameters: [{ type: object, mapping: "$." }]
+        - path: "/v1/annotations/{id}/comments"
+          name: "annotation-comments"
+          description: "Annotation comments."
+          operations:
+            - method: GET
+              name: "getAnnotationComments"
+              description: "List comments on an annotation."
+              call: "genius-annotations.getAnnotationComments"
+              with: { "id": "rest.id", "per_page": "rest.per_page", "page": "rest.page" }
+              outputParameters: [{ type: object, mapping: "$." }]
+        - path: "/v1/annotations/{id}/vote"
+          name: "annotation-vote"
+          description: "Annotation vote."
+          operations:
+            - method: PUT
+              name: "upvoteAnnotation"
+              description: "Upvote an annotation."
+              call: "genius-annotations.upvoteAnnotation"
+              with: { "id": "rest.id" }
+              outputParameters: [{ type: object, mapping: "$." }]
+            - method: DELETE
+              name: "removeAnnotationVote"
+              description: "Remove a vote from an annotation."
+              call: "genius-annotations.removeAnnotationVote"
+              with: { "id": "rest.id" }
+              outputParameters: [{ type: object, mapping: "$." }]
+        - path: "/v1/annotations/{id}/downvote"
+          name: "annotation-downvote"
+          description: "Annotation downvote."
+          operations:
+            - method: PUT
+              name: "downvoteAnnotation"
+              description: "Downvote an annotation."
+              call: "genius-annotations.downvoteAnnotation"
+              with: { "id": "rest.id" }
+              outputParameters: [{ type: object, mapping: "$." }]
+
+    - type: mcp
+      namespace: "genius-annotations-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Genius — Annotations."
+      tools:
+        - name: "get-annotation"
+          description: "Get a Genius annotation by ID."
+          hints: { readOnly: true, destructive: false, idempotent: true }
+          call: "genius-annotations.getAnnotation"
+          with: { "id": "tools.id", "text_format": "tools.text_format" }
+          outputParameters: [{ type: object, mapping: "$." }]
+        - name: "delete-annotation"
+          description: "Delete a Genius annotation."
+          hints: { readOnly: false, destructive: true, idempotent: true }
+          call: "genius-annotations.deleteAnnotation"
+          with: { "id": "tools.id" }
+          outputParameters: [{ type: object, mapping: "$." }]
+        - name: "create-annotation"
+          description: "Create a new Genius annotation."
+          hints: { readOnly: false, destructive: false, idempotent: false }
+          call: "genius-annotations.createAnnotation"
+          with: { "body": "tools.body" }
+          outputParameters: [{ type: object, mapping: "$." }]
+        - name: "list-annotation-edits"
+          description: "List the version history for a Genius annotation."
+          hints: { readOnly: true, destructive: false, idempotent: true }
+          call: "genius-annotations.getAnnotationEdits"
+          with: { "id": "tools.id" }
+          outputParameters: [{ type: object, mapping: "$." }]
+        - name: "list-annotation-comments"
+          description: "List comments on a Genius annotation."
+          hints: { readOnly: true, destructive: false, idempotent: true }
+          call: "genius-annotations.getAnnotationComments"
+          with: { "id": "tools.id", "per_page": "tools.per_page", "page": "tools.page" }
+          outputParameters: [{ type: object, mapping: "$." }]
+        - name: "upvote-annotation"
+          description: "Upvote a Genius annotation."
+          hints: { readOnly: false, destructive: false, idempotent: true }
+          call: "genius-annotations.upvoteAnnotation"
+          with: { "id": "tools.id" }
+          outputParameters: [{ type: object, mapping: "$." }]
+        - name: "remove-annotation-vote"
+          description: "Remove the user's vote from a Genius annotation."
+          hints: { readOnly: false, destructive: true, idempotent: true }
+          call: "genius-annotations.removeAnnotationVote"
+          with: { "id": "tools.id" }
+          outputParameters: [{ type: object, mapping: "$." }]
+        - name: "downvote-annotation"
+          description: "Downvote a Genius annotation."
+          hints: { readOnly: false, destructive: false, idempotent: true }
+          call: "genius-annotations.downvoteAnnotation"
+          with: { "id": "tools.id" }
+          outputParameters: [{ type: object, mapping: "$." }]

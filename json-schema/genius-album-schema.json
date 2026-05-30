@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/genius/blob/main/json-schema/genius-album-schema.json",
+  "title": "GeniusAlbum",
+  "description": "A Genius album record.",
+  "type": "object",
+  "required": ["id", "name"],
+  "properties": {
+    "id":                       { "type": "integer" },
+    "name":                     { "type": "string" },
+    "full_title":               { "type": "string" },
+    "url":                      { "type": "string", "format": "uri" },
+    "api_path":                 { "type": "string" },
+    "cover_art_url":            { "type": "string", "format": "uri" },
+    "cover_art_thumbnail_url":  { "type": "string", "format": "uri" },
+    "release_date_for_display": { "type": ["string","null"] },
+    "artist":                   { "$ref": "genius-artist-schema.json" }
+  }
+}

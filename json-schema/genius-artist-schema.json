@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/genius/blob/main/json-schema/genius-artist-schema.json",
+  "title": "GeniusArtist",
+  "description": "A Genius artist record.",
+  "type": "object",
+  "required": ["id", "name"],
+  "properties": {
+    "id":               { "type": "integer", "description": "Genius numeric artist ID." },
+    "name":             { "type": "string", "description": "Display name." },
+    "url":              { "type": "string", "format": "uri" },
+    "api_path":         { "type": "string" },
+    "image_url":        { "type": "string", "format": "uri" },
+    "header_image_url": { "type": "string", "format": "uri" },
+    "is_meme_verified": { "type": "boolean" },
+    "is_verified":      { "type": "boolean", "description": "True if the artist owns and manages their profile." },
+    "followers_count":  { "type": "integer", "minimum": 0 },
+    "iq":               { "type": ["integer","null"] },
+    "slug":             { "type": "string" },
+    "alternate_names":  { "type": "array", "items": { "type": "string" } },
+    "instagram_name":   { "type": ["string","null"] },
+    "twitter_name":     { "type": ["string","null"] },
+    "facebook_name":    { "type": ["string","null"] }
+  }
+}

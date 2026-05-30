@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-structure.github.io/schemas/draft-01/",
+  "title": "GeniusAnnotation",
+  "description": "JSON Structure for a Genius annotation — the central scholarly unit of the Genius platform.",
+  "type": "object",
+  "fields": {
+    "id":            { "type": "integer", "required": true },
+    "body":          { "type": "object",  "required": true, "description": "Annotation body rendered per text_format." },
+    "state":         { "type": "string",  "enum": ["accepted","pending","deleted","needs_exegesis"], "required": true },
+    "verified":      { "type": "boolean", "description": "True when verified by an editor or artist." },
+    "community":     { "type": "boolean", "description": "True when authored by community, not artist/editor." },
+    "votes_total":   { "type": "integer" },
+    "comment_count": { "type": "integer", "minimum": 0 },
+    "url":           { "type": "string", "format": "uri" },
+    "share_url":     { "type": "string", "format": "uri" },
+    "created_at":    { "type": "string", "format": "date-time" },
+    "authors":       { "type": "array",  "items": { "type": "object" } }
+  },
+  "metadata": {
+    "source": "https://docs.genius.com/",
+    "lifecycle": "public-stable",
+    "scopes": ["create_annotation","manage_annotation","vote"]
+  }
+}

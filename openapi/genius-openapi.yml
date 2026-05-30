@@ -1,0 +1,1824 @@
+openapi: 3.0.3
+info:
+  title: Genius API
+  description: |
+    The Genius API exposes the Genius/Rap Genius crowdsourced music knowledge
+    base — songs, artists, albums, annotations, and referents. Responses are
+    JSON. The API does NOT serve raw lyric text directly (those must be scraped
+    from the public song page); it returns rich song, artist, album, annotation
+    metadata, scoring, and the URLs needed to locate lyrics on genius.com.
+  version: "1.0.0"
+  termsOfService: https://genius.com/static/terms
+  contact:
+    name: Genius API Support
+    url: https://docs.genius.com/
+  license:
+    name: Genius API Terms of Use
+    url: https://genius.com/static/terms
+  x-generated-from: documentation
+  x-last-validated: "2026-05-29"
+servers:
+  - url: https://api.genius.com
+    description: Production Genius API
+externalDocs:
+  description: Official Genius API documentation
+  url: https://docs.genius.com/
+tags:
+  - name: Account
+    description: Authenticated user account.
+  - name: Search
+    description: Full-text search across the Genius corpus.
+  - name: Songs
+    description: Song metadata, contributors, and activity.
+  - name: Artists
+    description: Artist profiles, discography, followers, and leaderboards.
+  - name: Albums
+    description: Album metadata, tracks, cover art, and leaderboards.
+  - name: Annotations
+    description: Community annotations attached to lyric fragments.
+  - name: Referents
+    description: Lyric fragments (referents) and their attached annotations.
+  - name: Web Pages
+    description: Web page lookup for the annotation network.
+  - name: Users
+    description: Genius user profiles and contributions.
+paths:
+  /account:
+    get:
+      tags: [Account]
+      operationId: getAccount
+      summary: Get Current Account
+      description: Returns details about the authenticated user. Requires the `me` scope.
+      security:
+        - GeniusOAuth2: [me]
+      parameters:
+        - $ref: '#/components/parameters/TextFormat'
+      responses:
+        '200':
+          description: Account details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /search:
+    get:
+      tags: [Search]
+      operationId: search
+      summary: Search Genius
+      description: |
+        Search across songs, artists, and lyrics. Returns hit objects keyed by
+        type, currently only `song` results are surfaced by the public API.
+      security:
+        - GeniusOAuth2: []
+        - ClientAccessToken: []
+      parameters:
+        - name: q
+          in: query
+          required: true
+          description: The search query.
+          schema:
+            type: string
+            example: "Kendrick Lamar Alright"
+        - name: per_page
+          in: query
+          description: Number of results per page (max 5 for search).
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5
+            default: 5
+        - name: page
+          in: query
+          description: Page of results to return (1-indexed).
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /songs/{id}:
+    get:
+      tags: [Songs]
+      operationId: getSong
+      summary: Get Song
+      description: Returns full song metadata including artist, album, release date, media, and song relationships.
+      security:
+        - GeniusOAuth2: []
+        - ClientAccessToken: []
+      parameters:
+        - $ref: '#/components/parameters/SongId'
+        - $ref: '#/components/parameters/TextFormat'
+      responses:
+        '200':
+          description: Song details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SongResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /songs/{id}/comments:
+    get:
+      tags: [Songs]
+      operationId: getSongComments
+      summary: Get Song Comments
+      description: Lists comments left on a song page.
+      security:
+        - GeniusOAuth2: []
+      parameters:
+        - $ref: '#/components/parameters/SongId'
+        - $ref: '#/components/parameters/PerPage'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/TextFormat'
+      responses:
+        '200':
+          description: Comments on the song
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentListResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /songs/{id}/activity:
+    get:
+      tags: [Songs]
+      operationId: getSongActivity
+      summary: Get Song Activity
+      description: Activity stream for a song (annotations created, comments posted, edits, etc.).
+      security:
+        - GeniusOAuth2: []
+      parameters:
+        - $ref: '#/components/parameters/SongId'
+        - $ref: '#/components/parameters/PerPage'
+        - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: Activity feed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivityListResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /songs/{id}/contributors:
+    get:
+      tags: [Songs]
+      operationId: getSongContributors
+      summary: Get Song Contributors
+      description: List of users who have contributed to the song (transcribers, annotators, editors).
+      security:
+        - GeniusOAuth2: []
+      parameters:
+        - $ref: '#/components/parameters/SongId'
+      responses:
+        '200':
+          description: Contributors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContributorListResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /artists/{id}:
+    get:
+      tags: [Artists]
+      operationId: getArtist
+      summary: Get Artist
+      description: Returns artist metadata including bio, follower count, social handles, and verification status.
+      security:
+        - GeniusOAuth2: []
+        - ClientAccessToken: []
+      parameters:
+        - $ref: '#/components/parameters/ArtistId'
+        - $ref: '#/components/parameters/TextFormat'
+      responses:
+        '200':
+          description: Artist details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArtistResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /artists/{id}/songs:
+    get:
+      tags: [Artists]
+      operationId: getArtistSongs
+      summary: List Artist Songs
+      description: Returns a paginated list of songs for the artist, sortable by title, popularity, or release date.
+      security:
+        - GeniusOAuth2: []
+        - ClientAccessToken: []
+      parameters:
+        - $ref: '#/components/parameters/ArtistId'
+        - name: sort
+          in: query
+          description: Sort key for the result set.
+          schema:
+            type: string
+            enum: [title, popularity, release_date]
+            default: title
+        - $ref: '#/components/parameters/PerPage'
+        - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: Songs by the artist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SongListResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /artists/{id}/albums:
+    get:
+      tags: [Artists]
+      operationId: getArtistAlbums
+      summary: List Artist Albums
+      description: Returns albums associated with the artist.
+      security:
+        - GeniusOAuth2: []
+      parameters:
+        - $ref: '#/components/parameters/ArtistId'
+        - $ref: '#/components/parameters/PerPage'
+        - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: Albums by the artist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlbumListResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /artists/{id}/activity:
+    get:
+      tags: [Artists]
+      operationId: getArtistActivity
+      summary: Get Artist Activity
+      description: Activity stream covering all of the artist's songs.
+      security:
+        - GeniusOAuth2: []
+      parameters:
+        - $ref: '#/components/parameters/ArtistId'
+        - $ref: '#/components/parameters/PerPage'
+        - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: Activity feed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivityListResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /artists/{id}/followers:
+    get:
+      tags: [Artists]
+      operationId: getArtistFollowers
+      summary: List Artist Followers
+      description: Returns users who follow the artist.
+      security:
+        - GeniusOAuth2: []
+      parameters:
+        - $ref: '#/components/parameters/ArtistId'
+        - $ref: '#/components/parameters/PerPage'
+        - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: Followers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserListResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /artists/{id}/leaderboard:
+    get:
+      tags: [Artists]
+      operationId: getArtistLeaderboard
+      summary: Get Artist Leaderboard
+      description: Returns the top "scholars" — users with the highest contribution score for this artist.
+      security:
+        - GeniusOAuth2: []
+      parameters:
+        - $ref: '#/components/parameters/ArtistId'
+        - $ref: '#/components/parameters/PerPage'
+        - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: Leaderboard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeaderboardResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /albums/{id}:
+    get:
+      tags: [Albums]
+      operationId: getAlbum
+      summary: Get Album
+      description: Returns album metadata including title, artist, release date, and cover art.
+      security:
+        - GeniusOAuth2: []
+        - ClientAccessToken: []
+      parameters:
+        - $ref: '#/components/parameters/AlbumId'
+        - $ref: '#/components/parameters/TextFormat'
+      responses:
+        '200':
+          description: Album details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlbumResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /albums/{id}/tracks:
+    get:
+      tags: [Albums]
+      operationId: getAlbumTracks
+      summary: List Album Tracks
+      description: Returns the album's tracklist in order.
+      security:
+        - GeniusOAuth2: []
+      parameters:
+        - $ref: '#/components/parameters/AlbumId'
+        - $ref: '#/components/parameters/PerPage'
+        - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: Tracks
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlbumTracksResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /albums/{id}/comments:
+    get:
+      tags: [Albums]
+      operationId: getAlbumComments
+      summary: Get Album Comments
+      description: Comments left on the album page.
+      security:
+        - GeniusOAuth2: []
+      parameters:
+        - $ref: '#/components/parameters/AlbumId'
+        - $ref: '#/components/parameters/PerPage'
+        - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: Album comments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentListResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /albums/{id}/cover_arts:
+    get:
+      tags: [Albums]
+      operationId: getAlbumCoverArts
+      summary: Get Album Cover Arts
+      description: Returns all cover-art images attached to the album.
+      security:
+        - GeniusOAuth2: []
+      parameters:
+        - $ref: '#/components/parameters/AlbumId'
+      responses:
+        '200':
+          description: Cover arts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CoverArtListResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /albums/{id}/leaderboard:
+    get:
+      tags: [Albums]
+      operationId: getAlbumLeaderboard
+      summary: Get Album Leaderboard
+      description: Top contributors to the album.
+      security:
+        - GeniusOAuth2: []
+      parameters:
+        - $ref: '#/components/parameters/AlbumId'
+        - $ref: '#/components/parameters/PerPage'
+        - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: Leaderboard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeaderboardResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /annotations/{id}:
+    get:
+      tags: [Annotations]
+      operationId: getAnnotation
+      summary: Get Annotation
+      description: Returns the full content of an annotation along with its referent.
+      security:
+        - GeniusOAuth2: []
+        - ClientAccessToken: []
+      parameters:
+        - $ref: '#/components/parameters/AnnotationId'
+        - $ref: '#/components/parameters/TextFormat'
+      responses:
+        '200':
+          description: Annotation details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnnotationResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags: [Annotations]
+      operationId: deleteAnnotation
+      summary: Delete Annotation
+      description: Deletes an annotation owned by the authenticated user. Requires the `manage_annotation` scope.
+      security:
+        - GeniusOAuth2: [manage_annotation]
+      parameters:
+        - $ref: '#/components/parameters/AnnotationId'
+      responses:
+        '204':
+          description: Annotation deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /annotations:
+    post:
+      tags: [Annotations]
+      operationId: createAnnotation
+      summary: Create Annotation
+      description: Creates a new annotation attached to a referent (or a fragment of a web page). Requires the `create_annotation` scope.
+      security:
+        - GeniusOAuth2: [create_annotation]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAnnotationRequest'
+      responses:
+        '201':
+          description: Annotation created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnnotationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /annotations/{id}/edits:
+    get:
+      tags: [Annotations]
+      operationId: getAnnotationEdits
+      summary: Get Annotation Edits
+      description: Returns the version history of an annotation.
+      security:
+        - GeniusOAuth2: []
+      parameters:
+        - $ref: '#/components/parameters/AnnotationId'
+      responses:
+        '200':
+          description: Annotation versions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnnotationEditListResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /annotations/{id}/comments:
+    get:
+      tags: [Annotations]
+      operationId: getAnnotationComments
+      summary: Get Annotation Comments
+      description: Returns comments left on an annotation.
+      security:
+        - GeniusOAuth2: []
+      parameters:
+        - $ref: '#/components/parameters/AnnotationId'
+        - $ref: '#/components/parameters/PerPage'
+        - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: Annotation comments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentListResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /annotations/{id}/vote:
+    put:
+      tags: [Annotations]
+      operationId: upvoteAnnotation
+      summary: Upvote Annotation
+      description: Upvotes an annotation as the authenticated user. Requires the `vote` scope.
+      security:
+        - GeniusOAuth2: [vote]
+      parameters:
+        - $ref: '#/components/parameters/AnnotationId'
+      responses:
+        '200':
+          description: Vote recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoteResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags: [Annotations]
+      operationId: removeAnnotationVote
+      summary: Remove Annotation Vote
+      description: Removes the authenticated user's vote from the annotation. Requires the `vote` scope.
+      security:
+        - GeniusOAuth2: [vote]
+      parameters:
+        - $ref: '#/components/parameters/AnnotationId'
+      responses:
+        '200':
+          description: Vote removed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoteResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /annotations/{id}/downvote:
+    put:
+      tags: [Annotations]
+      operationId: downvoteAnnotation
+      summary: Downvote Annotation
+      description: Downvotes an annotation as the authenticated user. Requires the `vote` scope.
+      security:
+        - GeniusOAuth2: [vote]
+      parameters:
+        - $ref: '#/components/parameters/AnnotationId'
+      responses:
+        '200':
+          description: Vote recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoteResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /referents:
+    get:
+      tags: [Referents]
+      operationId: listReferents
+      summary: List Referents
+      description: |
+        Returns referents (lyric fragments) filtered by `song_id`, `web_page_id`,
+        or `created_by_id`. Exactly one of these parameters must be supplied.
+      security:
+        - GeniusOAuth2: []
+        - ClientAccessToken: []
+      parameters:
+        - name: song_id
+          in: query
+          description: Filter by song.
+          schema:
+            type: integer
+        - name: web_page_id
+          in: query
+          description: Filter by web page.
+          schema:
+            type: integer
+        - name: created_by_id
+          in: query
+          description: Filter by referent creator.
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/PerPage'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/TextFormat'
+      responses:
+        '200':
+          description: Referents
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferentListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /referents/{ids}:
+    get:
+      tags: [Referents]
+      operationId: getReferents
+      summary: Get Referents By IDs
+      description: Returns one or more referents by their IDs (comma-separated).
+      security:
+        - GeniusOAuth2: []
+        - ClientAccessToken: []
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          description: Comma-separated referent IDs.
+          schema:
+            type: string
+            example: "10225840,10225841"
+        - $ref: '#/components/parameters/TextFormat'
+      responses:
+        '200':
+          description: Referents
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferentListResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /web_pages/lookup:
+    get:
+      tags: [Web Pages]
+      operationId: lookupWebPage
+      summary: Lookup Web Page
+      description: |
+        Looks up a web page record (the surface on which Genius annotations live)
+        by one of `raw_annotatable_url`, `canonical_url`, or `og_url`.
+      security:
+        - GeniusOAuth2: []
+        - ClientAccessToken: []
+      parameters:
+        - name: raw_annotatable_url
+          in: query
+          description: Untransformed URL of the page.
+          schema:
+            type: string
+            format: uri
+        - name: canonical_url
+          in: query
+          description: Canonical URL declared by the page.
+          schema:
+            type: string
+            format: uri
+        - name: og_url
+          in: query
+          description: Open Graph URL declared by the page.
+          schema:
+            type: string
+            format: uri
+      responses:
+        '200':
+          description: Web page record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebPageResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /users/{id}:
+    get:
+      tags: [Users]
+      operationId: getUser
+      summary: Get User
+      description: Returns user profile data.
+      security:
+        - GeniusOAuth2: []
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+        - $ref: '#/components/parameters/TextFormat'
+      responses:
+        '200':
+          description: User profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /users/{id}/contributions:
+    get:
+      tags: [Users]
+      operationId: getUserContributions
+      summary: Get User Contributions
+      description: Returns contributions made by the user (annotations, songs, transcriptions, suggestions, etc.).
+      security:
+        - GeniusOAuth2: []
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+        - name: type
+          in: query
+          description: Restrict to a specific contribution type.
+          schema:
+            type: string
+            enum: [annotations, articles, pyongs, questions, song_comments, suggestions, transcriptions, unreviewed_annotations]
+        - $ref: '#/components/parameters/PerPage'
+        - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: Contributions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserContributionListResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+components:
+  parameters:
+    SongId:
+      name: id
+      in: path
+      required: true
+      description: Genius numeric song ID.
+      schema:
+        type: integer
+        example: 378195
+    ArtistId:
+      name: id
+      in: path
+      required: true
+      description: Genius numeric artist ID.
+      schema:
+        type: integer
+        example: 16775
+    AlbumId:
+      name: id
+      in: path
+      required: true
+      description: Genius numeric album ID.
+      schema:
+        type: integer
+        example: 56682
+    AnnotationId:
+      name: id
+      in: path
+      required: true
+      description: Genius numeric annotation ID.
+      schema:
+        type: integer
+        example: 10225840
+    UserId:
+      name: id
+      in: path
+      required: true
+      description: Genius numeric user ID.
+      schema:
+        type: integer
+        example: 1
+    PerPage:
+      name: per_page
+      in: query
+      description: Number of results per page (max 50).
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 20
+    Page:
+      name: page
+      in: query
+      description: Page index (1-indexed).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    TextFormat:
+      name: text_format
+      in: query
+      description: Format for textual fields in the response.
+      schema:
+        type: string
+        enum: [dom, html, markdown, plain]
+        default: dom
+
+  responses:
+    BadRequest:
+      description: Malformed request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing or invalid access token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+  securitySchemes:
+    GeniusOAuth2:
+      type: oauth2
+      description: |
+        Genius uses OAuth 2.0 with the authorization-code flow. Apps are
+        registered at https://genius.com/api-clients.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.genius.com/oauth/authorize
+          tokenUrl: https://api.genius.com/oauth/token
+          scopes:
+            me: Access account profile of the authenticated user.
+            create_annotation: Create new annotations.
+            manage_annotation: Edit or delete the user's annotations.
+            vote: Upvote, downvote, or remove a vote on annotations.
+    ClientAccessToken:
+      type: http
+      scheme: bearer
+      bearerFormat: client_access_token
+      description: |
+        Client-only access token issued at app registration. Sufficient for
+        read-only endpoints (search, songs, artists, albums, annotations,
+        referents, web_pages/lookup).
+
+  schemas:
+    Meta:
+      type: object
+      description: Wrapper metadata included on every response.
+      properties:
+        status:
+          type: integer
+          description: HTTP status code echoed in the payload.
+          example: 200
+        message:
+          type: string
+          description: Optional human-readable status message.
+      required: [status]
+
+    ErrorResponse:
+      type: object
+      properties:
+        meta:
+          allOf:
+            - $ref: '#/components/schemas/Meta'
+            - type: object
+              properties:
+                error:
+                  type: string
+                  description: Short machine error code.
+                  example: not_found
+                error_description:
+                  type: string
+                  description: Human-readable error description.
+      required: [meta]
+
+    AccountResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            user:
+              $ref: '#/components/schemas/User'
+
+    SearchResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            hits:
+              type: array
+              items:
+                $ref: '#/components/schemas/SearchHit'
+
+    SearchHit:
+      type: object
+      properties:
+        type:
+          type: string
+          example: song
+        index:
+          type: string
+          example: song
+        result:
+          $ref: '#/components/schemas/Song'
+
+    SongResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            song:
+              $ref: '#/components/schemas/Song'
+
+    SongListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            songs:
+              type: array
+              items:
+                $ref: '#/components/schemas/Song'
+            next_page:
+              type: integer
+              nullable: true
+
+    Song:
+      type: object
+      description: A Genius song record.
+      properties:
+        id:
+          type: integer
+          example: 378195
+        title:
+          type: string
+          example: "Alright"
+        title_with_featured:
+          type: string
+        full_title:
+          type: string
+          example: "Alright by Kendrick Lamar"
+        artist_names:
+          type: string
+        primary_artist:
+          $ref: '#/components/schemas/Artist'
+        featured_artists:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artist'
+        album:
+          $ref: '#/components/schemas/Album'
+        url:
+          type: string
+          format: uri
+          description: Public genius.com URL for the song page (source of lyric HTML).
+        path:
+          type: string
+        release_date:
+          type: string
+          format: date
+          nullable: true
+        release_date_for_display:
+          type: string
+          nullable: true
+        song_art_image_url:
+          type: string
+          format: uri
+        song_art_image_thumbnail_url:
+          type: string
+          format: uri
+        header_image_url:
+          type: string
+          format: uri
+        header_image_thumbnail_url:
+          type: string
+          format: uri
+        lyrics_state:
+          type: string
+          description: Lifecycle state of the lyrics (complete, incomplete, unreleased, etc.).
+        lyrics_owner_id:
+          type: integer
+        annotation_count:
+          type: integer
+        api_path:
+          type: string
+        pyongs_count:
+          type: integer
+          nullable: true
+        stats:
+          $ref: '#/components/schemas/SongStats'
+        media:
+          type: array
+          items:
+            $ref: '#/components/schemas/Media'
+        description:
+          $ref: '#/components/schemas/RichText'
+        description_annotation:
+          $ref: '#/components/schemas/Referent'
+        recording_location:
+          type: string
+          nullable: true
+        producer_artists:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artist'
+        writer_artists:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artist'
+
+    SongStats:
+      type: object
+      properties:
+        unreviewed_annotations:
+          type: integer
+        hot:
+          type: boolean
+        pageviews:
+          type: integer
+          nullable: true
+
+    Media:
+      type: object
+      properties:
+        provider:
+          type: string
+          example: youtube
+        type:
+          type: string
+          example: video
+        url:
+          type: string
+          format: uri
+        start:
+          type: integer
+          nullable: true
+        native_uri:
+          type: string
+          nullable: true
+
+    ArtistResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            artist:
+              $ref: '#/components/schemas/Artist'
+
+    Artist:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1421
+        name:
+          type: string
+          example: Kendrick Lamar
+        url:
+          type: string
+          format: uri
+        api_path:
+          type: string
+        image_url:
+          type: string
+          format: uri
+        header_image_url:
+          type: string
+          format: uri
+        is_meme_verified:
+          type: boolean
+        is_verified:
+          type: boolean
+        followers_count:
+          type: integer
+        iq:
+          type: integer
+          nullable: true
+        slug:
+          type: string
+        description:
+          $ref: '#/components/schemas/RichText'
+        alternate_names:
+          type: array
+          items:
+            type: string
+        instagram_name:
+          type: string
+          nullable: true
+        twitter_name:
+          type: string
+          nullable: true
+        facebook_name:
+          type: string
+          nullable: true
+
+    AlbumResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            album:
+              $ref: '#/components/schemas/Album'
+
+    AlbumListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            albums:
+              type: array
+              items:
+                $ref: '#/components/schemas/Album'
+            next_page:
+              type: integer
+              nullable: true
+
+    AlbumTracksResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            tracks:
+              type: array
+              items:
+                $ref: '#/components/schemas/AlbumTrack'
+
+    AlbumTrack:
+      type: object
+      properties:
+        number:
+          type: integer
+        song:
+          $ref: '#/components/schemas/Song'
+
+    CoverArtListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            cover_arts:
+              type: array
+              items:
+                $ref: '#/components/schemas/CoverArt'
+
+    CoverArt:
+      type: object
+      properties:
+        id:
+          type: integer
+        image_url:
+          type: string
+          format: uri
+        thumbnail_image_url:
+          type: string
+          format: uri
+        annotated:
+          type: boolean
+        api_path:
+          type: string
+
+    Album:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        full_title:
+          type: string
+        url:
+          type: string
+          format: uri
+        api_path:
+          type: string
+        cover_art_url:
+          type: string
+          format: uri
+        cover_art_thumbnail_url:
+          type: string
+          format: uri
+        release_date_for_display:
+          type: string
+          nullable: true
+        artist:
+          $ref: '#/components/schemas/Artist'
+
+    AnnotationResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            annotation:
+              $ref: '#/components/schemas/Annotation'
+            referent:
+              $ref: '#/components/schemas/Referent'
+
+    Annotation:
+      type: object
+      properties:
+        id:
+          type: integer
+        api_path:
+          type: string
+        body:
+          $ref: '#/components/schemas/RichText'
+        comment_count:
+          type: integer
+        community:
+          type: boolean
+          description: True if the annotation was authored by the community rather than an artist or editor.
+        custom_preview:
+          type: string
+          nullable: true
+        has_voters:
+          type: boolean
+        votes_total:
+          type: integer
+        verified:
+          type: boolean
+          description: True if the annotation has been verified by a trusted editor or artist.
+        verified_by:
+          $ref: '#/components/schemas/User'
+        state:
+          type: string
+          enum: [accepted, pending, deleted, needs_exegesis]
+        url:
+          type: string
+          format: uri
+        share_url:
+          type: string
+          format: uri
+        source:
+          type: string
+          nullable: true
+        pinned:
+          type: boolean
+        cosigned_by:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        authors:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnnotationAuthor'
+        created_at:
+          type: string
+          format: date-time
+
+    AnnotationAuthor:
+      type: object
+      properties:
+        attribution:
+          type: number
+          format: float
+        pinned_role:
+          type: string
+          nullable: true
+        user:
+          $ref: '#/components/schemas/User'
+
+    CreateAnnotationRequest:
+      type: object
+      required: [annotation, referent, web_page]
+      properties:
+        annotation:
+          type: object
+          required: [body]
+          properties:
+            body:
+              type: object
+              required: [markdown]
+              properties:
+                markdown:
+                  type: string
+                  description: Annotation body in Markdown.
+        referent:
+          type: object
+          required: [raw_annotatable_url, fragment]
+          properties:
+            raw_annotatable_url:
+              type: string
+              format: uri
+              description: URL of the page the annotation lives on.
+            fragment:
+              type: string
+              description: The exact text fragment being annotated.
+            before_html:
+              type: string
+              description: HTML context that precedes the fragment.
+            after_html:
+              type: string
+              description: HTML context that follows the fragment.
+        web_page:
+          type: object
+          properties:
+            canonical_url:
+              type: string
+              format: uri
+            og_url:
+              type: string
+              format: uri
+            title:
+              type: string
+
+    AnnotationEditListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            annotation_versions:
+              type: array
+              items:
+                $ref: '#/components/schemas/AnnotationVersion'
+
+    AnnotationVersion:
+      type: object
+      properties:
+        id:
+          type: integer
+        body:
+          $ref: '#/components/schemas/RichText'
+        major:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        user:
+          $ref: '#/components/schemas/User'
+
+    ReferentListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            referents:
+              type: array
+              items:
+                $ref: '#/components/schemas/Referent'
+
+    Referent:
+      type: object
+      description: A referent is a fragment of text on a page that one or more annotations are attached to.
+      properties:
+        id:
+          type: integer
+        annotator_id:
+          type: integer
+        annotator_login:
+          type: string
+        api_path:
+          type: string
+        classification:
+          type: string
+          example: accepted
+        fragment:
+          type: string
+          description: The exact text being annotated.
+        is_description:
+          type: boolean
+        path:
+          type: string
+        range:
+          type: object
+          additionalProperties: true
+          description: DOM range describing the location of the fragment on the source page.
+        song_id:
+          type: integer
+          nullable: true
+        url:
+          type: string
+          format: uri
+        verified_annotator_ids:
+          type: array
+          items:
+            type: integer
+        annotatable:
+          $ref: '#/components/schemas/Annotatable'
+        annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Annotation'
+
+    Annotatable:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+          example: song
+        title:
+          type: string
+        url:
+          type: string
+          format: uri
+        api_path:
+          type: string
+        image_url:
+          type: string
+          format: uri
+        context:
+          type: string
+
+    WebPageResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            web_page:
+              $ref: '#/components/schemas/WebPage'
+
+    WebPage:
+      type: object
+      properties:
+        id:
+          type: integer
+        url:
+          type: string
+          format: uri
+        api_path:
+          type: string
+        share_url:
+          type: string
+          format: uri
+        domain:
+          type: string
+        title:
+          type: string
+        annotation_count:
+          type: integer
+        canonical_url:
+          type: string
+          format: uri
+          nullable: true
+        normalized_url:
+          type: string
+          format: uri
+
+    UserResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            user:
+              $ref: '#/components/schemas/User'
+
+    UserListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            users:
+              type: array
+              items:
+                $ref: '#/components/schemas/User'
+
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        login:
+          type: string
+        name:
+          type: string
+        about_me_summary:
+          type: string
+          nullable: true
+        avatar:
+          type: object
+          properties:
+            tiny:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+            thumb:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+            small:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+            medium:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+        header_image_url:
+          type: string
+          format: uri
+        human_readable_role_for_display:
+          type: string
+          nullable: true
+        iq:
+          type: integer
+        identity_provider:
+          type: string
+          nullable: true
+        roles_for_display:
+          type: array
+          items:
+            type: string
+        url:
+          type: string
+          format: uri
+        api_path:
+          type: string
+
+    UserContributionListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            contribution_groups:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContributionGroup'
+
+    ContributionGroup:
+      type: object
+      properties:
+        contribution_type:
+          type: string
+        total:
+          type: integer
+        contributions:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+
+    LeaderboardResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            leaderboard:
+              type: array
+              items:
+                $ref: '#/components/schemas/LeaderboardEntry'
+
+    LeaderboardEntry:
+      type: object
+      properties:
+        attribution:
+          type: number
+          format: float
+        user:
+          $ref: '#/components/schemas/User'
+
+    CommentListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            comments:
+              type: array
+              items:
+                $ref: '#/components/schemas/Comment'
+
+    Comment:
+      type: object
+      properties:
+        id:
+          type: integer
+        body:
+          $ref: '#/components/schemas/RichText'
+        user:
+          $ref: '#/components/schemas/User'
+        created_at:
+          type: string
+          format: date-time
+        votes_total:
+          type: integer
+        has_voters:
+          type: boolean
+
+    ActivityListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            activities:
+              type: array
+              items:
+                $ref: '#/components/schemas/ActivityItem'
+
+    ActivityItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        objects:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+
+    ContributorListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            contributors:
+              type: array
+              items:
+                $ref: '#/components/schemas/Contributor'
+
+    Contributor:
+      type: object
+      properties:
+        attribution:
+          type: number
+          format: float
+        contributions:
+          type: array
+          items:
+            type: string
+        artist:
+          $ref: '#/components/schemas/Artist'
+          nullable: true
+        user:
+          $ref: '#/components/schemas/User'
+          nullable: true
+        pinned_role:
+          type: string
+          nullable: true
+
+    VoteResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            referent:
+              $ref: '#/components/schemas/Referent'
+            annotation:
+              $ref: '#/components/schemas/Annotation'
+
+    RichText:
+      type: object
+      description: |
+        Genius represents textual content in multiple formats. Which key is
+        present depends on the `text_format` query parameter.
+      properties:
+        dom:
+          type: object
+          additionalProperties: true
+        html:
+          type: string
+        markdown:
+          type: string
+        plain:
+          type: string

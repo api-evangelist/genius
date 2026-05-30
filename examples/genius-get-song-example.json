@@ -1,0 +1,42 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.genius.com/songs/378195?text_format=plain",
+    "headers": {
+      "Authorization": "Bearer YOUR_CLIENT_ACCESS_TOKEN",
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "meta": { "status": 200 },
+    "response": {
+      "song": {
+        "id": 378195,
+        "title": "Alright",
+        "full_title": "Alright by Kendrick Lamar",
+        "artist_names": "Kendrick Lamar",
+        "primary_artist": {
+          "id": 1421,
+          "name": "Kendrick Lamar",
+          "is_verified": true,
+          "followers_count": 9876543
+        },
+        "album": {
+          "id": 56682,
+          "name": "To Pimp A Butterfly",
+          "url": "https://genius.com/albums/Kendrick-lamar/To-pimp-a-butterfly"
+        },
+        "url": "https://genius.com/Kendrick-lamar-alright-lyrics",
+        "release_date": "2015-06-30",
+        "release_date_for_display": "June 30, 2015",
+        "song_art_image_url": "https://images.genius.com/song-art.jpg",
+        "lyrics_state": "complete",
+        "annotation_count": 142,
+        "description": { "plain": "The fourth single from To Pimp A Butterfly." },
+        "media": [
+          { "provider": "youtube", "type": "video", "url": "https://www.youtube.com/watch?v=Z-48u_uWMHY" }
+        ]
+      }
+    }
+  }
+}

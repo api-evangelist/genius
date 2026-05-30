@@ -1,0 +1,101 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Genius API — Users"
+  description: >-
+    Users — Genius user profiles and their contributions. 2 operations.
+    Lead operation: Get User.
+    Self-contained Naftiko capability covering one Genius business surface.
+  tags:
+    - Genius
+    - Music
+    - Users
+  created: "2026-05-29"
+  modified: "2026-05-29"
+
+binds:
+  - namespace: env
+    keys:
+      GENIUS_ACCESS_TOKEN: GENIUS_ACCESS_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "genius-users"
+      baseUri: "https://api.genius.com"
+      description: "Genius API — Users business capability."
+      authentication:
+        type: bearer
+        token: "{{env.GENIUS_ACCESS_TOKEN}}"
+      resources:
+        - name: "user"
+          path: "/users/{id}"
+          operations:
+            - name: "getUser"
+              method: GET
+              description: "Returns user profile data."
+              inputParameters:
+                - { name: "id",         in: path,  type: integer, required: true,  description: "Genius user ID." }
+                - { name: "text_format",in: query, type: string,  required: false, description: "Format for textual fields." }
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: "$." }]
+        - name: "user-contributions"
+          path: "/users/{id}/contributions"
+          operations:
+            - name: "getUserContributions"
+              method: GET
+              description: "Returns contributions made by the user."
+              inputParameters:
+                - { name: "id",       in: path,  type: integer, required: true,  description: "Genius user ID." }
+                - { name: "type",     in: query, type: string,  required: false, description: "Contribution type filter." }
+                - { name: "per_page", in: query, type: integer, required: false, description: "Results per page." }
+                - { name: "page",     in: query, type: integer, required: false, description: "Page index." }
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: "$." }]
+
+  exposes:
+    - type: rest
+      namespace: "genius-users-rest"
+      port: 8080
+      description: "REST adapter for Genius — Users."
+      resources:
+        - path: "/v1/users/{id}"
+          name: "user"
+          description: "User detail."
+          operations:
+            - method: GET
+              name: "getUser"
+              description: "Get a Genius user by ID."
+              call: "genius-users.getUser"
+              with: { "id": "rest.id", "text_format": "rest.text_format" }
+              outputParameters: [{ type: object, mapping: "$." }]
+        - path: "/v1/users/{id}/contributions"
+          name: "user-contributions"
+          description: "User contributions."
+          operations:
+            - method: GET
+              name: "getUserContributions"
+              description: "Get a Genius user's contributions."
+              call: "genius-users.getUserContributions"
+              with: { "id": "rest.id", "type": "rest.type", "per_page": "rest.per_page", "page": "rest.page" }
+              outputParameters: [{ type: object, mapping: "$." }]
+
+    - type: mcp
+      namespace: "genius-users-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Genius — Users."
+      tools:
+        - name: "get-user"
+          description: "Get a Genius user profile by ID."
+          hints: { readOnly: true, destructive: false, idempotent: true }
+          call: "genius-users.getUser"
+          with: { "id": "tools.id", "text_format": "tools.text_format" }
+          outputParameters: [{ type: object, mapping: "$." }]
+        - name: "list-user-contributions"
+          description: "List a Genius user's contributions."
+          hints: { readOnly: true, destructive: false, idempotent: true }
+          call: "genius-users.getUserContributions"
+          with: { "id": "tools.id", "type": "tools.type", "per_page": "tools.per_page", "page": "tools.page" }
+          outputParameters: [{ type: object, mapping: "$." }]

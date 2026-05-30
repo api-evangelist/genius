@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/genius/blob/main/json-schema/genius-web-page-schema.json",
+  "title": "GeniusWebPage",
+  "description": "A Genius web page record — the surface on which annotations may live.",
+  "type": "object",
+  "required": ["id", "url"],
+  "properties": {
+    "id":               { "type": "integer" },
+    "url":              { "type": "string", "format": "uri" },
+    "api_path":         { "type": "string" },
+    "share_url":        { "type": "string", "format": "uri" },
+    "domain":           { "type": "string" },
+    "title":            { "type": "string" },
+    "annotation_count": { "type": "integer", "minimum": 0 },
+    "canonical_url":    { "type": ["string","null"], "format": "uri" },
+    "normalized_url":   { "type": "string", "format": "uri" }
+  }
+}

@@ -1,10 +1,9 @@
 aid: genius
 name: Genius
 description: >-
-  Crowdsourced music knowledge — the Genius/Rap Genius platform. The Genius API
-  exposes structured metadata for songs, artists, albums, annotations,
-  referents, and contributors. Raw lyric text is not served by the API;
-  consumers receive the public song page URL and scrape lyrics from there.
+  Crowdsourced music knowledge — the Genius/Rap Genius platform. The Genius API exposes structured metadata for songs,
+  artists, albums, annotations, referents, and contributors. Raw lyric text is not served by the API; consumers receive
+  the public song page URL and scrape lyrics from there.
 url: https://docs.genius.com/
 image: https://assets.genius.com/images/apple-touch-icon.png
 specificationVersion: '0.20'
@@ -15,7 +14,6 @@ x-category: Music
 x-type: company
 x-tier: 2
 x-tier-reason: enriched-with-openapi-capabilities-and-schemas
-
 tags:
   - Music
   - Lyrics
@@ -23,12 +21,9 @@ tags:
   - Crowdsourced
   - Reference Data
   - Public APIs
-
 apis:
   - name: Genius
-    description: >-
-      Crowdsourced music knowledge — songs, artists, albums, annotations,
-      referents, and contributor data.
+    description: Crowdsourced music knowledge — songs, artists, albums, annotations, referents, and contributor data.
     humanURL: https://docs.genius.com/
     baseURL: https://api.genius.com
     tags:
@@ -94,39 +89,10 @@ apis:
       - type: Example
         title: Lookup Web Page
         url: examples/genius-lookup-web-page-example.json
-      - type: NaftikoCapability
-        title: Account
-        url: capabilities/genius-account.yaml
-      - type: NaftikoCapability
-        title: Search
-        url: capabilities/genius-search.yaml
-      - type: NaftikoCapability
-        title: Songs
-        url: capabilities/genius-songs.yaml
-      - type: NaftikoCapability
-        title: Artists
-        url: capabilities/genius-artists.yaml
-      - type: NaftikoCapability
-        title: Albums
-        url: capabilities/genius-albums.yaml
-      - type: NaftikoCapability
-        title: Annotations
-        url: capabilities/genius-annotations.yaml
-      - type: NaftikoCapability
-        title: Referents
-        url: capabilities/genius-referents.yaml
-      - type: NaftikoCapability
-        title: WebPages
-        url: capabilities/genius-web-pages.yaml
-      - type: NaftikoCapability
-        title: Users
-        url: capabilities/genius-users.yaml
       - type: Plans
         url: plans/genius-plans-pricing.yml
       - type: RateLimits
         url: rate-limits/genius-rate-limits.yml
-
-      # ── Community SDKs (Genius does not maintain official SDKs) ──
       - type: SDK
         title: Python SDK (lyricsgenius)
         url: https://github.com/johnwmillr/LyricsGenius
@@ -148,7 +114,6 @@ apis:
       - type: SDK
         title: R SDK (geniusr)
         url: https://cran.r-project.org/web/packages/geniusr/
-
 common:
   - type: Website
     url: https://genius.com/
@@ -168,8 +133,6 @@ common:
     url: vocabulary/genius-vocabulary.yml
   - type: PublicAPIsListing
     url: https://github.com/public-apis/public-apis
-
-  # ── MCP servers (community — Genius does not publish a first-party server) ──
   - type: Tools
     title: MCP Server (jchoi2x/genius-mcp)
     url: https://github.com/jchoi2x/genius-mcp
@@ -179,12 +142,9 @@ common:
   - type: Tools
     title: MCP Server (Sergiolm17/genius-mcp-server)
     url: https://mcp.so/server/genius-mcp-server/Sergiolm17
-
-  # ── OAuth-related Genius org artifacts ──
   - type: Tools
     title: omniauth-genius (OAuth strategy)
     url: https://github.com/Genius/omniauth-genius
-
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

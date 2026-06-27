@@ -33,7 +33,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.genius.com/
-      - type: SignUp
+      - type: Signup
         url: https://genius.com/api-clients
       - type: Authentication
         url: https://docs.genius.com/#/authentication-h1
@@ -68,50 +68,50 @@ apis:
       - type: JSONStructure
         title: Annotation
         url: json-structure/genius-annotation-structure.json
-      - type: Example
+      - type: Examples
         title: Search
         url: examples/genius-search-example.json
-      - type: Example
+      - type: Examples
         title: Get Song
         url: examples/genius-get-song-example.json
-      - type: Example
+      - type: Examples
         title: Get Artist
         url: examples/genius-get-artist-example.json
-      - type: Example
+      - type: Examples
         title: List Artist Songs
         url: examples/genius-list-artist-songs-example.json
-      - type: Example
+      - type: Examples
         title: Get Referents
         url: examples/genius-get-referents-example.json
-      - type: Example
+      - type: Examples
         title: Get Annotation
         url: examples/genius-get-annotation-example.json
-      - type: Example
+      - type: Examples
         title: Lookup Web Page
         url: examples/genius-lookup-web-page-example.json
       - type: Plans
         url: plans/genius-plans-pricing.yml
       - type: RateLimits
         url: rate-limits/genius-rate-limits.yml
-      - type: SDK
+      - type: SDKs
         title: Python SDK (lyricsgenius)
         url: https://github.com/johnwmillr/LyricsGenius
-      - type: SDK
+      - type: SDKs
         title: Python SDK (wrap-genius)
         url: https://github.com/fedecalendino/wrap-genius
-      - type: SDK
+      - type: SDKs
         title: Node.js SDK (genius-api)
         url: https://github.com/jahrlin/genius-api
-      - type: SDK
+      - type: SDKs
         title: Node.js SDK (node-genius)
         url: https://github.com/bookercodes/node-genius
-      - type: SDK
+      - type: SDKs
         title: Ruby SDK (timrogers/genius)
         url: https://github.com/timrogers/genius
-      - type: SDK
+      - type: SDKs
         title: PHP SDK (Genius-PHP)
         url: https://github.com/simivar/Genius-PHP
-      - type: SDK
+      - type: SDKs
         title: R SDK (geniusr)
         url: https://cran.r-project.org/web/packages/geniusr/
 common:

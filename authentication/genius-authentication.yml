@@ -1,0 +1,32 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/genius-openapi.yml
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: GeniusOAuth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.genius.com/oauth/authorize
+    tokenUrl: https://api.genius.com/oauth/token
+    scopes: 4
+  description: |-
+    Genius uses OAuth 2.0 with the authorization-code flow. Apps are
+    registered at https://genius.com/api-clients.
+  sources:
+  - openapi/genius-openapi.yml
+- name: ClientAccessToken
+  type: http
+  scheme: bearer
+  bearerFormat: client_access_token
+  description: |-
+    Client-only access token issued at app registration. Sufficient for
+    read-only endpoints (search, songs, artists, albums, annotations,
+    referents, web_pages/lookup).
+  sources:
+  - openapi/genius-openapi.yml

@@ -1,0 +1,38 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/genius-openapi.yml
+schemes:
+- name: GeniusOAuth2
+  source: openapi/genius-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.genius.com/oauth/authorize
+    tokenUrl: https://api.genius.com/oauth/token
+  description: |-
+    Genius uses OAuth 2.0 with the authorization-code flow. Apps are
+    registered at https://genius.com/api-clients.
+scopes:
+- scope: create_annotation
+  description: Create new annotations.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/genius-openapi.yml
+- scope: manage_annotation
+  description: Edit or delete the user's annotations.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/genius-openapi.yml
+- scope: me
+  description: Access account profile of the authenticated user.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/genius-openapi.yml
+- scope: vote
+  description: Upvote, downvote, or remove a vote on annotations.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/genius-openapi.yml

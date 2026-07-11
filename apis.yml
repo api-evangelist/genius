@@ -115,6 +115,8 @@ apis:
         title: R SDK (geniusr)
         url: https://cran.r-project.org/web/packages/geniusr/
 common:
+  - type: OAuthScopes
+    url: scopes/genius-scopes.yml
   - type: Website
     url: https://genius.com/
   - type: DeveloperPortal

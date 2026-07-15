@@ -115,6 +115,8 @@ apis:
         title: R SDK (geniusr)
         url: https://cran.r-project.org/web/packages/geniusr/
 common:
+  - type: AgenticAccess
+    url: agentic-access/genius-agentic-access.yml
   - type: DomainSecurity
     url: security/genius-domain-security.yml
   - type: Authentication

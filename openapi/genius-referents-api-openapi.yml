@@ -1,0 +1,429 @@
+openapi: 3.0.3
+info:
+  title: Genius Account Referents API
+  description: 'The Genius API exposes the Genius/Rap Genius crowdsourced music knowledge
+
+    base — songs, artists, albums, annotations, and referents. Responses are
+
+    JSON. The API does NOT serve raw lyric text directly (those must be scraped
+
+    from the public song page); it returns rich song, artist, album, annotation
+
+    metadata, scoring, and the URLs needed to locate lyrics on genius.com.
+
+    '
+  version: 1.0.0
+  termsOfService: https://genius.com/static/terms
+  contact:
+    name: Genius API Support
+    url: https://docs.genius.com/
+  license:
+    name: Genius API Terms of Use
+    url: https://genius.com/static/terms
+  x-generated-from: documentation
+  x-last-validated: '2026-05-29'
+servers:
+- url: https://api.genius.com
+  description: Production Genius API
+tags:
+- name: Referents
+  description: Lyric fragments (referents) and their attached annotations.
+paths:
+  /referents:
+    get:
+      tags:
+      - Referents
+      operationId: listReferents
+      summary: List Referents
+      description: 'Returns referents (lyric fragments) filtered by `song_id`, `web_page_id`,
+
+        or `created_by_id`. Exactly one of these parameters must be supplied.
+
+        '
+      security:
+      - GeniusOAuth2: []
+      - ClientAccessToken: []
+      parameters:
+      - name: song_id
+        in: query
+        description: Filter by song.
+        schema:
+          type: integer
+      - name: web_page_id
+        in: query
+        description: Filter by web page.
+        schema:
+          type: integer
+      - name: created_by_id
+        in: query
+        description: Filter by referent creator.
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/TextFormat'
+      responses:
+        '200':
+          description: Referents
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferentListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /referents/{ids}:
+    get:
+      tags:
+      - Referents
+      operationId: getReferents
+      summary: Get Referents By IDs
+      description: Returns one or more referents by their IDs (comma-separated).
+      security:
+      - GeniusOAuth2: []
+      - ClientAccessToken: []
+      parameters:
+      - name: ids
+        in: path
+        required: true
+        description: Comma-separated referent IDs.
+        schema:
+          type: string
+          example: 10225840,10225841
+      - $ref: '#/components/parameters/TextFormat'
+      responses:
+        '200':
+          description: Referents
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferentListResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    RichText:
+      type: object
+      description: 'Genius represents textual content in multiple formats. Which key is
+
+        present depends on the `text_format` query parameter.
+
+        '
+      properties:
+        dom:
+          type: object
+          additionalProperties: true
+        html:
+          type: string
+        markdown:
+          type: string
+        plain:
+          type: string
+    ErrorResponse:
+      type: object
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          - type: object
+            properties:
+              error:
+                type: string
+                description: Short machine error code.
+                example: not_found
+              error_description:
+                type: string
+                description: Human-readable error description.
+      required:
+      - meta
+    Meta:
+      type: object
+      description: Wrapper metadata included on every response.
+      properties:
+        status:
+          type: integer
+          description: HTTP status code echoed in the payload.
+          example: 200
+        message:
+          type: string
+          description: Optional human-readable status message.
+      required:
+      - status
+    ReferentListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            referents:
+              type: array
+              items:
+                $ref: '#/components/schemas/Referent'
+    Referent:
+      type: object
+      description: A referent is a fragment of text on a page that one or more annotations are attached to.
+      properties:
+        id:
+          type: integer
+        annotator_id:
+          type: integer
+        annotator_login:
+          type: string
+        api_path:
+          type: string
+        classification:
+          type: string
+          example: accepted
+        fragment:
+          type: string
+          description: The exact text being annotated.
+        is_description:
+          type: boolean
+        path:
+          type: string
+        range:
+          type: object
+          additionalProperties: true
+          description: DOM range describing the location of the fragment on the source page.
+        song_id:
+          type: integer
+          nullable: true
+        url:
+          type: string
+          format: uri
+        verified_annotator_ids:
+          type: array
+          items:
+            type: integer
+        annotatable:
+          $ref: '#/components/schemas/Annotatable'
+        annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Annotation'
+    Annotation:
+      type: object
+      properties:
+        id:
+          type: integer
+        api_path:
+          type: string
+        body:
+          $ref: '#/components/schemas/RichText'
+        comment_count:
+          type: integer
+        community:
+          type: boolean
+          description: True if the annotation was authored by the community rather than an artist or editor.
+        custom_preview:
+          type: string
+          nullable: true
+        has_voters:
+          type: boolean
+        votes_total:
+          type: integer
+        verified:
+          type: boolean
+          description: True if the annotation has been verified by a trusted editor or artist.
+        verified_by:
+          $ref: '#/components/schemas/User'
+        state:
+          type: string
+          enum:
+          - accepted
+          - pending
+          - deleted
+          - needs_exegesis
+        url:
+          type: string
+          format: uri
+        share_url:
+          type: string
+          format: uri
+        source:
+          type: string
+          nullable: true
+        pinned:
+          type: boolean
+        cosigned_by:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        authors:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnnotationAuthor'
+        created_at:
+          type: string
+          format: date-time
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        login:
+          type: string
+        name:
+          type: string
+        about_me_summary:
+          type: string
+          nullable: true
+        avatar:
+          type: object
+          properties:
+            tiny:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+            thumb:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+            small:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+            medium:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+        header_image_url:
+          type: string
+          format: uri
+        human_readable_role_for_display:
+          type: string
+          nullable: true
+        iq:
+          type: integer
+        identity_provider:
+          type: string
+          nullable: true
+        roles_for_display:
+          type: array
+          items:
+            type: string
+        url:
+          type: string
+          format: uri
+        api_path:
+          type: string
+    Annotatable:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+          example: song
+        title:
+          type: string
+        url:
+          type: string
+          format: uri
+        api_path:
+          type: string
+        image_url:
+          type: string
+          format: uri
+        context:
+          type: string
+    AnnotationAuthor:
+      type: object
+      properties:
+        attribution:
+          type: number
+          format: float
+        pinned_role:
+          type: string
+          nullable: true
+        user:
+          $ref: '#/components/schemas/User'
+  parameters:
+    PerPage:
+      name: per_page
+      in: query
+      description: Number of results per page (max 50).
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 20
+    Page:
+      name: page
+      in: query
+      description: Page index (1-indexed).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    TextFormat:
+      name: text_format
+      in: query
+      description: Format for textual fields in the response.
+      schema:
+        type: string
+        enum:
+        - dom
+        - html
+        - markdown
+        - plain
+        default: dom
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Malformed request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    GeniusOAuth2:
+      type: oauth2
+      description: 'Genius uses OAuth 2.0 with the authorization-code flow. Apps are
+
+        registered at https://genius.com/api-clients.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.genius.com/oauth/authorize
+          tokenUrl: https://api.genius.com/oauth/token
+          scopes:
+            me: Access account profile of the authenticated user.
+            create_annotation: Create new annotations.
+            manage_annotation: Edit or delete the user's annotations.
+            vote: Upvote, downvote, or remove a vote on annotations.
+    ClientAccessToken:
+      type: http
+      scheme: bearer
+      bearerFormat: client_access_token
+      description: 'Client-only access token issued at app registration. Sufficient for
+
+        read-only endpoints (search, songs, artists, albums, annotations,
+
+        referents, web_pages/lookup).
+
+        '
+externalDocs:
+  description: Official Genius API documentation
+  url: https://docs.genius.com/

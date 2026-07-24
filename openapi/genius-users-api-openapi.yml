@@ -1,0 +1,293 @@
+openapi: 3.0.3
+info:
+  title: Genius Account Users API
+  description: 'The Genius API exposes the Genius/Rap Genius crowdsourced music knowledge
+
+    base — songs, artists, albums, annotations, and referents. Responses are
+
+    JSON. The API does NOT serve raw lyric text directly (those must be scraped
+
+    from the public song page); it returns rich song, artist, album, annotation
+
+    metadata, scoring, and the URLs needed to locate lyrics on genius.com.
+
+    '
+  version: 1.0.0
+  termsOfService: https://genius.com/static/terms
+  contact:
+    name: Genius API Support
+    url: https://docs.genius.com/
+  license:
+    name: Genius API Terms of Use
+    url: https://genius.com/static/terms
+  x-generated-from: documentation
+  x-last-validated: '2026-05-29'
+servers:
+- url: https://api.genius.com
+  description: Production Genius API
+tags:
+- name: Users
+  description: Genius user profiles and contributions.
+paths:
+  /users/{id}:
+    get:
+      tags:
+      - Users
+      operationId: getUser
+      summary: Get User
+      description: Returns user profile data.
+      security:
+      - GeniusOAuth2: []
+      parameters:
+      - $ref: '#/components/parameters/UserId'
+      - $ref: '#/components/parameters/TextFormat'
+      responses:
+        '200':
+          description: User profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /users/{id}/contributions:
+    get:
+      tags:
+      - Users
+      operationId: getUserContributions
+      summary: Get User Contributions
+      description: Returns contributions made by the user (annotations, songs, transcriptions, suggestions, etc.).
+      security:
+      - GeniusOAuth2: []
+      parameters:
+      - $ref: '#/components/parameters/UserId'
+      - name: type
+        in: query
+        description: Restrict to a specific contribution type.
+        schema:
+          type: string
+          enum:
+          - annotations
+          - articles
+          - pyongs
+          - questions
+          - song_comments
+          - suggestions
+          - transcriptions
+          - unreviewed_annotations
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: Contributions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserContributionListResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          - type: object
+            properties:
+              error:
+                type: string
+                description: Short machine error code.
+                example: not_found
+              error_description:
+                type: string
+                description: Human-readable error description.
+      required:
+      - meta
+    Meta:
+      type: object
+      description: Wrapper metadata included on every response.
+      properties:
+        status:
+          type: integer
+          description: HTTP status code echoed in the payload.
+          example: 200
+        message:
+          type: string
+          description: Optional human-readable status message.
+      required:
+      - status
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        login:
+          type: string
+        name:
+          type: string
+        about_me_summary:
+          type: string
+          nullable: true
+        avatar:
+          type: object
+          properties:
+            tiny:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+            thumb:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+            small:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+            medium:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+        header_image_url:
+          type: string
+          format: uri
+        human_readable_role_for_display:
+          type: string
+          nullable: true
+        iq:
+          type: integer
+        identity_provider:
+          type: string
+          nullable: true
+        roles_for_display:
+          type: array
+          items:
+            type: string
+        url:
+          type: string
+          format: uri
+        api_path:
+          type: string
+    UserResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            user:
+              $ref: '#/components/schemas/User'
+    ContributionGroup:
+      type: object
+      properties:
+        contribution_type:
+          type: string
+        total:
+          type: integer
+        contributions:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+    UserContributionListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            contribution_groups:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContributionGroup'
+  parameters:
+    UserId:
+      name: id
+      in: path
+      required: true
+      description: Genius numeric user ID.
+      schema:
+        type: integer
+        example: 1
+    Page:
+      name: page
+      in: query
+      description: Page index (1-indexed).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    PerPage:
+      name: per_page
+      in: query
+      description: Number of results per page (max 50).
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 20
+    TextFormat:
+      name: text_format
+      in: query
+      description: Format for textual fields in the response.
+      schema:
+        type: string
+        enum:
+        - dom
+        - html
+        - markdown
+        - plain
+        default: dom
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    GeniusOAuth2:
+      type: oauth2
+      description: 'Genius uses OAuth 2.0 with the authorization-code flow. Apps are
+
+        registered at https://genius.com/api-clients.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.genius.com/oauth/authorize
+          tokenUrl: https://api.genius.com/oauth/token
+          scopes:
+            me: Access account profile of the authenticated user.
+            create_annotation: Create new annotations.
+            manage_annotation: Edit or delete the user's annotations.
+            vote: Upvote, downvote, or remove a vote on annotations.
+    ClientAccessToken:
+      type: http
+      scheme: bearer
+      bearerFormat: client_access_token
+      description: 'Client-only access token issued at app registration. Sufficient for
+
+        read-only endpoints (search, songs, artists, albums, annotations,
+
+        referents, web_pages/lookup).
+
+        '
+externalDocs:
+  description: Official Genius API documentation
+  url: https://docs.genius.com/

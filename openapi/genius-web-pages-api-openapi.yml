@@ -1,0 +1,190 @@
+openapi: 3.0.3
+info:
+  title: Genius Account Web Pages API
+  description: 'The Genius API exposes the Genius/Rap Genius crowdsourced music knowledge
+
+    base — songs, artists, albums, annotations, and referents. Responses are
+
+    JSON. The API does NOT serve raw lyric text directly (those must be scraped
+
+    from the public song page); it returns rich song, artist, album, annotation
+
+    metadata, scoring, and the URLs needed to locate lyrics on genius.com.
+
+    '
+  version: 1.0.0
+  termsOfService: https://genius.com/static/terms
+  contact:
+    name: Genius API Support
+    url: https://docs.genius.com/
+  license:
+    name: Genius API Terms of Use
+    url: https://genius.com/static/terms
+  x-generated-from: documentation
+  x-last-validated: '2026-05-29'
+servers:
+- url: https://api.genius.com
+  description: Production Genius API
+tags:
+- name: Web Pages
+  description: Web page lookup for the annotation network.
+paths:
+  /web_pages/lookup:
+    get:
+      tags:
+      - Web Pages
+      operationId: lookupWebPage
+      summary: Lookup Web Page
+      description: 'Looks up a web page record (the surface on which Genius annotations live)
+
+        by one of `raw_annotatable_url`, `canonical_url`, or `og_url`.
+
+        '
+      security:
+      - GeniusOAuth2: []
+      - ClientAccessToken: []
+      parameters:
+      - name: raw_annotatable_url
+        in: query
+        description: Untransformed URL of the page.
+        schema:
+          type: string
+          format: uri
+      - name: canonical_url
+        in: query
+        description: Canonical URL declared by the page.
+        schema:
+          type: string
+          format: uri
+      - name: og_url
+        in: query
+        description: Open Graph URL declared by the page.
+        schema:
+          type: string
+          format: uri
+      responses:
+        '200':
+          description: Web page record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebPageResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    BadRequest:
+      description: Malformed request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    WebPage:
+      type: object
+      properties:
+        id:
+          type: integer
+        url:
+          type: string
+          format: uri
+        api_path:
+          type: string
+        share_url:
+          type: string
+          format: uri
+        domain:
+          type: string
+        title:
+          type: string
+        annotation_count:
+          type: integer
+        canonical_url:
+          type: string
+          format: uri
+          nullable: true
+        normalized_url:
+          type: string
+          format: uri
+    ErrorResponse:
+      type: object
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          - type: object
+            properties:
+              error:
+                type: string
+                description: Short machine error code.
+                example: not_found
+              error_description:
+                type: string
+                description: Human-readable error description.
+      required:
+      - meta
+    WebPageResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            web_page:
+              $ref: '#/components/schemas/WebPage'
+    Meta:
+      type: object
+      description: Wrapper metadata included on every response.
+      properties:
+        status:
+          type: integer
+          description: HTTP status code echoed in the payload.
+          example: 200
+        message:
+          type: string
+          description: Optional human-readable status message.
+      required:
+      - status
+  securitySchemes:
+    GeniusOAuth2:
+      type: oauth2
+      description: 'Genius uses OAuth 2.0 with the authorization-code flow. Apps are
+
+        registered at https://genius.com/api-clients.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.genius.com/oauth/authorize
+          tokenUrl: https://api.genius.com/oauth/token
+          scopes:
+            me: Access account profile of the authenticated user.
+            create_annotation: Create new annotations.
+            manage_annotation: Edit or delete the user's annotations.
+            vote: Upvote, downvote, or remove a vote on annotations.
+    ClientAccessToken:
+      type: http
+      scheme: bearer
+      bearerFormat: client_access_token
+      description: 'Client-only access token issued at app registration. Sufficient for
+
+        read-only endpoints (search, songs, artists, albums, annotations,
+
+        referents, web_pages/lookup).
+
+        '
+externalDocs:
+  description: Official Genius API documentation
+  url: https://docs.genius.com/

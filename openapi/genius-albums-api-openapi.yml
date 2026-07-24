@@ -1,0 +1,744 @@
+openapi: 3.0.3
+info:
+  title: Genius Account Albums API
+  description: 'The Genius API exposes the Genius/Rap Genius crowdsourced music knowledge
+
+    base — songs, artists, albums, annotations, and referents. Responses are
+
+    JSON. The API does NOT serve raw lyric text directly (those must be scraped
+
+    from the public song page); it returns rich song, artist, album, annotation
+
+    metadata, scoring, and the URLs needed to locate lyrics on genius.com.
+
+    '
+  version: 1.0.0
+  termsOfService: https://genius.com/static/terms
+  contact:
+    name: Genius API Support
+    url: https://docs.genius.com/
+  license:
+    name: Genius API Terms of Use
+    url: https://genius.com/static/terms
+  x-generated-from: documentation
+  x-last-validated: '2026-05-29'
+servers:
+- url: https://api.genius.com
+  description: Production Genius API
+tags:
+- name: Albums
+  description: Album metadata, tracks, cover art, and leaderboards.
+paths:
+  /albums/{id}:
+    get:
+      tags:
+      - Albums
+      operationId: getAlbum
+      summary: Get Album
+      description: Returns album metadata including title, artist, release date, and cover art.
+      security:
+      - GeniusOAuth2: []
+      - ClientAccessToken: []
+      parameters:
+      - $ref: '#/components/parameters/AlbumId'
+      - $ref: '#/components/parameters/TextFormat'
+      responses:
+        '200':
+          description: Album details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlbumResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /albums/{id}/tracks:
+    get:
+      tags:
+      - Albums
+      operationId: getAlbumTracks
+      summary: List Album Tracks
+      description: Returns the album's tracklist in order.
+      security:
+      - GeniusOAuth2: []
+      parameters:
+      - $ref: '#/components/parameters/AlbumId'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: Tracks
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlbumTracksResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /albums/{id}/comments:
+    get:
+      tags:
+      - Albums
+      operationId: getAlbumComments
+      summary: Get Album Comments
+      description: Comments left on the album page.
+      security:
+      - GeniusOAuth2: []
+      parameters:
+      - $ref: '#/components/parameters/AlbumId'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: Album comments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentListResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /albums/{id}/cover_arts:
+    get:
+      tags:
+      - Albums
+      operationId: getAlbumCoverArts
+      summary: Get Album Cover Arts
+      description: Returns all cover-art images attached to the album.
+      security:
+      - GeniusOAuth2: []
+      parameters:
+      - $ref: '#/components/parameters/AlbumId'
+      responses:
+        '200':
+          description: Cover arts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CoverArtListResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /albums/{id}/leaderboard:
+    get:
+      tags:
+      - Albums
+      operationId: getAlbumLeaderboard
+      summary: Get Album Leaderboard
+      description: Top contributors to the album.
+      security:
+      - GeniusOAuth2: []
+      parameters:
+      - $ref: '#/components/parameters/AlbumId'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: Leaderboard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeaderboardResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    RichText:
+      type: object
+      description: 'Genius represents textual content in multiple formats. Which key is
+
+        present depends on the `text_format` query parameter.
+
+        '
+      properties:
+        dom:
+          type: object
+          additionalProperties: true
+        html:
+          type: string
+        markdown:
+          type: string
+        plain:
+          type: string
+    Song:
+      type: object
+      description: A Genius song record.
+      properties:
+        id:
+          type: integer
+          example: 378195
+        title:
+          type: string
+          example: Alright
+        title_with_featured:
+          type: string
+        full_title:
+          type: string
+          example: Alright by Kendrick Lamar
+        artist_names:
+          type: string
+        primary_artist:
+          $ref: '#/components/schemas/Artist'
+        featured_artists:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artist'
+        album:
+          $ref: '#/components/schemas/Album'
+        url:
+          type: string
+          format: uri
+          description: Public genius.com URL for the song page (source of lyric HTML).
+        path:
+          type: string
+        release_date:
+          type: string
+          format: date
+          nullable: true
+        release_date_for_display:
+          type: string
+          nullable: true
+        song_art_image_url:
+          type: string
+          format: uri
+        song_art_image_thumbnail_url:
+          type: string
+          format: uri
+        header_image_url:
+          type: string
+          format: uri
+        header_image_thumbnail_url:
+          type: string
+          format: uri
+        lyrics_state:
+          type: string
+          description: Lifecycle state of the lyrics (complete, incomplete, unreleased, etc.).
+        lyrics_owner_id:
+          type: integer
+        annotation_count:
+          type: integer
+        api_path:
+          type: string
+        pyongs_count:
+          type: integer
+          nullable: true
+        stats:
+          $ref: '#/components/schemas/SongStats'
+        media:
+          type: array
+          items:
+            $ref: '#/components/schemas/Media'
+        description:
+          $ref: '#/components/schemas/RichText'
+        description_annotation:
+          $ref: '#/components/schemas/Referent'
+        recording_location:
+          type: string
+          nullable: true
+        producer_artists:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artist'
+        writer_artists:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artist'
+    AlbumResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            album:
+              $ref: '#/components/schemas/Album'
+    Meta:
+      type: object
+      description: Wrapper metadata included on every response.
+      properties:
+        status:
+          type: integer
+          description: HTTP status code echoed in the payload.
+          example: 200
+        message:
+          type: string
+          description: Optional human-readable status message.
+      required:
+      - status
+    LeaderboardResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            leaderboard:
+              type: array
+              items:
+                $ref: '#/components/schemas/LeaderboardEntry'
+    CommentListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            comments:
+              type: array
+              items:
+                $ref: '#/components/schemas/Comment'
+    ErrorResponse:
+      type: object
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          - type: object
+            properties:
+              error:
+                type: string
+                description: Short machine error code.
+                example: not_found
+              error_description:
+                type: string
+                description: Human-readable error description.
+      required:
+      - meta
+    CoverArtListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            cover_arts:
+              type: array
+              items:
+                $ref: '#/components/schemas/CoverArt'
+    Comment:
+      type: object
+      properties:
+        id:
+          type: integer
+        body:
+          $ref: '#/components/schemas/RichText'
+        user:
+          $ref: '#/components/schemas/User'
+        created_at:
+          type: string
+          format: date-time
+        votes_total:
+          type: integer
+        has_voters:
+          type: boolean
+    LeaderboardEntry:
+      type: object
+      properties:
+        attribution:
+          type: number
+          format: float
+        user:
+          $ref: '#/components/schemas/User'
+    Artist:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1421
+        name:
+          type: string
+          example: Kendrick Lamar
+        url:
+          type: string
+          format: uri
+        api_path:
+          type: string
+        image_url:
+          type: string
+          format: uri
+        header_image_url:
+          type: string
+          format: uri
+        is_meme_verified:
+          type: boolean
+        is_verified:
+          type: boolean
+        followers_count:
+          type: integer
+        iq:
+          type: integer
+          nullable: true
+        slug:
+          type: string
+        description:
+          $ref: '#/components/schemas/RichText'
+        alternate_names:
+          type: array
+          items:
+            type: string
+        instagram_name:
+          type: string
+          nullable: true
+        twitter_name:
+          type: string
+          nullable: true
+        facebook_name:
+          type: string
+          nullable: true
+    CoverArt:
+      type: object
+      properties:
+        id:
+          type: integer
+        image_url:
+          type: string
+          format: uri
+        thumbnail_image_url:
+          type: string
+          format: uri
+        annotated:
+          type: boolean
+        api_path:
+          type: string
+    SongStats:
+      type: object
+      properties:
+        unreviewed_annotations:
+          type: integer
+        hot:
+          type: boolean
+        pageviews:
+          type: integer
+          nullable: true
+    Annotation:
+      type: object
+      properties:
+        id:
+          type: integer
+        api_path:
+          type: string
+        body:
+          $ref: '#/components/schemas/RichText'
+        comment_count:
+          type: integer
+        community:
+          type: boolean
+          description: True if the annotation was authored by the community rather than an artist or editor.
+        custom_preview:
+          type: string
+          nullable: true
+        has_voters:
+          type: boolean
+        votes_total:
+          type: integer
+        verified:
+          type: boolean
+          description: True if the annotation has been verified by a trusted editor or artist.
+        verified_by:
+          $ref: '#/components/schemas/User'
+        state:
+          type: string
+          enum:
+          - accepted
+          - pending
+          - deleted
+          - needs_exegesis
+        url:
+          type: string
+          format: uri
+        share_url:
+          type: string
+          format: uri
+        source:
+          type: string
+          nullable: true
+        pinned:
+          type: boolean
+        cosigned_by:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        authors:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnnotationAuthor'
+        created_at:
+          type: string
+          format: date-time
+    Annotatable:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+          example: song
+        title:
+          type: string
+        url:
+          type: string
+          format: uri
+        api_path:
+          type: string
+        image_url:
+          type: string
+          format: uri
+        context:
+          type: string
+    AnnotationAuthor:
+      type: object
+      properties:
+        attribution:
+          type: number
+          format: float
+        pinned_role:
+          type: string
+          nullable: true
+        user:
+          $ref: '#/components/schemas/User'
+    Album:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        full_title:
+          type: string
+        url:
+          type: string
+          format: uri
+        api_path:
+          type: string
+        cover_art_url:
+          type: string
+          format: uri
+        cover_art_thumbnail_url:
+          type: string
+          format: uri
+        release_date_for_display:
+          type: string
+          nullable: true
+        artist:
+          $ref: '#/components/schemas/Artist'
+    AlbumTracksResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            tracks:
+              type: array
+              items:
+                $ref: '#/components/schemas/AlbumTrack'
+    Media:
+      type: object
+      properties:
+        provider:
+          type: string
+          example: youtube
+        type:
+          type: string
+          example: video
+        url:
+          type: string
+          format: uri
+        start:
+          type: integer
+          nullable: true
+        native_uri:
+          type: string
+          nullable: true
+    AlbumTrack:
+      type: object
+      properties:
+        number:
+          type: integer
+        song:
+          $ref: '#/components/schemas/Song'
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        login:
+          type: string
+        name:
+          type: string
+        about_me_summary:
+          type: string
+          nullable: true
+        avatar:
+          type: object
+          properties:
+            tiny:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+            thumb:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+            small:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+            medium:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+        header_image_url:
+          type: string
+          format: uri
+        human_readable_role_for_display:
+          type: string
+          nullable: true
+        iq:
+          type: integer
+        identity_provider:
+          type: string
+          nullable: true
+        roles_for_display:
+          type: array
+          items:
+            type: string
+        url:
+          type: string
+          format: uri
+        api_path:
+          type: string
+    Referent:
+      type: object
+      description: A referent is a fragment of text on a page that one or more annotations are attached to.
+      properties:
+        id:
+          type: integer
+        annotator_id:
+          type: integer
+        annotator_login:
+          type: string
+        api_path:
+          type: string
+        classification:
+          type: string
+          example: accepted
+        fragment:
+          type: string
+          description: The exact text being annotated.
+        is_description:
+          type: boolean
+        path:
+          type: string
+        range:
+          type: object
+          additionalProperties: true
+          description: DOM range describing the location of the fragment on the source page.
+        song_id:
+          type: integer
+          nullable: true
+        url:
+          type: string
+          format: uri
+        verified_annotator_ids:
+          type: array
+          items:
+            type: integer
+        annotatable:
+          $ref: '#/components/schemas/Annotatable'
+        annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Annotation'
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    Page:
+      name: page
+      in: query
+      description: Page index (1-indexed).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    AlbumId:
+      name: id
+      in: path
+      required: true
+      description: Genius numeric album ID.
+      schema:
+        type: integer
+        example: 56682
+    TextFormat:
+      name: text_format
+      in: query
+      description: Format for textual fields in the response.
+      schema:
+        type: string
+        enum:
+        - dom
+        - html
+        - markdown
+        - plain
+        default: dom
+    PerPage:
+      name: per_page
+      in: query
+      description: Number of results per page (max 50).
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 20
+  securitySchemes:
+    GeniusOAuth2:
+      type: oauth2
+      description: 'Genius uses OAuth 2.0 with the authorization-code flow. Apps are
+
+        registered at https://genius.com/api-clients.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.genius.com/oauth/authorize
+          tokenUrl: https://api.genius.com/oauth/token
+          scopes:
+            me: Access account profile of the authenticated user.
+            create_annotation: Create new annotations.
+            manage_annotation: Edit or delete the user's annotations.
+            vote: Upvote, downvote, or remove a vote on annotations.
+    ClientAccessToken:
+      type: http
+      scheme: bearer
+      bearerFormat: client_access_token
+      description: 'Client-only access token issued at app registration. Sufficient for
+
+        read-only endpoints (search, songs, artists, albums, annotations,
+
+        referents, web_pages/lookup).
+
+        '
+externalDocs:
+  description: Official Genius API documentation
+  url: https://docs.genius.com/

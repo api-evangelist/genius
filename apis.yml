@@ -5,6 +5,19 @@ description: >-
   artists, albums, annotations, referents, and contributors. Raw lyric text is not served by the API; consumers receive
   the public song page URL and scrape lyrics from there.
 url: https://docs.genius.com/
+accessModel:
+  pricing: free
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Free · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://assets.genius.com/images/apple-touch-icon.png
 specificationVersion: '0.20'
 created: '2026-05-28'
@@ -22,98 +35,618 @@ tags:
   - Reference Data
   - Public APIs
 apis:
-  - name: Genius
-    description: Crowdsourced music knowledge — songs, artists, albums, annotations, referents, and contributor data.
-    humanURL: https://docs.genius.com/
-    baseURL: https://api.genius.com
-    tags:
-      - Music
-      - Lyrics
-      - Annotations
-    properties:
-      - type: Documentation
-        url: https://docs.genius.com/
-      - type: Signup
-        url: https://genius.com/api-clients
-      - type: Authentication
-        url: https://docs.genius.com/#/authentication-h1
-      - type: TermsOfService
-        url: https://genius.com/static/terms
-      - type: OpenAPI
-        url: openapi/genius-openapi.yml
-      - type: JSONSchema
-        title: Song
-        url: json-schema/genius-song-schema.json
-      - type: JSONSchema
-        title: Artist
-        url: json-schema/genius-artist-schema.json
-      - type: JSONSchema
-        title: Album
-        url: json-schema/genius-album-schema.json
-      - type: JSONSchema
-        title: Annotation
-        url: json-schema/genius-annotation-schema.json
-      - type: JSONSchema
-        title: Referent
-        url: json-schema/genius-referent-schema.json
-      - type: JSONSchema
-        title: User
-        url: json-schema/genius-user-schema.json
-      - type: JSONSchema
-        title: WebPage
-        url: json-schema/genius-web-page-schema.json
-      - type: JSONStructure
-        title: Song
-        url: json-structure/genius-song-structure.json
-      - type: JSONStructure
-        title: Annotation
-        url: json-structure/genius-annotation-structure.json
-      - type: Examples
-        title: Search
-        url: examples/genius-search-example.json
-      - type: Examples
-        title: Get Song
-        url: examples/genius-get-song-example.json
-      - type: Examples
-        title: Get Artist
-        url: examples/genius-get-artist-example.json
-      - type: Examples
-        title: List Artist Songs
-        url: examples/genius-list-artist-songs-example.json
-      - type: Examples
-        title: Get Referents
-        url: examples/genius-get-referents-example.json
-      - type: Examples
-        title: Get Annotation
-        url: examples/genius-get-annotation-example.json
-      - type: Examples
-        title: Lookup Web Page
-        url: examples/genius-lookup-web-page-example.json
-      - type: Plans
-        url: plans/genius-plans-pricing.yml
-      - type: RateLimits
-        url: rate-limits/genius-rate-limits.yml
-      - type: SDKs
-        title: Python SDK (lyricsgenius)
-        url: https://github.com/johnwmillr/LyricsGenius
-      - type: SDKs
-        title: Python SDK (wrap-genius)
-        url: https://github.com/fedecalendino/wrap-genius
-      - type: SDKs
-        title: Node.js SDK (genius-api)
-        url: https://github.com/jahrlin/genius-api
-      - type: SDKs
-        title: Node.js SDK (node-genius)
-        url: https://github.com/bookercodes/node-genius
-      - type: SDKs
-        title: Ruby SDK (timrogers/genius)
-        url: https://github.com/timrogers/genius
-      - type: SDKs
-        title: PHP SDK (Genius-PHP)
-        url: https://github.com/simivar/Genius-PHP
-      - type: SDKs
-        title: R SDK (geniusr)
-        url: https://cran.r-project.org/web/packages/geniusr/
+- aid: genius:genius-account-api
+  name: Genius Account API
+  description: Authenticated user account.
+  humanURL: https://docs.genius.com/
+  baseURL: https://api.genius.com
+  tags:
+  - Account
+  properties:
+  - type: OpenAPI
+    url: openapi/genius-account-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genius.com/
+  - type: Signup
+    url: https://genius.com/api-clients
+  - type: Authentication
+    url: https://docs.genius.com/#/authentication-h1
+  - type: TermsOfService
+    url: https://genius.com/static/terms
+  - type: JSONSchema
+    url: json-schema/genius-song-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-artist-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-album-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-annotation-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-referent-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-user-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-web-page-schema.json
+  - type: JSONStructure
+    url: json-structure/genius-song-structure.json
+  - type: JSONStructure
+    url: json-structure/genius-annotation-structure.json
+  - type: Examples
+    url: examples/genius-search-example.json
+  - type: Examples
+    url: examples/genius-get-song-example.json
+  - type: Examples
+    url: examples/genius-get-artist-example.json
+  - type: Examples
+    url: examples/genius-list-artist-songs-example.json
+  - type: Examples
+    url: examples/genius-get-referents-example.json
+  - type: Examples
+    url: examples/genius-get-annotation-example.json
+  - type: Examples
+    url: examples/genius-lookup-web-page-example.json
+  - type: Plans
+    url: plans/genius-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/genius-rate-limits.yml
+  - type: SDKs
+    url: https://github.com/johnwmillr/LyricsGenius
+  - type: SDKs
+    url: https://github.com/fedecalendino/wrap-genius
+  - type: SDKs
+    url: https://github.com/jahrlin/genius-api
+  - type: SDKs
+    url: https://github.com/bookercodes/node-genius
+  - type: SDKs
+    url: https://github.com/timrogers/genius
+  - type: SDKs
+    url: https://github.com/simivar/Genius-PHP
+  - type: SDKs
+    url: https://cran.r-project.org/web/packages/geniusr/
+- aid: genius:genius-albums-api
+  name: Genius Albums API
+  description: Album metadata, tracks, cover art, and leaderboards.
+  humanURL: https://docs.genius.com/
+  baseURL: https://api.genius.com
+  tags:
+  - Albums
+  properties:
+  - type: OpenAPI
+    url: openapi/genius-albums-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genius.com/
+  - type: Signup
+    url: https://genius.com/api-clients
+  - type: Authentication
+    url: https://docs.genius.com/#/authentication-h1
+  - type: TermsOfService
+    url: https://genius.com/static/terms
+  - type: JSONSchema
+    url: json-schema/genius-song-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-artist-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-album-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-annotation-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-referent-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-user-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-web-page-schema.json
+  - type: JSONStructure
+    url: json-structure/genius-song-structure.json
+  - type: JSONStructure
+    url: json-structure/genius-annotation-structure.json
+  - type: Examples
+    url: examples/genius-search-example.json
+  - type: Examples
+    url: examples/genius-get-song-example.json
+  - type: Examples
+    url: examples/genius-get-artist-example.json
+  - type: Examples
+    url: examples/genius-list-artist-songs-example.json
+  - type: Examples
+    url: examples/genius-get-referents-example.json
+  - type: Examples
+    url: examples/genius-get-annotation-example.json
+  - type: Examples
+    url: examples/genius-lookup-web-page-example.json
+  - type: Plans
+    url: plans/genius-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/genius-rate-limits.yml
+  - type: SDKs
+    url: https://github.com/johnwmillr/LyricsGenius
+  - type: SDKs
+    url: https://github.com/fedecalendino/wrap-genius
+  - type: SDKs
+    url: https://github.com/jahrlin/genius-api
+  - type: SDKs
+    url: https://github.com/bookercodes/node-genius
+  - type: SDKs
+    url: https://github.com/timrogers/genius
+  - type: SDKs
+    url: https://github.com/simivar/Genius-PHP
+  - type: SDKs
+    url: https://cran.r-project.org/web/packages/geniusr/
+- aid: genius:genius-annotations-api
+  name: Genius Annotations API
+  description: Community annotations attached to lyric fragments.
+  humanURL: https://docs.genius.com/
+  baseURL: https://api.genius.com
+  tags:
+  - Annotations
+  properties:
+  - type: OpenAPI
+    url: openapi/genius-annotations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genius.com/
+  - type: Signup
+    url: https://genius.com/api-clients
+  - type: Authentication
+    url: https://docs.genius.com/#/authentication-h1
+  - type: TermsOfService
+    url: https://genius.com/static/terms
+  - type: JSONSchema
+    url: json-schema/genius-song-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-artist-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-album-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-annotation-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-referent-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-user-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-web-page-schema.json
+  - type: JSONStructure
+    url: json-structure/genius-song-structure.json
+  - type: JSONStructure
+    url: json-structure/genius-annotation-structure.json
+  - type: Examples
+    url: examples/genius-search-example.json
+  - type: Examples
+    url: examples/genius-get-song-example.json
+  - type: Examples
+    url: examples/genius-get-artist-example.json
+  - type: Examples
+    url: examples/genius-list-artist-songs-example.json
+  - type: Examples
+    url: examples/genius-get-referents-example.json
+  - type: Examples
+    url: examples/genius-get-annotation-example.json
+  - type: Examples
+    url: examples/genius-lookup-web-page-example.json
+  - type: Plans
+    url: plans/genius-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/genius-rate-limits.yml
+  - type: SDKs
+    url: https://github.com/johnwmillr/LyricsGenius
+  - type: SDKs
+    url: https://github.com/fedecalendino/wrap-genius
+  - type: SDKs
+    url: https://github.com/jahrlin/genius-api
+  - type: SDKs
+    url: https://github.com/bookercodes/node-genius
+  - type: SDKs
+    url: https://github.com/timrogers/genius
+  - type: SDKs
+    url: https://github.com/simivar/Genius-PHP
+  - type: SDKs
+    url: https://cran.r-project.org/web/packages/geniusr/
+- aid: genius:genius-artists-api
+  name: Genius Artists API
+  description: Artist profiles, discography, followers, and leaderboards.
+  humanURL: https://docs.genius.com/
+  baseURL: https://api.genius.com
+  tags:
+  - Artists
+  properties:
+  - type: OpenAPI
+    url: openapi/genius-artists-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genius.com/
+  - type: Signup
+    url: https://genius.com/api-clients
+  - type: Authentication
+    url: https://docs.genius.com/#/authentication-h1
+  - type: TermsOfService
+    url: https://genius.com/static/terms
+  - type: JSONSchema
+    url: json-schema/genius-song-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-artist-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-album-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-annotation-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-referent-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-user-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-web-page-schema.json
+  - type: JSONStructure
+    url: json-structure/genius-song-structure.json
+  - type: JSONStructure
+    url: json-structure/genius-annotation-structure.json
+  - type: Examples
+    url: examples/genius-search-example.json
+  - type: Examples
+    url: examples/genius-get-song-example.json
+  - type: Examples
+    url: examples/genius-get-artist-example.json
+  - type: Examples
+    url: examples/genius-list-artist-songs-example.json
+  - type: Examples
+    url: examples/genius-get-referents-example.json
+  - type: Examples
+    url: examples/genius-get-annotation-example.json
+  - type: Examples
+    url: examples/genius-lookup-web-page-example.json
+  - type: Plans
+    url: plans/genius-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/genius-rate-limits.yml
+  - type: SDKs
+    url: https://github.com/johnwmillr/LyricsGenius
+  - type: SDKs
+    url: https://github.com/fedecalendino/wrap-genius
+  - type: SDKs
+    url: https://github.com/jahrlin/genius-api
+  - type: SDKs
+    url: https://github.com/bookercodes/node-genius
+  - type: SDKs
+    url: https://github.com/timrogers/genius
+  - type: SDKs
+    url: https://github.com/simivar/Genius-PHP
+  - type: SDKs
+    url: https://cran.r-project.org/web/packages/geniusr/
+- aid: genius:genius-referents-api
+  name: Genius Referents API
+  description: Lyric fragments (referents) and their attached annotations.
+  humanURL: https://docs.genius.com/
+  baseURL: https://api.genius.com
+  tags:
+  - Referents
+  properties:
+  - type: OpenAPI
+    url: openapi/genius-referents-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genius.com/
+  - type: Signup
+    url: https://genius.com/api-clients
+  - type: Authentication
+    url: https://docs.genius.com/#/authentication-h1
+  - type: TermsOfService
+    url: https://genius.com/static/terms
+  - type: JSONSchema
+    url: json-schema/genius-song-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-artist-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-album-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-annotation-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-referent-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-user-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-web-page-schema.json
+  - type: JSONStructure
+    url: json-structure/genius-song-structure.json
+  - type: JSONStructure
+    url: json-structure/genius-annotation-structure.json
+  - type: Examples
+    url: examples/genius-search-example.json
+  - type: Examples
+    url: examples/genius-get-song-example.json
+  - type: Examples
+    url: examples/genius-get-artist-example.json
+  - type: Examples
+    url: examples/genius-list-artist-songs-example.json
+  - type: Examples
+    url: examples/genius-get-referents-example.json
+  - type: Examples
+    url: examples/genius-get-annotation-example.json
+  - type: Examples
+    url: examples/genius-lookup-web-page-example.json
+  - type: Plans
+    url: plans/genius-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/genius-rate-limits.yml
+  - type: SDKs
+    url: https://github.com/johnwmillr/LyricsGenius
+  - type: SDKs
+    url: https://github.com/fedecalendino/wrap-genius
+  - type: SDKs
+    url: https://github.com/jahrlin/genius-api
+  - type: SDKs
+    url: https://github.com/bookercodes/node-genius
+  - type: SDKs
+    url: https://github.com/timrogers/genius
+  - type: SDKs
+    url: https://github.com/simivar/Genius-PHP
+  - type: SDKs
+    url: https://cran.r-project.org/web/packages/geniusr/
+- aid: genius:genius-search-api
+  name: Genius Search API
+  description: Full-text search across the Genius corpus.
+  humanURL: https://docs.genius.com/
+  baseURL: https://api.genius.com
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/genius-search-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genius.com/
+  - type: Signup
+    url: https://genius.com/api-clients
+  - type: Authentication
+    url: https://docs.genius.com/#/authentication-h1
+  - type: TermsOfService
+    url: https://genius.com/static/terms
+  - type: JSONSchema
+    url: json-schema/genius-song-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-artist-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-album-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-annotation-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-referent-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-user-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-web-page-schema.json
+  - type: JSONStructure
+    url: json-structure/genius-song-structure.json
+  - type: JSONStructure
+    url: json-structure/genius-annotation-structure.json
+  - type: Examples
+    url: examples/genius-search-example.json
+  - type: Examples
+    url: examples/genius-get-song-example.json
+  - type: Examples
+    url: examples/genius-get-artist-example.json
+  - type: Examples
+    url: examples/genius-list-artist-songs-example.json
+  - type: Examples
+    url: examples/genius-get-referents-example.json
+  - type: Examples
+    url: examples/genius-get-annotation-example.json
+  - type: Examples
+    url: examples/genius-lookup-web-page-example.json
+  - type: Plans
+    url: plans/genius-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/genius-rate-limits.yml
+  - type: SDKs
+    url: https://github.com/johnwmillr/LyricsGenius
+  - type: SDKs
+    url: https://github.com/fedecalendino/wrap-genius
+  - type: SDKs
+    url: https://github.com/jahrlin/genius-api
+  - type: SDKs
+    url: https://github.com/bookercodes/node-genius
+  - type: SDKs
+    url: https://github.com/timrogers/genius
+  - type: SDKs
+    url: https://github.com/simivar/Genius-PHP
+  - type: SDKs
+    url: https://cran.r-project.org/web/packages/geniusr/
+- aid: genius:genius-songs-api
+  name: Genius Songs API
+  description: Song metadata, contributors, and activity.
+  humanURL: https://docs.genius.com/
+  baseURL: https://api.genius.com
+  tags:
+  - Songs
+  properties:
+  - type: OpenAPI
+    url: openapi/genius-songs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genius.com/
+  - type: Signup
+    url: https://genius.com/api-clients
+  - type: Authentication
+    url: https://docs.genius.com/#/authentication-h1
+  - type: TermsOfService
+    url: https://genius.com/static/terms
+  - type: JSONSchema
+    url: json-schema/genius-song-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-artist-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-album-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-annotation-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-referent-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-user-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-web-page-schema.json
+  - type: JSONStructure
+    url: json-structure/genius-song-structure.json
+  - type: JSONStructure
+    url: json-structure/genius-annotation-structure.json
+  - type: Examples
+    url: examples/genius-search-example.json
+  - type: Examples
+    url: examples/genius-get-song-example.json
+  - type: Examples
+    url: examples/genius-get-artist-example.json
+  - type: Examples
+    url: examples/genius-list-artist-songs-example.json
+  - type: Examples
+    url: examples/genius-get-referents-example.json
+  - type: Examples
+    url: examples/genius-get-annotation-example.json
+  - type: Examples
+    url: examples/genius-lookup-web-page-example.json
+  - type: Plans
+    url: plans/genius-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/genius-rate-limits.yml
+  - type: SDKs
+    url: https://github.com/johnwmillr/LyricsGenius
+  - type: SDKs
+    url: https://github.com/fedecalendino/wrap-genius
+  - type: SDKs
+    url: https://github.com/jahrlin/genius-api
+  - type: SDKs
+    url: https://github.com/bookercodes/node-genius
+  - type: SDKs
+    url: https://github.com/timrogers/genius
+  - type: SDKs
+    url: https://github.com/simivar/Genius-PHP
+  - type: SDKs
+    url: https://cran.r-project.org/web/packages/geniusr/
+- aid: genius:genius-users-api
+  name: Genius Users API
+  description: Genius user profiles and contributions.
+  humanURL: https://docs.genius.com/
+  baseURL: https://api.genius.com
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/genius-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genius.com/
+  - type: Signup
+    url: https://genius.com/api-clients
+  - type: Authentication
+    url: https://docs.genius.com/#/authentication-h1
+  - type: TermsOfService
+    url: https://genius.com/static/terms
+  - type: JSONSchema
+    url: json-schema/genius-song-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-artist-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-album-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-annotation-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-referent-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-user-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-web-page-schema.json
+  - type: JSONStructure
+    url: json-structure/genius-song-structure.json
+  - type: JSONStructure
+    url: json-structure/genius-annotation-structure.json
+  - type: Examples
+    url: examples/genius-search-example.json
+  - type: Examples
+    url: examples/genius-get-song-example.json
+  - type: Examples
+    url: examples/genius-get-artist-example.json
+  - type: Examples
+    url: examples/genius-list-artist-songs-example.json
+  - type: Examples
+    url: examples/genius-get-referents-example.json
+  - type: Examples
+    url: examples/genius-get-annotation-example.json
+  - type: Examples
+    url: examples/genius-lookup-web-page-example.json
+  - type: Plans
+    url: plans/genius-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/genius-rate-limits.yml
+  - type: SDKs
+    url: https://github.com/johnwmillr/LyricsGenius
+  - type: SDKs
+    url: https://github.com/fedecalendino/wrap-genius
+  - type: SDKs
+    url: https://github.com/jahrlin/genius-api
+  - type: SDKs
+    url: https://github.com/bookercodes/node-genius
+  - type: SDKs
+    url: https://github.com/timrogers/genius
+  - type: SDKs
+    url: https://github.com/simivar/Genius-PHP
+  - type: SDKs
+    url: https://cran.r-project.org/web/packages/geniusr/
+- aid: genius:genius-web-pages-api
+  name: Genius Web Pages API
+  description: Web page lookup for the annotation network.
+  humanURL: https://docs.genius.com/
+  baseURL: https://api.genius.com
+  tags:
+  - Web Pages
+  properties:
+  - type: OpenAPI
+    url: openapi/genius-web-pages-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genius.com/
+  - type: Signup
+    url: https://genius.com/api-clients
+  - type: Authentication
+    url: https://docs.genius.com/#/authentication-h1
+  - type: TermsOfService
+    url: https://genius.com/static/terms
+  - type: JSONSchema
+    url: json-schema/genius-song-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-artist-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-album-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-annotation-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-referent-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-user-schema.json
+  - type: JSONSchema
+    url: json-schema/genius-web-page-schema.json
+  - type: JSONStructure
+    url: json-structure/genius-song-structure.json
+  - type: JSONStructure
+    url: json-structure/genius-annotation-structure.json
+  - type: Examples
+    url: examples/genius-search-example.json
+  - type: Examples
+    url: examples/genius-get-song-example.json
+  - type: Examples
+    url: examples/genius-get-artist-example.json
+  - type: Examples
+    url: examples/genius-list-artist-songs-example.json
+  - type: Examples
+    url: examples/genius-get-referents-example.json
+  - type: Examples
+    url: examples/genius-get-annotation-example.json
+  - type: Examples
+    url: examples/genius-lookup-web-page-example.json
+  - type: Plans
+    url: plans/genius-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/genius-rate-limits.yml
+  - type: SDKs
+    url: https://github.com/johnwmillr/LyricsGenius
+  - type: SDKs
+    url: https://github.com/fedecalendino/wrap-genius
+  - type: SDKs
+    url: https://github.com/jahrlin/genius-api
+  - type: SDKs
+    url: https://github.com/bookercodes/node-genius
+  - type: SDKs
+    url: https://github.com/timrogers/genius
+  - type: SDKs
+    url: https://github.com/simivar/Genius-PHP
+  - type: SDKs
+    url: https://cran.r-project.org/web/packages/geniusr/
 common:
   - type: AgenticAccess
     url: agentic-access/genius-agentic-access.yml

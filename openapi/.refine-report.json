@@ -1,0 +1,30 @@
+{
+  "provider": "genius",
+  "sources": [
+    "genius-account-api-openapi.yml",
+    "genius-albums-api-openapi.yml",
+    "genius-annotations-api-openapi.yml",
+    "genius-artists-api-openapi.yml",
+    "genius-referents-api-openapi.yml",
+    "genius-search-api-openapi.yml",
+    "genius-songs-api-openapi.yml",
+    "genius-users-api-openapi.yml",
+    "genius-web-pages-api-openapi.yml"
+  ],
+  "outputs": [
+    "genius-account-api-openapi.yml",
+    "genius-albums-api-openapi.yml",
+    "genius-annotations-api-openapi.yml",
+    "genius-artists-api-openapi.yml",
+    "genius-referents-api-openapi.yml",
+    "genius-search-api-openapi.yml",
+    "genius-songs-api-openapi.yml",
+    "genius-users-api-openapi.yml",
+    "genius-web-pages-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

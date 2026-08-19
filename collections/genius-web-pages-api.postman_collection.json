@@ -1,0 +1,278 @@
+{
+  "item": [
+    {
+      "id": "7159a9d1-4080-4152-9fe5-f6cb1d7f4269",
+      "name": "Web Pages",
+      "description": {
+        "content": "Web page lookup for the annotation network.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "97d91652-4011-4171-93e3-7e3b4fbefe6b",
+          "name": "Lookup Web Page",
+          "request": {
+            "name": "Lookup Web Page",
+            "description": {
+              "content": "Looks up a web page record (the surface on which Genius annotations live)\nby one of `raw_annotatable_url`, `canonical_url`, or `og_url`.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "web_pages",
+                "lookup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "raw_annotatable_url",
+                  "value": "<uri>",
+                  "description": "Untransformed URL of the page."
+                },
+                {
+                  "disabled": false,
+                  "key": "canonical_url",
+                  "value": "<uri>",
+                  "description": "Canonical URL declared by the page."
+                },
+                {
+                  "disabled": false,
+                  "key": "og_url",
+                  "value": "<uri>",
+                  "description": "Open Graph URL declared by the page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "me create_annotation manage_annotation vote"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.genius.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.genius.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fa11b964-f1ac-4919-aef5-4bb4a2a9761a",
+              "name": "Web page record",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "web_pages",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "raw_annotatable_url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "canonical_url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "og_url",
+                      "value": "<uri>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\"\n  },\n  \"response\": {\n    \"web_page\": {\n      \"id\": 6626,\n      \"url\": \"http://FOheZYl.uidzJSUIVo9fn5Dx1dQsEoVnTny9ngbHWUJjApoIsIMOCHv-GUXaAIuD4CR3PkakiF\",\n      \"api_path\": \"string\",\n      \"share_url\": \"http://wLpsEvxhhjqLYh.vanf6EOa1DWVIsP-RGq5N\",\n      \"domain\": \"string\",\n      \"title\": \"string\",\n      \"annotation_count\": 1669,\n      \"canonical_url\": \"http://XuNhwCENNpHnQIqMMUelxjtPoEiU.feA8yuB-MhQUf1GEaKhAuITCLB6ASdLYNySb.Km+uoYkmc9H4EokYP9GULWMcspjIeNM0qbHxL\",\n      \"normalized_url\": \"http://p.cpxkC1Ilx037OQLiuk5.01GohYlUaF.mFEAwTlqcby5an\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46361f7d-ce29-4505-9de1-25d579474815",
+              "name": "Malformed request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "web_pages",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "raw_annotatable_url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "canonical_url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "og_url",
+                      "value": "<uri>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\",\n    \"error\": \"not_found\",\n    \"error_description\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42e1dfb9-760b-4c36-84af-35a96bb3cd2b",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "web_pages",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "raw_annotatable_url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "canonical_url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "og_url",
+                      "value": "<uri>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\",\n    \"error\": \"not_found\",\n    \"error_description\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.genius.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "465d931b-8938-4e10-8e9e-c735a64b86c3",
+    "name": "Genius Account Web Pages API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Genius API exposes the Genius/Rap Genius crowdsourced music knowledge\nbase — songs, artists, albums, annotations, and referents. Responses are\nJSON. The API does NOT serve raw lyric text directly (those must be scraped\nfrom the public song page); it returns rich song, artist, album, annotation\nmetadata, scoring, and the URLs needed to locate lyrics on genius.com.\n\n\nContact Support:\n Name: Genius API Support",
+      "type": "text/plain"
+    }
+  }
+}

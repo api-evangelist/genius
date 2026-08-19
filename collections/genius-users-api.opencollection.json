@@ -1,0 +1,100 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Genius Account Users API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.genius.com/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Genius numeric user ID."
+              },
+              {
+                "name": "text_format",
+                "value": "",
+                "type": "query",
+                "description": "Format for textual fields in the response."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.genius.com/oauth/authorize",
+              "accessTokenUrl": "https://api.genius.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns user profile data."
+        },
+        {
+          "info": {
+            "name": "Get User Contributions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.genius.com/users/:id/contributions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Genius numeric user ID."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Restrict to a specific contribution type."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (max 50)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page index (1-indexed)."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.genius.com/oauth/authorize",
+              "accessTokenUrl": "https://api.genius.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns contributions made by the user (annotations, songs, transcriptions, suggestions, etc.)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

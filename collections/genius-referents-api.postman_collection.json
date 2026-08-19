@@ -1,0 +1,445 @@
+{
+  "item": [
+    {
+      "id": "b19dc8ee-ef32-42bc-ab05-48146bf36a8f",
+      "name": "Referents",
+      "description": {
+        "content": "Lyric fragments (referents) and their attached annotations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c12014af-9b2f-4649-8232-29c1dd664d5c",
+          "name": "List Referents",
+          "request": {
+            "name": "List Referents",
+            "description": {
+              "content": "Returns referents (lyric fragments) filtered by `song_id`, `web_page_id`,\nor `created_by_id`. Exactly one of these parameters must be supplied.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "referents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "song_id",
+                  "value": "<integer>",
+                  "description": "Filter by song."
+                },
+                {
+                  "disabled": false,
+                  "key": "web_page_id",
+                  "value": "<integer>",
+                  "description": "Filter by web page."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_by_id",
+                  "value": "<integer>",
+                  "description": "Filter by referent creator."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of results per page (max 50)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page index (1-indexed)."
+                },
+                {
+                  "disabled": false,
+                  "key": "text_format",
+                  "value": "dom",
+                  "description": "Format for textual fields in the response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "me create_annotation manage_annotation vote"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.genius.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.genius.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "56da07cf-d2e0-4d61-bf02-88ca72f033d9",
+              "name": "Referents",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "referents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "song_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "web_page_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "created_by_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "text_format",
+                      "value": "dom"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\"\n  },\n  \"response\": {\n    \"referents\": [\n      {\n        \"id\": 5957,\n        \"annotator_id\": 7138,\n        \"annotator_login\": \"string\",\n        \"api_path\": \"string\",\n        \"classification\": \"accepted\",\n        \"fragment\": \"string\",\n        \"is_description\": false,\n        \"path\": \"string\",\n        \"range\": {\n          \"key_0\": 6052.099713629075,\n          \"key_1\": true\n        },\n        \"song_id\": 6706,\n        \"url\": \"http://YWgBenUizmlXKfqUvmqyxmXV.sxfHR0Nx9.8EVipgeCQ0jh4lJIsIlW-bnoMSRCAiWsV8oBz2OzLj8Fbv.XRQ4Hrt.qN8Vjq\",\n        \"verified_annotator_ids\": [\n          8221,\n          5759\n        ],\n        \"annotatable\": {\n          \"id\": 785,\n          \"type\": \"song\",\n          \"title\": \"string\",\n          \"url\": \"https://saRsyuMEBISmUKhSHezyeUEVC.brojRxdQLpgcSZtiPAwI13hijMtjSOd7HuSNhLTvfB6BWIfgALbgpTYR8gv.RLGYEtTtO.4\",\n          \"api_path\": \"string\",\n          \"image_url\": \"http://civ.fmhmxlPmlF.zbmNFkuUCSKgOa2IR3nY8t,mw9fNF5z4H5keyoLlKCXvuDhqJhcqC\",\n          \"context\": \"string\"\n        },\n        \"annotations\": [\n          {\n            \"id\": 2209,\n            \"api_path\": \"string\",\n            \"body\": {\n              \"dom\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"html\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"markdown\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"plain\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"comment_count\": 6468,\n            \"community\": true,\n            \"custom_preview\": \"string\",\n            \"has_voters\": true,\n            \"votes_total\": 8863,\n            \"verified\": true,\n            \"verified_by\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"login\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"about_me_summary\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"avatar\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"header_image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"human_readable_role_for_display\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iq\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"identity_provider\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"roles_for_display\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"api_path\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"state\": \"deleted\",\n            \"url\": \"http://FKTNTm.kkMCZalkBQ\",\n            \"share_url\": \"http://NCvgfIaKMivutwOabDs.xdfiH1jLq2mutY8Rr.mWzf7JY7ip-hD2.SxCdwlEw4jF2ylaxz9y9OUcOApRbRrCz\",\n            \"source\": \"string\",\n            \"pinned\": true,\n            \"cosigned_by\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"authors\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"created_at\": \"2008-02-25T04:20:27.387Z\"\n          },\n          {\n            \"id\": 2734,\n            \"api_path\": \"string\",\n            \"body\": {\n              \"dom\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"html\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"markdown\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"plain\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"comment_count\": 1436,\n            \"community\": true,\n            \"custom_preview\": \"string\",\n            \"has_voters\": true,\n            \"votes_total\": 4752,\n            \"verified\": false,\n            \"verified_by\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"login\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"about_me_summary\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"avatar\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"header_image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"human_readable_role_for_display\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iq\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"identity_provider\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"roles_for_display\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"api_path\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"state\": \"needs_exegesis\",\n            \"url\": \"http://KhhtiQ.goLVob3.kC+RzEYPh,eL9BKX6IgJm6XJbCqwsqql\",\n            \"share_url\": \"http://pakoicmogxaoFxAkyUFlbSVNQDmVozq.vggbFWZtSZWOXqaSps1XhbN42FSaD4aMgsID2zzWjxsaCl4qjB8Ws-Sp,,Xzz+5aBlMNdv-5bv15B\",\n            \"source\": \"string\",\n            \"pinned\": true,\n            \"cosigned_by\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"authors\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"created_at\": \"1988-02-11T09:50:21.338Z\"\n          }\n        ]\n      },\n      {\n        \"id\": 9375,\n        \"annotator_id\": 8832,\n        \"annotator_login\": \"string\",\n        \"api_path\": \"string\",\n        \"classification\": \"accepted\",\n        \"fragment\": \"string\",\n        \"is_description\": true,\n        \"path\": \"string\",\n        \"range\": {\n          \"key_0\": 6459.450122961212\n        },\n        \"song_id\": 4796,\n        \"url\": \"https://wnkBQpSGcgJ.yrSM0M1-jggmpQWnKcjVQixKoq\",\n        \"verified_annotator_ids\": [\n          761,\n          5415\n        ],\n        \"annotatable\": {\n          \"id\": 2590,\n          \"type\": \"song\",\n          \"title\": \"string\",\n          \"url\": \"http://DEtexOXE.lohUJZ0IQRO6.oAS4iPNVFCkipmVY8CFTEznY1bWtyno6odoEaqcEc\",\n          \"api_path\": \"string\",\n          \"image_url\": \"http://W.vbaRPIt0PoK3iDCphve0zH7NuKKG3U7Az5,Rc-Ho\",\n          \"context\": \"string\"\n        },\n        \"annotations\": [\n          {\n            \"id\": 9472,\n            \"api_path\": \"string\",\n            \"body\": {\n              \"dom\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"html\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"markdown\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"plain\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"comment_count\": 6785,\n            \"community\": false,\n            \"custom_preview\": \"string\",\n            \"has_voters\": true,\n            \"votes_total\": 5074,\n            \"verified\": false,\n            \"verified_by\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"login\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"about_me_summary\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"avatar\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"header_image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"human_readable_role_for_display\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iq\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"identity_provider\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"roles_for_display\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"api_path\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"state\": \"deleted\",\n            \"url\": \"https://dvuXXzoNcNVs.qrlfHoUtA06ijGgSuSs,deVIVe.zN,j8FZsBX2Gi4b+Kjv62,YTpfzRH8l\",\n            \"share_url\": \"https://EaUnkxQnmiYmrITbNZKdfJDbEAcozNP.hcqEZzw5dHni8Ev1zlvwK3obKEzZwOtsSALhJek+NciMvftE-+sl\",\n            \"source\": \"string\",\n            \"pinned\": true,\n            \"cosigned_by\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"authors\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"created_at\": \"1973-09-26T11:41:43.523Z\"\n          },\n          {\n            \"id\": 5963,\n            \"api_path\": \"string\",\n            \"body\": {\n              \"dom\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"html\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"markdown\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"plain\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"comment_count\": 6940,\n            \"community\": true,\n            \"custom_preview\": \"string\",\n            \"has_voters\": true,\n            \"votes_total\": 2775,\n            \"verified\": true,\n            \"verified_by\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"login\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"about_me_summary\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"avatar\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"header_image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"human_readable_role_for_display\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iq\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"identity_provider\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"roles_for_display\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"api_path\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"state\": \"accepted\",\n            \"url\": \"https://XmaXhNyIAvFURUKwWwCeKXrhsZj.gacB.btczqbWs+LtO0lLIw4.1,hA0BwzJo56zXCLkoVLUWBfvxe8X+M\",\n            \"share_url\": \"https://cUPzkha.dupjd10wDJZf\",\n            \"source\": \"string\",\n            \"pinned\": false,\n            \"cosigned_by\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"authors\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"created_at\": \"2005-11-23T05:13:51.409Z\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8f82bd6-64e3-4c16-a789-d19b73b80b10",
+              "name": "Malformed request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "referents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "song_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "web_page_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "created_by_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "text_format",
+                      "value": "dom"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\",\n    \"error\": \"not_found\",\n    \"error_description\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bbed7576-d43f-4894-9a7b-6fa47cf15567",
+          "name": "Get Referents By IDs",
+          "request": {
+            "name": "Get Referents By IDs",
+            "description": {
+              "content": "Returns one or more referents by their IDs (comma-separated).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "referents",
+                ":ids"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "text_format",
+                  "value": "dom",
+                  "description": "Format for textual fields in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ids",
+                  "description": "(Required) Comma-separated referent IDs."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "me create_annotation manage_annotation vote"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.genius.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.genius.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2bc16642-a58f-4e80-9657-1fef9520bb63",
+              "name": "Referents",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "referents",
+                    ":ids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "text_format",
+                      "value": "dom"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ids",
+                      "description": "(Required) Comma-separated referent IDs."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\"\n  },\n  \"response\": {\n    \"referents\": [\n      {\n        \"id\": 4502,\n        \"annotator_id\": 1120,\n        \"annotator_login\": \"string\",\n        \"api_path\": \"string\",\n        \"classification\": \"accepted\",\n        \"fragment\": \"string\",\n        \"is_description\": true,\n        \"path\": \"string\",\n        \"range\": {\n          \"key_0\": \"string\"\n        },\n        \"song_id\": 5923,\n        \"url\": \"http://dkxVhqyFiZw.rsmIZgMzAFUBz.ZFxnDI,.\",\n        \"verified_annotator_ids\": [\n          3228,\n          3354\n        ],\n        \"annotatable\": {\n          \"id\": 4663,\n          \"type\": \"song\",\n          \"title\": \"string\",\n          \"url\": \"http://wVqohOkGDvULGNCVnNMzMk.yhfbQA0ZhQWpZttW+7AqTPoQJ+BaVSHd5deTThsMrTPUuKZP41Dczt09O9EsDbYg3YzT4iLQxw4iF\",\n          \"api_path\": \"string\",\n          \"image_url\": \"http://vmdFdwSrEVIViqyfEFoZ.tgpylSp64QbvEMGU4gQPTyIV5gbS\",\n          \"context\": \"string\"\n        },\n        \"annotations\": [\n          {\n            \"id\": 4999,\n            \"api_path\": \"string\",\n            \"body\": {\n              \"dom\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"html\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"markdown\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"plain\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"comment_count\": 9899,\n            \"community\": true,\n            \"custom_preview\": \"string\",\n            \"has_voters\": true,\n            \"votes_total\": 1803,\n            \"verified\": true,\n            \"verified_by\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"login\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"about_me_summary\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"avatar\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"header_image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"human_readable_role_for_display\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iq\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"identity_provider\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"roles_for_display\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"api_path\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"state\": \"deleted\",\n            \"url\": \"http://qETBSuyIKTWHOZukzyUjfak.alomaBWXzSkzt3hOUSfPLjFfG826lUmK7QQrFxsYgK1fVBbPORnlKYgGMr7dmcvoQh\",\n            \"share_url\": \"http://alOQBeCYaBxFnOolOslUfX.afl0QXChgZetgGe5yu-c-M-ZQuU+5sn9\",\n            \"source\": \"string\",\n            \"pinned\": false,\n            \"cosigned_by\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"authors\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"created_at\": \"1949-07-26T23:11:01.892Z\"\n          },\n          {\n            \"id\": 6113,\n            \"api_path\": \"string\",\n            \"body\": {\n              \"dom\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"html\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"markdown\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"plain\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"comment_count\": 1353,\n            \"community\": false,\n            \"custom_preview\": \"string\",\n            \"has_voters\": false,\n            \"votes_total\": 7017,\n            \"verified\": false,\n            \"verified_by\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"login\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"about_me_summary\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"avatar\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"header_image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"human_readable_role_for_display\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iq\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"identity_provider\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"roles_for_display\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"api_path\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"state\": \"accepted\",\n            \"url\": \"http://FYZsvcTOuGAIZFvqkYyzmLQZ.tklqa7AqNkMnDYLvTtvjkv10EtYw.fh8zhiTUThUB3evPtdGtbRJinbONv3\",\n            \"share_url\": \"http://iJCrfWbZbNIs.dohUrnGNqCZQ2r+.exEeo6Wr8.H\",\n            \"source\": \"string\",\n            \"pinned\": false,\n            \"cosigned_by\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"authors\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"created_at\": \"2025-08-15T17:04:40.236Z\"\n          }\n        ]\n      },\n      {\n        \"id\": 6720,\n        \"annotator_id\": 6919,\n        \"annotator_login\": \"string\",\n        \"api_path\": \"string\",\n        \"classification\": \"accepted\",\n        \"fragment\": \"string\",\n        \"is_description\": true,\n        \"path\": \"string\",\n        \"range\": {\n          \"key_0\": false\n        },\n        \"song_id\": 9900,\n        \"url\": \"http://DWIKTeHcpFYZOdPJWj.wdzgW,aquxn\",\n        \"verified_annotator_ids\": [\n          2253,\n          6428\n        ],\n        \"annotatable\": {\n          \"id\": 2352,\n          \"type\": \"song\",\n          \"title\": \"string\",\n          \"url\": \"https://TWinBBcJsItUVEcJmmvnMqyvLo.xxnrq9rT50\",\n          \"api_path\": \"string\",\n          \"image_url\": \"http://uWBtiDvFtiBm.tsuvU6ed0J6yZ62kmrPqRFYgwkF9gmeXv\",\n          \"context\": \"string\"\n        },\n        \"annotations\": [\n          {\n            \"id\": 4759,\n            \"api_path\": \"string\",\n            \"body\": {\n              \"dom\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"html\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"markdown\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"plain\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"comment_count\": 512,\n            \"community\": false,\n            \"custom_preview\": \"string\",\n            \"has_voters\": true,\n            \"votes_total\": 9581,\n            \"verified\": false,\n            \"verified_by\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"login\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"about_me_summary\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"avatar\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"header_image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"human_readable_role_for_display\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iq\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"identity_provider\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"roles_for_display\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"api_path\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"state\": \"needs_exegesis\",\n            \"url\": \"http://qvtUnXxGlzocZJPWFKP.takwEqqXejglbmh1Qs2okV6ibVS0D8ZA7FkN.3\",\n            \"share_url\": \"http://CVeumpkmiqcAevjlRAUBUFGBqXQsGo.gapPGIsIIK3p\",\n            \"source\": \"string\",\n            \"pinned\": false,\n            \"cosigned_by\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"authors\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"created_at\": \"2001-09-11T16:05:14.778Z\"\n          },\n          {\n            \"id\": 8015,\n            \"api_path\": \"string\",\n            \"body\": {\n              \"dom\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"html\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"markdown\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"plain\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"comment_count\": 1763,\n            \"community\": true,\n            \"custom_preview\": \"string\",\n            \"has_voters\": false,\n            \"votes_total\": 8700,\n            \"verified\": false,\n            \"verified_by\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"login\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"about_me_summary\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"avatar\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"header_image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"human_readable_role_for_display\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iq\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"identity_provider\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"roles_for_display\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"api_path\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"state\": \"accepted\",\n            \"url\": \"https://thkDTXEyWAaT.lpCvfzX0ghFSAItyl6W1J.cPAMivPXRvEAGGjsyjPs7xhMQ8y.a.MhmQL2i1a4Y\",\n            \"share_url\": \"http://IIRMzlIaRtMLmWkCETcGOLHHkzGbBT.ipovfZaa92OE168jf,bK0J9PTGa,I\",\n            \"source\": \"string\",\n            \"pinned\": false,\n            \"cosigned_by\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"authors\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"created_at\": \"1984-02-14T07:02:40.074Z\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ba9b1e6-f94b-481d-8b6f-26945dd1bc03",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "referents",
+                    ":ids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "text_format",
+                      "value": "dom"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ids",
+                      "description": "(Required) Comma-separated referent IDs."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\",\n    \"error\": \"not_found\",\n    \"error_description\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.genius.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "fccf9304-a1e9-4613-87cf-0e818aefd4f0",
+    "name": "Genius Account Referents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Genius API exposes the Genius/Rap Genius crowdsourced music knowledge\nbase — songs, artists, albums, annotations, and referents. Responses are\nJSON. The API does NOT serve raw lyric text directly (those must be scraped\nfrom the public song page); it returns rich song, artist, album, annotation\nmetadata, scoring, and the URLs needed to locate lyrics on genius.com.\n\n\nContact Support:\n Name: Genius API Support",
+      "type": "text/plain"
+    }
+  }
+}

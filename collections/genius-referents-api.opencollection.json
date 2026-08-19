@@ -1,0 +1,112 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Genius Account Referents API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Referents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Referents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.genius.com/referents",
+            "params": [
+              {
+                "name": "song_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by song."
+              },
+              {
+                "name": "web_page_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by web page."
+              },
+              {
+                "name": "created_by_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by referent creator."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (max 50)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page index (1-indexed)."
+              },
+              {
+                "name": "text_format",
+                "value": "",
+                "type": "query",
+                "description": "Format for textual fields in the response."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.genius.com/oauth/authorize",
+              "accessTokenUrl": "https://api.genius.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns referents (lyric fragments) filtered by `song_id`, `web_page_id`,\nor `created_by_id`. Exactly one of these parameters must be supplied.\n"
+        },
+        {
+          "info": {
+            "name": "Get Referents By IDs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.genius.com/referents/:ids",
+            "params": [
+              {
+                "name": "ids",
+                "value": "",
+                "type": "path",
+                "description": "Comma-separated referent IDs."
+              },
+              {
+                "name": "text_format",
+                "value": "",
+                "type": "query",
+                "description": "Format for textual fields in the response."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.genius.com/oauth/authorize",
+              "accessTokenUrl": "https://api.genius.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns one or more referents by their IDs (comma-separated)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

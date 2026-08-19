@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Genius Account Web Pages API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Web Pages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lookup Web Page",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.genius.com/web_pages/lookup",
+            "params": [
+              {
+                "name": "raw_annotatable_url",
+                "value": "",
+                "type": "query",
+                "description": "Untransformed URL of the page."
+              },
+              {
+                "name": "canonical_url",
+                "value": "",
+                "type": "query",
+                "description": "Canonical URL declared by the page."
+              },
+              {
+                "name": "og_url",
+                "value": "",
+                "type": "query",
+                "description": "Open Graph URL declared by the page."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.genius.com/oauth/authorize",
+              "accessTokenUrl": "https://api.genius.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Looks up a web page record (the surface on which Genius annotations live)\nby one of `raw_annotatable_url`, `canonical_url`, or `og_url`.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

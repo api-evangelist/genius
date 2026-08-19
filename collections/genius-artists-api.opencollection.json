@@ -1,0 +1,264 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Genius Account Artists API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Artists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Artist",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.genius.com/artists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Genius numeric artist ID."
+              },
+              {
+                "name": "text_format",
+                "value": "",
+                "type": "query",
+                "description": "Format for textual fields in the response."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.genius.com/oauth/authorize",
+              "accessTokenUrl": "https://api.genius.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns artist metadata including bio, follower count, social handles, and verification status."
+        },
+        {
+          "info": {
+            "name": "List Artist Songs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.genius.com/artists/:id/songs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Genius numeric artist ID."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort key for the result set."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (max 50)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page index (1-indexed)."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.genius.com/oauth/authorize",
+              "accessTokenUrl": "https://api.genius.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns a paginated list of songs for the artist, sortable by title, popularity, or release date."
+        },
+        {
+          "info": {
+            "name": "List Artist Albums",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.genius.com/artists/:id/albums",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Genius numeric artist ID."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (max 50)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page index (1-indexed)."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.genius.com/oauth/authorize",
+              "accessTokenUrl": "https://api.genius.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns albums associated with the artist."
+        },
+        {
+          "info": {
+            "name": "Get Artist Activity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.genius.com/artists/:id/activity",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Genius numeric artist ID."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (max 50)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page index (1-indexed)."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.genius.com/oauth/authorize",
+              "accessTokenUrl": "https://api.genius.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Activity stream covering all of the artist's songs."
+        },
+        {
+          "info": {
+            "name": "List Artist Followers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.genius.com/artists/:id/followers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Genius numeric artist ID."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (max 50)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page index (1-indexed)."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.genius.com/oauth/authorize",
+              "accessTokenUrl": "https://api.genius.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns users who follow the artist."
+        },
+        {
+          "info": {
+            "name": "Get Artist Leaderboard",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.genius.com/artists/:id/leaderboard",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Genius numeric artist ID."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (max 50)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page index (1-indexed)."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.genius.com/oauth/authorize",
+              "accessTokenUrl": "https://api.genius.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns the top \"scholars\" — users with the highest contribution score for this artist."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

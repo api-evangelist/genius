@@ -1,0 +1,264 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Genius Account Annotations API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Annotations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Annotation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.genius.com/annotations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Genius numeric annotation ID."
+              },
+              {
+                "name": "text_format",
+                "value": "",
+                "type": "query",
+                "description": "Format for textual fields in the response."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.genius.com/oauth/authorize",
+              "accessTokenUrl": "https://api.genius.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns the full content of an annotation along with its referent."
+        },
+        {
+          "info": {
+            "name": "Delete Annotation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.genius.com/annotations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Genius numeric annotation ID."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.genius.com/oauth/authorize",
+              "accessTokenUrl": "https://api.genius.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Deletes an annotation owned by the authenticated user. Requires the `manage_annotation` scope."
+        },
+        {
+          "info": {
+            "name": "Create Annotation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.genius.com/annotations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.genius.com/oauth/authorize",
+              "accessTokenUrl": "https://api.genius.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Creates a new annotation attached to a referent (or a fragment of a web page). Requires the `create_annotation` scope."
+        },
+        {
+          "info": {
+            "name": "Get Annotation Edits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.genius.com/annotations/:id/edits",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Genius numeric annotation ID."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.genius.com/oauth/authorize",
+              "accessTokenUrl": "https://api.genius.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns the version history of an annotation."
+        },
+        {
+          "info": {
+            "name": "Get Annotation Comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.genius.com/annotations/:id/comments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Genius numeric annotation ID."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (max 50)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page index (1-indexed)."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.genius.com/oauth/authorize",
+              "accessTokenUrl": "https://api.genius.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns comments left on an annotation."
+        },
+        {
+          "info": {
+            "name": "Upvote Annotation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.genius.com/annotations/:id/vote",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Genius numeric annotation ID."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.genius.com/oauth/authorize",
+              "accessTokenUrl": "https://api.genius.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Upvotes an annotation as the authenticated user. Requires the `vote` scope."
+        },
+        {
+          "info": {
+            "name": "Remove Annotation Vote",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.genius.com/annotations/:id/vote",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Genius numeric annotation ID."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.genius.com/oauth/authorize",
+              "accessTokenUrl": "https://api.genius.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Removes the authenticated user's vote from the annotation. Requires the `vote` scope."
+        },
+        {
+          "info": {
+            "name": "Downvote Annotation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.genius.com/annotations/:id/downvote",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Genius numeric annotation ID."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.genius.com/oauth/authorize",
+              "accessTokenUrl": "https://api.genius.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Downvotes an annotation as the authenticated user. Requires the `vote` scope."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

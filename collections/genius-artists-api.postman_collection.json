@@ -1,0 +1,927 @@
+{
+  "item": [
+    {
+      "id": "eeb2267c-855e-4e8f-88c2-361baec7e8ba",
+      "name": "Artists",
+      "description": {
+        "content": "Artist profiles, discography, followers, and leaderboards.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "357ce705-be22-443c-b3dd-83b53ebd9253",
+          "name": "Get Artist",
+          "request": {
+            "name": "Get Artist",
+            "description": {
+              "content": "Returns artist metadata including bio, follower count, social handles, and verification status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "artists",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "text_format",
+                  "value": "dom",
+                  "description": "Format for textual fields in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Genius numeric artist ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "me create_annotation manage_annotation vote"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.genius.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.genius.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1b9fa19c-486d-422b-bfd9-da1d1eb538ab",
+              "name": "Artist details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "artists",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "text_format",
+                      "value": "dom"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Genius numeric artist ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\"\n  },\n  \"response\": {\n    \"artist\": {\n      \"id\": 1421,\n      \"name\": \"Kendrick Lamar\",\n      \"url\": \"https://PtYNzLVJKIkYhWmjdywJ.hsmllCM46HqiNS,qN+\",\n      \"api_path\": \"string\",\n      \"image_url\": \"https://knVkkqKGcgLUhwpRdzohHxTRjqRKx.plEZI\",\n      \"header_image_url\": \"https://CAxpbQoHMtMmZnK.rrTeKnWlnQpotejMV85zn5qPWe50AawF\",\n      \"is_meme_verified\": false,\n      \"is_verified\": true,\n      \"followers_count\": 4329,\n      \"iq\": 1934,\n      \"slug\": \"string\",\n      \"description\": {\n        \"dom\": {\n          \"key_0\": true,\n          \"key_1\": 7244\n        },\n        \"html\": \"string\",\n        \"markdown\": \"string\",\n        \"plain\": \"string\"\n      },\n      \"alternate_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"instagram_name\": \"string\",\n      \"twitter_name\": \"string\",\n      \"facebook_name\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b2a3357-0085-4f58-8cda-6740b1e81e83",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "artists",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "text_format",
+                      "value": "dom"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Genius numeric artist ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\",\n    \"error\": \"not_found\",\n    \"error_description\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80ae5fb0-aed2-40a4-946a-db156492a770",
+          "name": "List Artist Songs",
+          "request": {
+            "name": "List Artist Songs",
+            "description": {
+              "content": "Returns a paginated list of songs for the artist, sortable by title, popularity, or release date.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "artists",
+                ":id",
+                "songs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "title",
+                  "description": "Sort key for the result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of results per page (max 50)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page index (1-indexed)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Genius numeric artist ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "me create_annotation manage_annotation vote"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.genius.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.genius.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "31cc7a36-af01-454a-95b8-94120c588217",
+              "name": "Songs by the artist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "artists",
+                    ":id",
+                    "songs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort",
+                      "value": "title"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Genius numeric artist ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\"\n  },\n  \"response\": {\n    \"songs\": [\n      {\n        \"id\": 378195,\n        \"title\": \"Alright\",\n        \"title_with_featured\": \"string\",\n        \"full_title\": \"Alright by Kendrick Lamar\",\n        \"artist_names\": \"string\",\n        \"primary_artist\": {\n          \"id\": 1421,\n          \"name\": \"Kendrick Lamar\",\n          \"url\": \"https://eSjxawkpdxxWGjlNNFISxyzGBR.mhlksozPd.xbSKEHONGsgYBhDUwXKPGYxglj2d7wXADsHjT20nfE+92mM\",\n          \"api_path\": \"string\",\n          \"image_url\": \"http://jNiVwqHQmIPVLvxcApbt.ukxT,OImFMAcTEXCIeCXfHXhLh\",\n          \"header_image_url\": \"https://eqElpadKzJLUjtbJiDLvETjfpt.szcqgHcwkedTlyd3EywxF9+bl.fbsK,p6m9T\",\n          \"is_meme_verified\": true,\n          \"is_verified\": true,\n          \"followers_count\": 9088,\n          \"iq\": 6846,\n          \"slug\": \"string\",\n          \"description\": {\n            \"dom\": {\n              \"key_0\": true,\n              \"key_1\": \"string\"\n            },\n            \"html\": \"string\",\n            \"markdown\": \"string\",\n            \"plain\": \"string\"\n          },\n          \"alternate_names\": [\n            \"string\",\n            \"string\"\n          ],\n          \"instagram_name\": \"string\",\n          \"twitter_name\": \"string\",\n          \"facebook_name\": \"string\"\n        },\n        \"featured_artists\": [\n          {\n            \"id\": 1421,\n            \"name\": \"Kendrick Lamar\",\n            \"url\": \"http://KiqfyAQcYN.onlhkZqryWB5Rdf1SVJ1D5oe,y722M4\",\n            \"api_path\": \"string\",\n            \"image_url\": \"https://IZtIfWWpuNAuR.xcttRRh2NFtZWQ-Bk5VanHZJtLljUqsCCWdHZwuX3ikw+VWxytPpUOwOzaIM8TZOVZLTNfK,N,2\",\n            \"header_image_url\": \"http://MhtEcmi.iblCRhNARBGo7KXPV,ECdxTNYsCVS86Yzre\",\n            \"is_meme_verified\": false,\n            \"is_verified\": false,\n            \"followers_count\": 4844,\n            \"iq\": 1247,\n            \"slug\": \"string\",\n            \"description\": {\n              \"dom\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"html\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"markdown\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"plain\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"alternate_names\": [\n              \"string\",\n              \"string\"\n            ],\n            \"instagram_name\": \"string\",\n            \"twitter_name\": \"string\",\n            \"facebook_name\": \"string\"\n          },\n          {\n            \"id\": 1421,\n            \"name\": \"Kendrick Lamar\",\n            \"url\": \"https://ApxWmAcdufOHImTkoipuvuHlVZFv.ogtc6,4w02efdagXPqEOEUijOvO+pzBc6seo\",\n            \"api_path\": \"string\",\n            \"image_url\": \"https://izmluhuf.iezXxSHS+oN4XnQLoA,RdsfB6nQR1XC\",\n            \"header_image_url\": \"https://eMlINhASUraiEZKKKhnpEHLyIRALmqIWu.cqT8AfFlUZBnVjw+5amQZ+EMC55N\",\n            \"is_meme_verified\": false,\n            \"is_verified\": false,\n            \"followers_count\": 8976,\n            \"iq\": 888,\n            \"slug\": \"string\",\n            \"description\": {\n              \"dom\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"html\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"markdown\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"plain\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"alternate_names\": [\n              \"string\",\n              \"string\"\n            ],\n            \"instagram_name\": \"string\",\n            \"twitter_name\": \"string\",\n            \"facebook_name\": \"string\"\n          }\n        ],\n        \"album\": {\n          \"id\": 8158,\n          \"name\": \"string\",\n          \"full_title\": \"string\",\n          \"url\": \"https://LfwAhf.keiyXgiOOZLMP.zyTQ-hrOoeFHWv\",\n          \"api_path\": \"string\",\n          \"cover_art_url\": \"http://zxCJqWWHovuWwyawUQSYmHgevNwyir.olurn6smoepgZC.jlHwUkESIPay7yJR5gbLHPV+iw-xS38sR3FCSpzFyFpJgPFgaqoqNF6SvfHQ\",\n          \"cover_art_thumbnail_url\": \"http://JkapWBmIqRvbWHQpWijWVGZiF.pdQgoVkELAB,3PmIMck5m0TFpOa2Ha0yCUIAwEak\",\n          \"release_date_for_display\": \"string\",\n          \"artist\": {\n            \"id\": 1421,\n            \"name\": \"Kendrick Lamar\",\n            \"url\": \"https://OimS.ybsvr,E4lTD\",\n            \"api_path\": \"string\",\n            \"image_url\": \"http://wpffdQYXQHvWPDSFcHNrhgEKeBURL.khQD6sw-VDyXaI6SnVl\",\n            \"header_image_url\": \"http://LxbxwbMqCYedlumBqmANcWuBDWBLTIokF.ycPyt1,Fo0G\",\n            \"is_meme_verified\": false,\n            \"is_verified\": false,\n            \"followers_count\": 7114,\n            \"iq\": 9088,\n            \"slug\": \"string\",\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"alternate_names\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"instagram_name\": \"string\",\n            \"twitter_name\": \"string\",\n            \"facebook_name\": \"string\"\n          }\n        },\n        \"url\": \"https://ZsMuqOYcsCaZzV.jhdG8lGBt3SO2.dPPe15Xjwz.Sa-ci,zf4u8Y9bvxvm5wMChbXuA5DI1FWuhfI41M+ZpTxLJ4APR\",\n        \"path\": \"string\",\n        \"release_date\": \"1997-09-05\",\n        \"release_date_for_display\": \"string\",\n        \"song_art_image_url\": \"https://asYdwkcoQTQDSRnNdGsVeooqXqDGDTodf.nizAjnHfRQorCN.BoApIzNqvUMEzSfnY5\",\n        \"song_art_image_thumbnail_url\": \"http://kmDwcrROwewQDO.dnqjcGvVFwMLKSEZFdnH6\",\n        \"header_image_url\": \"https://nRKnPTGnoWaBScMSlHOGhWjXMo.zaZ2FRxB7PLTHFZbWkcFLWz6L1o3XZp3KXhxFC-qpUvr0-\",\n        \"header_image_thumbnail_url\": \"https://CctMa.zbwwl\",\n        \"lyrics_state\": \"string\",\n        \"lyrics_owner_id\": 7506,\n        \"annotation_count\": 9019,\n        \"api_path\": \"string\",\n        \"pyongs_count\": 8662,\n        \"stats\": {\n          \"unreviewed_annotations\": 198,\n          \"hot\": true,\n          \"pageviews\": 5099\n        },\n        \"media\": [\n          {\n            \"provider\": \"youtube\",\n            \"type\": \"video\",\n            \"url\": \"http://IM.qurjrrRB9Hc8OPBtYqaQGO46b\",\n            \"start\": 3732,\n            \"native_uri\": \"string\"\n          },\n          {\n            \"provider\": \"youtube\",\n            \"type\": \"video\",\n            \"url\": \"https://IlSYvaNT.whxnQrUZVwjKA0zUGTnleo9qTgp-GwioHtLk\",\n            \"start\": 9711,\n            \"native_uri\": \"string\"\n          }\n        ],\n        \"description\": {\n          \"dom\": {\n            \"key_0\": false,\n            \"key_1\": false\n          },\n          \"html\": \"string\",\n          \"markdown\": \"string\",\n          \"plain\": \"string\"\n        },\n        \"description_annotation\": {\n          \"id\": 7038,\n          \"annotator_id\": 9857,\n          \"annotator_login\": \"string\",\n          \"api_path\": \"string\",\n          \"classification\": \"accepted\",\n          \"fragment\": \"string\",\n          \"is_description\": false,\n          \"path\": \"string\",\n          \"range\": {\n            \"key_0\": 1767\n          },\n          \"song_id\": 419,\n          \"url\": \"https://XSwF.zoaZL.E7rwDtBk-wGJPc.5I3nyHQPyEe5yjkIuzYx+3jaWkBBL5syRZx.BCZ59UhHL\",\n          \"verified_annotator_ids\": [\n            7040,\n            7979\n          ],\n          \"annotatable\": {\n            \"id\": 8997,\n            \"type\": \"song\",\n            \"title\": \"string\",\n            \"url\": \"https://pAIMKguwiXxWjisFDxV.qhwgkCYJTkoZoulCte\",\n            \"api_path\": \"string\",\n            \"image_url\": \"http://GrrPqZONiSfWVrwqz.asyfXj0aEssOcBTNU1F5x-AWqMLEYdq-i7EM-K.0msfnQtft7ZzJuHDPVPraPOZ\",\n            \"context\": \"string\"\n          },\n          \"annotations\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"api_path\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"body\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"comment_count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"community\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"custom_preview\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"has_voters\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"votes_total\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verified_by\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"state\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"share_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"pinned\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"cosigned_by\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"authors\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"api_path\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"body\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"comment_count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"community\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"custom_preview\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"has_voters\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"votes_total\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verified_by\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"state\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"share_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"pinned\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"cosigned_by\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"authors\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        \"recording_location\": \"string\",\n        \"producer_artists\": [\n          {\n            \"id\": 1421,\n            \"name\": \"Kendrick Lamar\",\n            \"url\": \"https://BtC.zxhZ9uLcs8w,JRHOWaCKmGOYrcRFLIB7\",\n            \"api_path\": \"string\",\n            \"image_url\": \"http://NkYbHRWkhmhucnfuIxgnUVsZTbNnmWSp.fxNRE.L1udx-tj8XZegjZDGu,UIiYU.k.\",\n            \"header_image_url\": \"https://nuEIhAweaiyANJJNYAAOPgfIaHDkOXg.tmka7SqoJEZJSQlRxGd3j5VCV44.+yancB8dIHzB\",\n            \"is_meme_verified\": true,\n            \"is_verified\": true,\n            \"followers_count\": 9269,\n            \"iq\": 2219,\n            \"slug\": \"string\",\n            \"description\": {\n              \"dom\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"html\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"markdown\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"plain\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"alternate_names\": [\n              \"string\",\n              \"string\"\n            ],\n            \"instagram_name\": \"string\",\n            \"twitter_name\": \"string\",\n            \"facebook_name\": \"string\"\n          },\n          {\n            \"id\": 1421,\n            \"name\": \"Kendrick Lamar\",\n            \"url\": \"https://rISVEgNMb.lpqcuaowvetQPhRA44\",\n            \"api_path\": \"string\",\n            \"image_url\": \"https://ZtyUEToJQXyYdkBf.cqwe3hc\",\n            \"header_image_url\": \"https://HkhUFDhSOoSoDVwFVMwmytf.gzpCmchqmecapAoExcs1udqCBg42GaTYovgJhJGI,MxKAPOoN07pbYTtFgK\",\n            \"is_meme_verified\": false,\n            \"is_verified\": true,\n            \"followers_count\": 3080,\n            \"iq\": 9779,\n            \"slug\": \"string\",\n            \"description\": {\n              \"dom\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"html\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"markdown\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"plain\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"alternate_names\": [\n              \"string\",\n              \"string\"\n            ],\n            \"instagram_name\": \"string\",\n            \"twitter_name\": \"string\",\n            \"facebook_name\": \"string\"\n          }\n        ],\n        \"writer_artists\": [\n          {\n            \"id\": 1421,\n            \"name\": \"Kendrick Lamar\",\n            \"url\": \"https://nXfwiPQolqyQaBSCjSQtJCZWoQup.hrhtW4+sClG\",\n            \"api_path\": \"string\",\n            \"image_url\": \"https://WmWfCbDzflDImCNdjARTH.gkflNkf04cpgHdgNlkEIKwWBaGjzRBsF,6GSZu7gUAnvpbIdaVoMK0I\",\n            \"header_image_url\": \"https://FIVeaNmUhSTMGMAd.llbNoQXLqEGFLHcU4zbT,8HfrUcnmTM0APDA\",\n            \"is_meme_verified\": false,\n            \"is_verified\": true,\n            \"followers_count\": 4685,\n            \"iq\": 3850,\n            \"slug\": \"string\",\n            \"description\": {\n              \"dom\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"html\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"markdown\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"plain\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"alternate_names\": [\n              \"string\",\n              \"string\"\n            ],\n            \"instagram_name\": \"string\",\n            \"twitter_name\": \"string\",\n            \"facebook_name\": \"string\"\n          },\n          {\n            \"id\": 1421,\n            \"name\": \"Kendrick Lamar\",\n            \"url\": \"http://LZo.spfnsBfP0LTKT1YZgnDqRwZhnYoVPfh+ayEwrZq\",\n            \"api_path\": \"string\",\n            \"image_url\": \"https://xxGbsWohXbipYyWItBapzulp.gsotx.4mpsjkQU,,DcI\",\n            \"header_image_url\": \"https://CAeHuvPtWfSczvbxZpvYMaBUjs.ptpucJ\",\n            \"is_meme_verified\": true,\n            \"is_verified\": false,\n            \"followers_count\": 897,\n            \"iq\": 5589,\n            \"slug\": \"string\",\n            \"description\": {\n              \"dom\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"html\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"markdown\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"plain\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"alternate_names\": [\n              \"string\",\n              \"string\"\n            ],\n            \"instagram_name\": \"string\",\n            \"twitter_name\": \"string\",\n            \"facebook_name\": \"string\"\n          }\n        ]\n      },\n      {\n        \"id\": 378195,\n        \"title\": \"Alright\",\n        \"title_with_featured\": \"string\",\n        \"full_title\": \"Alright by Kendrick Lamar\",\n        \"artist_names\": \"string\",\n        \"primary_artist\": {\n          \"id\": 1421,\n          \"name\": \"Kendrick Lamar\",\n          \"url\": \"http://ZrmZDvGCo.tkceJ8-CybO1wTD2cR3fxLtaIR1Yo8UsOwBf+Oim-zjaCiLsgdedY\",\n          \"api_path\": \"string\",\n          \"image_url\": \"http://c.dmoM1HOHoZpboA.HeC\",\n          \"header_image_url\": \"http://bmNXcfilgcPgcA.kycVmoj1cLsaiZOZdjahwP\",\n          \"is_meme_verified\": true,\n          \"is_verified\": false,\n          \"followers_count\": 6925,\n          \"iq\": 2429,\n          \"slug\": \"string\",\n          \"description\": {\n            \"dom\": {\n              \"key_0\": 2030,\n              \"key_1\": 3821\n            },\n            \"html\": \"string\",\n            \"markdown\": \"string\",\n            \"plain\": \"string\"\n          },\n          \"alternate_names\": [\n            \"string\",\n            \"string\"\n          ],\n          \"instagram_name\": \"string\",\n          \"twitter_name\": \"string\",\n          \"facebook_name\": \"string\"\n        },\n        \"featured_artists\": [\n          {\n            \"id\": 1421,\n            \"name\": \"Kendrick Lamar\",\n            \"url\": \"http://nnoYxuczPjPZEyhxyMmDJhDrc.dhjI8opyYoLmJKrng8h\",\n            \"api_path\": \"string\",\n            \"image_url\": \"https://RXDUDyAjqtAetDtDBlrLZopZYEuMwa.awcrX.RhegRsO3oSMMsxBlZ6GN5T,wQ\",\n            \"header_image_url\": \"http://sxTviNivhHtNwmfAAmSOhCVshaIrAEKC.yjHXe2JS6,1p\",\n            \"is_meme_verified\": true,\n            \"is_verified\": true,\n            \"followers_count\": 6850,\n            \"iq\": 4039,\n            \"slug\": \"string\",\n            \"description\": {\n              \"dom\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"html\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"markdown\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"plain\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"alternate_names\": [\n              \"string\",\n              \"string\"\n            ],\n            \"instagram_name\": \"string\",\n            \"twitter_name\": \"string\",\n            \"facebook_name\": \"string\"\n          },\n          {\n            \"id\": 1421,\n            \"name\": \"Kendrick Lamar\",\n            \"url\": \"http://GlikIXYkqQyBcFkQp.vgzJ3d\",\n            \"api_path\": \"string\",\n            \"image_url\": \"http://HQutS.mrfuKxxgvDaop7a1tPN.YuS5d++1dXjN\",\n            \"header_image_url\": \"https://tuLKjrvUoVNeMiEUDMVGiAkPFiREIZbr.ywI-GMzQVtxaKW2RsFvjesm2ylOc+ID+hv9c+A+I18TBX,HLMf0rrI\",\n            \"is_meme_verified\": false,\n            \"is_verified\": false,\n            \"followers_count\": 6912,\n            \"iq\": 6802,\n            \"slug\": \"string\",\n            \"description\": {\n              \"dom\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"html\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"markdown\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"plain\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"alternate_names\": [\n              \"string\",\n              \"string\"\n            ],\n            \"instagram_name\": \"string\",\n            \"twitter_name\": \"string\",\n            \"facebook_name\": \"string\"\n          }\n        ],\n        \"album\": {\n          \"id\": 1403,\n          \"name\": \"string\",\n          \"full_title\": \"string\",\n          \"url\": \"https://BynINhkjJaJixCSUyzMBUEZtSyww.gntmzysVNTP5qjHL0E9YHldKT5F,O-rif\",\n          \"api_path\": \"string\",\n          \"cover_art_url\": \"http://cSWXHTVL.ekjeuV1x0iTgoOQUIqwnWEIAB0iSqLi2-g-,Xvfd7YWetV8IBzLw\",\n          \"cover_art_thumbnail_url\": \"https://NktvxUqBXzlYKdCVFsttefCH.lciYEQ70AY1GBx2LM4FBbpxf\",\n          \"release_date_for_display\": \"string\",\n          \"artist\": {\n            \"id\": 1421,\n            \"name\": \"Kendrick Lamar\",\n            \"url\": \"https://xoNoKrNkSMNkKDHpADrFEYXeZYSTQmw.fphew3HHcbAHXVR77.qp-1STBbSoJvs,9XBUm3\",\n            \"api_path\": \"string\",\n            \"image_url\": \"https://GRSHDr.hnpjRvJrRZzj1xdk-3YVJfCf26wYlwKA7rdZicKz4FTumg+B8JhS-3avtjrHHGe.ZJeRl\",\n            \"header_image_url\": \"https://BcbTPYbduKZVzoOBvoCECftjNf.kfAWkNPtnyM5a6JCBecfKnft3i+y12go5aqUMv60XbuPE1rxZ\",\n            \"is_meme_verified\": true,\n            \"is_verified\": false,\n            \"followers_count\": 3502,\n            \"iq\": 5735,\n            \"slug\": \"string\",\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"alternate_names\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"instagram_name\": \"string\",\n            \"twitter_name\": \"string\",\n            \"facebook_name\": \"string\"\n          }\n        },\n        \"url\": \"https://PwimcrwuyxDQcOenZbajI.pucbfremFhg,u+beWR7Vwdj4++JqskDe2mwG6ovDu6WA00ODPwId+cUrY0yjF-jQGToacTwdg9Y\",\n        \"path\": \"string\",\n        \"release_date\": \"1987-11-23\",\n        \"release_date_for_display\": \"string\",\n        \"song_art_image_url\": \"https://SrMoDpIqBFretqHpErADFKXKXeHYIr.eppRLqFWDwFj24Qu2vsCqdcEPgShO\",\n        \"song_art_image_thumbnail_url\": \"http://ajTTZwMEqONnTixzFijtpmhEMWElgkuy.lataVFSE4TCQQ-ZPqVUD6MS5ubmvNn1G3DLuWi\",\n        \"header_image_url\": \"http://LOzgGmnovHvJVYkKNALbipULxU.oqybKV-ZAqFus6yhcNIVFiDlfvFSpUTdN,fQEu\",\n        \"header_image_thumbnail_url\": \"http://PTfDJbAhfgx.nficfW.gWqZpDglAdUh7-casJv-H7Ni+45ze4a5P8wkIQ\",\n        \"lyrics_state\": \"string\",\n        \"lyrics_owner_id\": 6577,\n        \"annotation_count\": 6360,\n        \"api_path\": \"string\",\n        \"pyongs_count\": 3810,\n        \"stats\": {\n          \"unreviewed_annotations\": 7582,\n          \"hot\": false,\n          \"pageviews\": 9604\n        },\n        \"media\": [\n          {\n            \"provider\": \"youtube\",\n            \"type\": \"video\",\n            \"url\": \"http://GAEIDYpJJcWjsVEApfHgbwEBvMJkIGie.xmexiRst1axPxDNbbKoIwPNp6jJeIDH1Ln1XHvQ,WwOqk87R+WX2Y\",\n            \"start\": 5376,\n            \"native_uri\": \"string\"\n          },\n          {\n            \"provider\": \"youtube\",\n            \"type\": \"video\",\n            \"url\": \"https://mPqhIQcGvRAPWgMwtxCOESCLMe.sqfs-z-XhyAx7lnpfKgkC4pkeCOGBVzIKtax\",\n            \"start\": 1948,\n            \"native_uri\": \"string\"\n          }\n        ],\n        \"description\": {\n          \"dom\": {\n            \"key_0\": \"string\"\n          },\n          \"html\": \"string\",\n          \"markdown\": \"string\",\n          \"plain\": \"string\"\n        },\n        \"description_annotation\": {\n          \"id\": 2536,\n          \"annotator_id\": 1120,\n          \"annotator_login\": \"string\",\n          \"api_path\": \"string\",\n          \"classification\": \"accepted\",\n          \"fragment\": \"string\",\n          \"is_description\": true,\n          \"path\": \"string\",\n          \"range\": {\n            \"key_0\": 4872,\n            \"key_1\": 6168\n          },\n          \"song_id\": 6018,\n          \"url\": \"https://qjGNIHckCPNXrtKiPwBa.psrbuyv9CQV9ubB00gYHhozsvEWhXsbbq\",\n          \"verified_annotator_ids\": [\n            5386,\n            4868\n          ],\n          \"annotatable\": {\n            \"id\": 9505,\n            \"type\": \"song\",\n            \"title\": \"string\",\n            \"url\": \"https://gTkqGPRu.lfvdyaNUXafmj13TIIeeAdGCBB1-62DCBaKnlgJSOl4KSyrGg8CdWL\",\n            \"api_path\": \"string\",\n            \"image_url\": \"http://ZWlvDUPZXYFoQIyJPIejMKbVg.wfdoaL8FGk0eQmDjInmOzmP-DccTx,Nbwecik-PaZV,wYbgcH7Txbr\",\n            \"context\": \"string\"\n          },\n          \"annotations\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"api_path\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"body\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"comment_count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"community\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"custom_preview\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"has_voters\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"votes_total\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verified_by\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"state\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"share_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"pinned\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"cosigned_by\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"authors\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"api_path\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"body\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"comment_count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"community\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"custom_preview\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"has_voters\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"votes_total\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verified_by\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"state\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"share_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"pinned\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"cosigned_by\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"authors\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        \"recording_location\": \"string\",\n        \"producer_artists\": [\n          {\n            \"id\": 1421,\n            \"name\": \"Kendrick Lamar\",\n            \"url\": \"http://veXuYznXmBfQOoVaMgvhHypkSPXnNIuKn.zmilpJcB0S\",\n            \"api_path\": \"string\",\n            \"image_url\": \"https://gHjnkzLSBGTQHaDSoWprnFTEgFuQywhnZ.drmPktbfWKFMnxsGMGZvHoeh7,UAII92LYjX,NJIj,CcLr3vCwNKR93s,OkaI\",\n            \"header_image_url\": \"http://ELaLKKgObjWcIccTuChmJgVkR.ufUJdJW96M+l,HnKvje3.S,h\",\n            \"is_meme_verified\": true,\n            \"is_verified\": false,\n            \"followers_count\": 2820,\n            \"iq\": 1278,\n            \"slug\": \"string\",\n            \"description\": {\n              \"dom\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"html\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"markdown\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"plain\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"alternate_names\": [\n              \"string\",\n              \"string\"\n            ],\n            \"instagram_name\": \"string\",\n            \"twitter_name\": \"string\",\n            \"facebook_name\": \"string\"\n          },\n          {\n            \"id\": 1421,\n            \"name\": \"Kendrick Lamar\",\n            \"url\": \"https://lcrjusTXWYWaFMbHOxTszGtH.hnebVNbJj-7AY1yLDrBu4M.pnRnk2Y5jOtvPJV-DzgR1g5S0AIdp2rJJj3iU\",\n            \"api_path\": \"string\",\n            \"image_url\": \"http://WHKYcmVhyPHmTHJkSYz.ojnRKb2v3ob7t4BFa..89eKJC+QbMzR-ZeTkcc98+Yr3PXC1S-,MfEPqm+xwVz\",\n            \"header_image_url\": \"https://SxqIrtUd.coqtiHCBXrum9PL4RCIaabjXDMgBwmhWQFsFoczVmdz4,AzS9y3cDwqqhRY\",\n            \"is_meme_verified\": true,\n            \"is_verified\": true,\n            \"followers_count\": 3053,\n            \"iq\": 3626,\n            \"slug\": \"string\",\n            \"description\": {\n              \"dom\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"html\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"markdown\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"plain\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"alternate_names\": [\n              \"string\",\n              \"string\"\n            ],\n            \"instagram_name\": \"string\",\n            \"twitter_name\": \"string\",\n            \"facebook_name\": \"string\"\n          }\n        ],\n        \"writer_artists\": [\n          {\n            \"id\": 1421,\n            \"name\": \"Kendrick Lamar\",\n            \"url\": \"https://ERnj.dmwgG0fPziDyuSMyEbGZjXvJG2nW8zMNWzIjfQYEbEKT,7U,LHDEiXzrr+WLsfuKaUxtuFpM6gei0bc2ySmPt.\",\n            \"api_path\": \"string\",\n            \"image_url\": \"http://cqHQOuPFwc.kfiQpPu5sFNC0bwuSWDehcCHNJyJqdEYmsFO\",\n            \"header_image_url\": \"https://YJwem.ymcnkptupsPswZEdawm3SHp.lVQMV-+-YBgNSQ\",\n            \"is_meme_verified\": false,\n            \"is_verified\": true,\n            \"followers_count\": 849,\n            \"iq\": 8372,\n            \"slug\": \"string\",\n            \"description\": {\n              \"dom\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"html\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"markdown\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"plain\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"alternate_names\": [\n              \"string\",\n              \"string\"\n            ],\n            \"instagram_name\": \"string\",\n            \"twitter_name\": \"string\",\n            \"facebook_name\": \"string\"\n          },\n          {\n            \"id\": 1421,\n            \"name\": \"Kendrick Lamar\",\n            \"url\": \"http://Ft.jdpCkpsAqT5gu\",\n            \"api_path\": \"string\",\n            \"image_url\": \"http://Dhscfe.xwcaIdfdF\",\n            \"header_image_url\": \"http://YgSJjmfsNnB.mxAzlv5qudrqZOvEvmyHhQ6HzCEjOoXwkCkV\",\n            \"is_meme_verified\": false,\n            \"is_verified\": false,\n            \"followers_count\": 218,\n            \"iq\": 3913,\n            \"slug\": \"string\",\n            \"description\": {\n              \"dom\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"html\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"markdown\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"plain\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"alternate_names\": [\n              \"string\",\n              \"string\"\n            ],\n            \"instagram_name\": \"string\",\n            \"twitter_name\": \"string\",\n            \"facebook_name\": \"string\"\n          }\n        ]\n      }\n    ],\n    \"next_page\": 8306\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "565f3603-75d8-43fa-a45b-d3406313f8cc",
+          "name": "List Artist Albums",
+          "request": {
+            "name": "List Artist Albums",
+            "description": {
+              "content": "Returns albums associated with the artist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "artists",
+                ":id",
+                "albums"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of results per page (max 50)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page index (1-indexed)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Genius numeric artist ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "me create_annotation manage_annotation vote"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.genius.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.genius.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "57c18eae-2fb6-492e-9cb6-8c656801b2ea",
+              "name": "Albums by the artist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "artists",
+                    ":id",
+                    "albums"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Genius numeric artist ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\"\n  },\n  \"response\": {\n    \"albums\": [\n      {\n        \"id\": 6876,\n        \"name\": \"string\",\n        \"full_title\": \"string\",\n        \"url\": \"http://MdbAoFyOFSRAFjIQTyLwfO.ezcGKYl5u9i\",\n        \"api_path\": \"string\",\n        \"cover_art_url\": \"https://ocROsaSQrlfEPyUXEicmNVm.llmqgGI8f7q7GPnHyJItx2PbFjk\",\n        \"cover_art_thumbnail_url\": \"https://xZhRFEyUcTNzifaQNJPj.cikrxe.dRetB5smiAsE+ew7Z4gyOJ-ZO\",\n        \"release_date_for_display\": \"string\",\n        \"artist\": {\n          \"id\": 1421,\n          \"name\": \"Kendrick Lamar\",\n          \"url\": \"http://afuwREFKoyIRTmmFldPvQfS.jouult88JkGHLuGzD35+8n3s4zqEmA\",\n          \"api_path\": \"string\",\n          \"image_url\": \"https://BJaCqmSxBWmYNyUMcKfsaQmHDABFlGt.zubWYkKoAiMuVE10EjUuv2jA14XLj1uGtjnQKB+\",\n          \"header_image_url\": \"https://VHOwtb.ddZZLSpo6+X8VOIZevxPBBMHFKITpHFH+Xwy3hXXNAhoI1+,K.VnBAfkVsA\",\n          \"is_meme_verified\": false,\n          \"is_verified\": false,\n          \"followers_count\": 701,\n          \"iq\": 1148,\n          \"slug\": \"string\",\n          \"description\": {\n            \"dom\": {\n              \"key_0\": 5953.312895592901\n            },\n            \"html\": \"string\",\n            \"markdown\": \"string\",\n            \"plain\": \"string\"\n          },\n          \"alternate_names\": [\n            \"string\",\n            \"string\"\n          ],\n          \"instagram_name\": \"string\",\n          \"twitter_name\": \"string\",\n          \"facebook_name\": \"string\"\n        }\n      },\n      {\n        \"id\": 8346,\n        \"name\": \"string\",\n        \"full_title\": \"string\",\n        \"url\": \"http://iBWTlrQwqPdWBK.gcuxp456JOpMs5nR7v3X7LgG0c7qgcYE4S12tdg+FnPJ9RraCbzknqHrVrcIOFtNF,4\",\n        \"api_path\": \"string\",\n        \"cover_art_url\": \"https://FWNtIFVLoIwy.dfDUe+,xu\",\n        \"cover_art_thumbnail_url\": \"http://MxIAtKfRItUuGyqPSHEDB.bhs4WOdlOU.w6PAwuljwtYJ8Vsrg7ZVIIVkj8O2\",\n        \"release_date_for_display\": \"string\",\n        \"artist\": {\n          \"id\": 1421,\n          \"name\": \"Kendrick Lamar\",\n          \"url\": \"https://gTDkDbMaQTKVGKYBIDF.mgbwd+lfpXiYc7CGIQnO\",\n          \"api_path\": \"string\",\n          \"image_url\": \"http://dHNWglzEDrbECqwfTULUxhoCTD.tfByNcNx\",\n          \"header_image_url\": \"https://kvNNpFVJANYXcxrMfzKcpffvdc.kxkxfU-yeh2M.JS.ZgcIxgldFjgzCOQmzOqNGGpbsJTxVw-idW+7VCXJFwbWNUYEYIenvlT\",\n          \"is_meme_verified\": true,\n          \"is_verified\": false,\n          \"followers_count\": 1139,\n          \"iq\": 6381,\n          \"slug\": \"string\",\n          \"description\": {\n            \"dom\": {\n              \"key_0\": 7388.177119845873\n            },\n            \"html\": \"string\",\n            \"markdown\": \"string\",\n            \"plain\": \"string\"\n          },\n          \"alternate_names\": [\n            \"string\",\n            \"string\"\n          ],\n          \"instagram_name\": \"string\",\n          \"twitter_name\": \"string\",\n          \"facebook_name\": \"string\"\n        }\n      }\n    ],\n    \"next_page\": 9659\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "de4b915b-e5f3-4f4d-985d-154ba8df48cf",
+          "name": "Get Artist Activity",
+          "request": {
+            "name": "Get Artist Activity",
+            "description": {
+              "content": "Activity stream covering all of the artist's songs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "artists",
+                ":id",
+                "activity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of results per page (max 50)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page index (1-indexed)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Genius numeric artist ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "me create_annotation manage_annotation vote"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.genius.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.genius.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fe46b1b3-fbed-4c99-a42e-ed0047f31f96",
+              "name": "Activity feed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "artists",
+                    ":id",
+                    "activity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Genius numeric artist ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\"\n  },\n  \"response\": {\n    \"activities\": [\n      {\n        \"id\": 8825,\n        \"type\": \"string\",\n        \"created_at\": \"1959-12-31T12:36:24.778Z\",\n        \"objects\": [\n          {\n            \"key_0\": 8841\n          },\n          {\n            \"key_0\": 2699\n          }\n        ]\n      },\n      {\n        \"id\": 3067,\n        \"type\": \"string\",\n        \"created_at\": \"2009-04-08T07:17:48.301Z\",\n        \"objects\": [\n          {\n            \"key_0\": 8800,\n            \"key_1\": \"string\"\n          },\n          {\n            \"key_0\": \"string\",\n            \"key_1\": true\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "20cf4ee3-68f8-421e-af82-248d7966a855",
+          "name": "List Artist Followers",
+          "request": {
+            "name": "List Artist Followers",
+            "description": {
+              "content": "Returns users who follow the artist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "artists",
+                ":id",
+                "followers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of results per page (max 50)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page index (1-indexed)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Genius numeric artist ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "me create_annotation manage_annotation vote"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.genius.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.genius.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "25e6762d-7923-4159-a39b-17276e3d296a",
+              "name": "Followers",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "artists",
+                    ":id",
+                    "followers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Genius numeric artist ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\"\n  },\n  \"response\": {\n    \"users\": [\n      {\n        \"id\": 847,\n        \"login\": \"string\",\n        \"name\": \"string\",\n        \"about_me_summary\": \"string\",\n        \"avatar\": {\n          \"tiny\": {\n            \"url\": \"http://WgjdKpSQSWSzF.zeqpmR6MhUHOjaTeOhtREyyGlKuozisIaIZvRV5qfzgTIbHRHxAhxKPJSkQUePWV7BwuoWWCPokH.\"\n          },\n          \"thumb\": {\n            \"url\": \"https://LwhgtZHHROhewuzmsCozfoLuLAgbptE.stvpjxIW5oo7RPy7bW2bfVjziM6i-McxDj9-A-Zv.hOj\"\n          },\n          \"small\": {\n            \"url\": \"https://AqVbpkeQIxzodTRWRUX.iqpojYMBKCWY.Mw5yfVyHkh6n-H4HSJBRQwZ+Tsix4KPRXlyoibU30\"\n          },\n          \"medium\": {\n            \"url\": \"http://ydz.ltldbPhXtzJonXqeqIoUfQg1oax0CqP7pLh6y2nEkwLxH5iQbYe5UHRY-mapP\"\n          }\n        },\n        \"header_image_url\": \"https://TQJJoLEPgAHKzeNEAHNdUuIrlPC.srs4,A9OLQs\",\n        \"human_readable_role_for_display\": \"string\",\n        \"iq\": 3696,\n        \"identity_provider\": \"string\",\n        \"roles_for_display\": [\n          \"string\",\n          \"string\"\n        ],\n        \"url\": \"https://kfXRvKCHZisJGXYIabbhPyiC.hfAAmLFPP\",\n        \"api_path\": \"string\"\n      },\n      {\n        \"id\": 6855,\n        \"login\": \"string\",\n        \"name\": \"string\",\n        \"about_me_summary\": \"string\",\n        \"avatar\": {\n          \"tiny\": {\n            \"url\": \"http://FnAMFHCLBTWREpVeQeQybKUs.arwwogr601.fzCmmAGBIjVi2rr7lgGQMYXzLcJPjPkz0BQtmhs,ji7LuS7Hok\"\n          },\n          \"thumb\": {\n            \"url\": \"https://f.cxMdxMyVxbVp.gJxvhXwcsnkZ+kh2OcdUIaV+Z+LPD,O6MBSzhj-\"\n          },\n          \"small\": {\n            \"url\": \"http://bg.qhkdmL3SDQ7OmS4s2g9K,IZZnq-Cz1MkjIPidM5ZmMUNNwp+WvPh.DQ\"\n          },\n          \"medium\": {\n            \"url\": \"http://hx.eiysWLkfhN-JS4hRTzlXzSh3j6bYgGkl1E\"\n          }\n        },\n        \"header_image_url\": \"https://rLtQSrWiXEENOxPlJMPzr.piyrMGYhfzeM-NrlYihQWS\",\n        \"human_readable_role_for_display\": \"string\",\n        \"iq\": 6754,\n        \"identity_provider\": \"string\",\n        \"roles_for_display\": [\n          \"string\",\n          \"string\"\n        ],\n        \"url\": \"http://YkoefbodEXobanoRjBlASBspe.dsdW4W3qt8lNWYTVRxbb4jhYzGVa6EdCASLaY07,qMNzTJ8KmhmrjGmfXMqjjeL2nVteF2yyR9x\",\n        \"api_path\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6fddd614-bf1e-4f18-a928-d200ef31cb6d",
+          "name": "Get Artist Leaderboard",
+          "request": {
+            "name": "Get Artist Leaderboard",
+            "description": {
+              "content": "Returns the top \"scholars\" — users with the highest contribution score for this artist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "artists",
+                ":id",
+                "leaderboard"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of results per page (max 50)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page index (1-indexed)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Genius numeric artist ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "me create_annotation manage_annotation vote"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.genius.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.genius.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "865b3e65-fe2a-4227-b0e0-7d9bea1857eb",
+              "name": "Leaderboard",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "artists",
+                    ":id",
+                    "leaderboard"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Genius numeric artist ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\"\n  },\n  \"response\": {\n    \"leaderboard\": [\n      {\n        \"attribution\": 3289.2525012402784,\n        \"user\": {\n          \"id\": 8611,\n          \"login\": \"string\",\n          \"name\": \"string\",\n          \"about_me_summary\": \"string\",\n          \"avatar\": {\n            \"tiny\": {\n              \"url\": \"https://gQvCPhT.klbggXd4sUSf\"\n            },\n            \"thumb\": {\n              \"url\": \"https://eTMKk.onok.+09leKP0b8rkTvPgdZH-F4m,EWC,OzBbEfE46a1cP4hhLSd+a8TsCiDisiabTAllCRgFtN2UI,Bu0ER,\"\n            },\n            \"small\": {\n              \"url\": \"https://jMTCEnlEppZeGWFQwxrBHTNSgtAUrewIx.jnlNPRwRrp2ssTjBQSxfRwh.HCS8KHaArud9-BJ11D3V2i1OOu9RzTeUjWBhd8fchcw\"\n            },\n            \"medium\": {\n              \"url\": \"http://CPUHHcuszjfppcCFQysAcXlYYOQt.tmCqxXOL-IzT\"\n            }\n          },\n          \"header_image_url\": \"https://G.oaaux+QieXgGcpD3Hke,+aTFoq6kV4KeSTaNMBZ-WuB4q+vutN\",\n          \"human_readable_role_for_display\": \"string\",\n          \"iq\": 8544,\n          \"identity_provider\": \"string\",\n          \"roles_for_display\": [\n            \"string\",\n            \"string\"\n          ],\n          \"url\": \"http://kpWbwuSWanrfmlfZVlwPTDXzN.bgyeygbRkKhjzIHJ7OnFaWji2zLKSGjK2til0iYh5Wsi0gYH6VANXe2mW4c.\",\n          \"api_path\": \"string\"\n        }\n      },\n      {\n        \"attribution\": 2192.506533009867,\n        \"user\": {\n          \"id\": 1318,\n          \"login\": \"string\",\n          \"name\": \"string\",\n          \"about_me_summary\": \"string\",\n          \"avatar\": {\n            \"tiny\": {\n              \"url\": \"https://AYujvY.bgsGdMsqaZy+9d\"\n            },\n            \"thumb\": {\n              \"url\": \"https://uRHsXxvKCgdFgsXhBuyS.tlGr7Upqwx3WA5z+j5pAauO,LJ51\"\n            },\n            \"small\": {\n              \"url\": \"https://c.uocrYmvivUVyicNXPjUQcOMMu2I3hmoWpJ8wC6q9zvkh\"\n            },\n            \"medium\": {\n              \"url\": \"http://g.nuyufcPnR.5ni+19sHB75UoVT0npkJ,aQouemCQcx73fud2p\"\n            }\n          },\n          \"header_image_url\": \"http://olm.xtibJpkWTQyxgB-E0,mUA+uWTfBM6-xLDRGRGEDf\",\n          \"human_readable_role_for_display\": \"string\",\n          \"iq\": 5996,\n          \"identity_provider\": \"string\",\n          \"roles_for_display\": [\n            \"string\",\n            \"string\"\n          ],\n          \"url\": \"https://oLsnreyHoiBWlBHJzCDsfOAGWiHymHs.eyzkmxHxvggQw+WuvlC6oX,30NorEhSTcuwZKaQT3C6MeE,W-,UY9beA8-ciBj2\",\n          \"api_path\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.genius.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "cb84e0ed-28eb-46fc-a0b8-1efc491c9149",
+    "name": "Genius Account Artists API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Genius API exposes the Genius/Rap Genius crowdsourced music knowledge\nbase — songs, artists, albums, annotations, and referents. Responses are\nJSON. The API does NOT serve raw lyric text directly (those must be scraped\nfrom the public song page); it returns rich song, artist, album, annotation\nmetadata, scoring, and the URLs needed to locate lyrics on genius.com.\n\n\nContact Support:\n Name: Genius API Support",
+      "type": "text/plain"
+    }
+  }
+}

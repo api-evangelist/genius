@@ -1,0 +1,625 @@
+{
+  "item": [
+    {
+      "id": "b989be3c-5cad-43f5-a004-bc8cd3f36959",
+      "name": "Songs",
+      "description": {
+        "content": "Song metadata, contributors, and activity.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f8b95e5a-5700-4325-a008-49b9d0ab3f38",
+          "name": "Get Song",
+          "request": {
+            "name": "Get Song",
+            "description": {
+              "content": "Returns full song metadata including artist, album, release date, media, and song relationships.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "songs",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "text_format",
+                  "value": "dom",
+                  "description": "Format for textual fields in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Genius numeric song ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "me create_annotation manage_annotation vote"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.genius.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.genius.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f968bd4f-5ac1-4e82-9159-173b61c7bc55",
+              "name": "Song details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "songs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "text_format",
+                      "value": "dom"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Genius numeric song ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\"\n  },\n  \"response\": {\n    \"song\": {\n      \"id\": 378195,\n      \"title\": \"Alright\",\n      \"title_with_featured\": \"string\",\n      \"full_title\": \"Alright by Kendrick Lamar\",\n      \"artist_names\": \"string\",\n      \"primary_artist\": {\n        \"id\": 1421,\n        \"name\": \"Kendrick Lamar\",\n        \"url\": \"https://SlsQebLtAAkPMEM.rpsrzVbN7iHuu+RHH3ZBJ\",\n        \"api_path\": \"string\",\n        \"image_url\": \"http://BiaSXsMplhzIjNkOOkGRoJOmfxwFgpk.qpfGAJ,vIQc1EGMxeidXOdV6+Cg8t,uRrmznZplx164iIgUg0W\",\n        \"header_image_url\": \"https://nnmHwAErPAQvWSpmCLcrYrSSNiFgpwlE.hpiKmDh\",\n        \"is_meme_verified\": true,\n        \"is_verified\": false,\n        \"followers_count\": 4874,\n        \"iq\": 2328,\n        \"slug\": \"string\",\n        \"description\": {\n          \"dom\": {\n            \"key_0\": 9063,\n            \"key_1\": 3560,\n            \"key_2\": true,\n            \"key_3\": 8891\n          },\n          \"html\": \"string\",\n          \"markdown\": \"string\",\n          \"plain\": \"string\"\n        },\n        \"alternate_names\": [\n          \"string\",\n          \"string\"\n        ],\n        \"instagram_name\": \"string\",\n        \"twitter_name\": \"string\",\n        \"facebook_name\": \"string\"\n      },\n      \"featured_artists\": [\n        {\n          \"id\": 1421,\n          \"name\": \"Kendrick Lamar\",\n          \"url\": \"http://lHOxrGrGVsGgdaLJpDFlAlbtWB.mlknG-bwMrVs2rJlCHaYqQT0mS.TuSu9dXOsUN55RzRdo9JAeqd.Z.Y\",\n          \"api_path\": \"string\",\n          \"image_url\": \"https://kHuMnNolgXuxLJfAatbHBMmyrPNymwrv.htqmz2vaDOTUSh4yrVMwu0UiiGZCx+zKYz\",\n          \"header_image_url\": \"https://qncWTeuJohFMsoH.dguYNF-KD,ZviQWQhmZ3EeYhh,XBM.8vB\",\n          \"is_meme_verified\": true,\n          \"is_verified\": false,\n          \"followers_count\": 9848,\n          \"iq\": 8670,\n          \"slug\": \"string\",\n          \"description\": {\n            \"dom\": {\n              \"key_0\": \"string\"\n            },\n            \"html\": \"string\",\n            \"markdown\": \"string\",\n            \"plain\": \"string\"\n          },\n          \"alternate_names\": [\n            \"string\",\n            \"string\"\n          ],\n          \"instagram_name\": \"string\",\n          \"twitter_name\": \"string\",\n          \"facebook_name\": \"string\"\n        },\n        {\n          \"id\": 1421,\n          \"name\": \"Kendrick Lamar\",\n          \"url\": \"https://ryep.tzicnfrzp1TxdcsQekqpwl70vYOmqnYepFFcUKry7W4\",\n          \"api_path\": \"string\",\n          \"image_url\": \"https://nLikcrLCfHSqsbuEHCNDbgwKufexOGZDf.dvWBycPWlCYWqHNOKxBx85E.h5t-YzP0iu5ltkJoexPdkYz\",\n          \"header_image_url\": \"http://TCUhLUsPLUvYWOSB.swcgDvLnpFllOLAowqt6MSmFKoRcDWueorDURrNmbnQw-jE23AY804u\",\n          \"is_meme_verified\": true,\n          \"is_verified\": false,\n          \"followers_count\": 268,\n          \"iq\": 5647,\n          \"slug\": \"string\",\n          \"description\": {\n            \"dom\": {\n              \"key_0\": \"string\",\n              \"key_1\": 3428.5492020986617,\n              \"key_2\": \"string\",\n              \"key_3\": 3067.738833235675,\n              \"key_4\": 4109\n            },\n            \"html\": \"string\",\n            \"markdown\": \"string\",\n            \"plain\": \"string\"\n          },\n          \"alternate_names\": [\n            \"string\",\n            \"string\"\n          ],\n          \"instagram_name\": \"string\",\n          \"twitter_name\": \"string\",\n          \"facebook_name\": \"string\"\n        }\n      ],\n      \"album\": {\n        \"id\": 6511,\n        \"name\": \"string\",\n        \"full_title\": \"string\",\n        \"url\": \"https://OwecLjOsMUTkdPnPYSAAOjAwZteWvB.zxqRFEjz7iAFU5nf24npj0Qgk1vjiHjQOeSvJ380VKNgBzIO7yZw\",\n        \"api_path\": \"string\",\n        \"cover_art_url\": \"http://ruqQJXEUmCPSSIgMNVTPTptnOSHjzEa.mxypZIF0ghjkUtbHjbHA,l6S\",\n        \"cover_art_thumbnail_url\": \"http://WonzMJxEtG.sfnLw+mmYJNn6sdNSHRKbXFuXAwR0k3F-Rd7-ssptv8VPlAqRmnohsbu1kuJt5yNyiHhemfj2,.Cs2\",\n        \"release_date_for_display\": \"string\",\n        \"artist\": {\n          \"id\": 1421,\n          \"name\": \"Kendrick Lamar\",\n          \"url\": \"https://kraBVzifruBfzeG.kwRuAAG-M0ZbBx8G8WhXbrg2HnQ9UpcGHB,kIctSjupzuUFxRqDK,zV4Fn\",\n          \"api_path\": \"string\",\n          \"image_url\": \"http://oSwIUORIWBkYVqwmyLFYowby.zlmzaLGxocq8o,jmGQvbcHWwFrcm.xQ0Ltoq7C\",\n          \"header_image_url\": \"http://OtVQyFLN.qqt8MsSllQH6smL9FgUerfK7co.QQ+CF71rbZh3P6n,rxK.mIDP1JyzzTXawAUgrfkqH0K\",\n          \"is_meme_verified\": false,\n          \"is_verified\": true,\n          \"followers_count\": 8258,\n          \"iq\": 6442,\n          \"slug\": \"string\",\n          \"description\": {\n            \"dom\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"html\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"markdown\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"plain\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"alternate_names\": [\n            \"string\",\n            \"string\"\n          ],\n          \"instagram_name\": \"string\",\n          \"twitter_name\": \"string\",\n          \"facebook_name\": \"string\"\n        }\n      },\n      \"url\": \"https://KowzSpMLtDAPk.rslkt71vMo6azkK55SWq.PENaS4txLkbjHaewEIIIdL6Ci\",\n      \"path\": \"string\",\n      \"release_date\": \"2011-12-04\",\n      \"release_date_for_display\": \"string\",\n      \"song_art_image_url\": \"https://MYWiRbyzciKVH.tkhnsx3SEkGVb\",\n      \"song_art_image_thumbnail_url\": \"http://GsEtOuSlwHdCogNcgKmtTseuhP.hpeAZJXXE1H,4NK2mBOO4F7FZTi3l2VWTAj6Z+uumtSyuHSrMg\",\n      \"header_image_url\": \"https://byakNFiXwgbtXMTFABxjfLJBwCWNy.sjmrfMOwlLWxYaP1tWt\",\n      \"header_image_thumbnail_url\": \"http://Y.jzzvpp.fPNGlzd0gdiLsVGJRbuA7\",\n      \"lyrics_state\": \"string\",\n      \"lyrics_owner_id\": 7548,\n      \"annotation_count\": 2383,\n      \"api_path\": \"string\",\n      \"pyongs_count\": 4218,\n      \"stats\": {\n        \"unreviewed_annotations\": 6068,\n        \"hot\": false,\n        \"pageviews\": 1568\n      },\n      \"media\": [\n        {\n          \"provider\": \"youtube\",\n          \"type\": \"video\",\n          \"url\": \"http://iqlQipYmtbMdNCswtukpJJbm.aakJv\",\n          \"start\": 4481,\n          \"native_uri\": \"string\"\n        },\n        {\n          \"provider\": \"youtube\",\n          \"type\": \"video\",\n          \"url\": \"https://gWqFVqWHckyVqGNtlqQbsDPfBIskDMrY.xmxE64\",\n          \"start\": 56,\n          \"native_uri\": \"string\"\n        }\n      ],\n      \"description\": {\n        \"dom\": {\n          \"key_0\": 4293.014138161174\n        },\n        \"html\": \"string\",\n        \"markdown\": \"string\",\n        \"plain\": \"string\"\n      },\n      \"description_annotation\": {\n        \"id\": 1784,\n        \"annotator_id\": 7702,\n        \"annotator_login\": \"string\",\n        \"api_path\": \"string\",\n        \"classification\": \"accepted\",\n        \"fragment\": \"string\",\n        \"is_description\": false,\n        \"path\": \"string\",\n        \"range\": {\n          \"key_0\": 4252,\n          \"key_1\": 747\n        },\n        \"song_id\": 5427,\n        \"url\": \"https://zOxCihfzfyzQZGwvoIdBtWQftjbDkwknu.amEgWPwvC6Lzjs2NsEAKfKPwf422o6HeA.pFp\",\n        \"verified_annotator_ids\": [\n          3065,\n          9867\n        ],\n        \"annotatable\": {\n          \"id\": 8110,\n          \"type\": \"song\",\n          \"title\": \"string\",\n          \"url\": \"http://UmTUNAxcV.qqOpt-1b4,JdwES5pJSBKYyIptstVxn-WTwgXKVtVJBP-D3kfAZ\",\n          \"api_path\": \"string\",\n          \"image_url\": \"http://jcShaOrjPIVWnXNvXAyArM.mqsUEcKUc+.okEwbjv\",\n          \"context\": \"string\"\n        },\n        \"annotations\": [\n          {\n            \"id\": 3888,\n            \"api_path\": \"string\",\n            \"body\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"comment_count\": 9005,\n            \"community\": false,\n            \"custom_preview\": \"string\",\n            \"has_voters\": false,\n            \"votes_total\": 6273,\n            \"verified\": true,\n            \"verified_by\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": \"pending\",\n            \"url\": \"http://giaKoSjfvfekFbOXmpgvxwXJUKIFy.gboetPMJjidtlJ7ESom1HwYzDr9uR\",\n            \"share_url\": \"https://fPKB.qdx2BxW72KHQeZR1Mpq7c12Riqg9DMmW8BV8MRq0YZl59VJyWEoNuc12NO4Z94r2xUhqjHIBXREje\",\n            \"source\": \"string\",\n            \"pinned\": false,\n            \"cosigned_by\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"authors\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"created_at\": \"1999-05-27T19:03:23.929Z\"\n          },\n          {\n            \"id\": 6596,\n            \"api_path\": \"string\",\n            \"body\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"comment_count\": 6476,\n            \"community\": false,\n            \"custom_preview\": \"string\",\n            \"has_voters\": true,\n            \"votes_total\": 5843,\n            \"verified\": true,\n            \"verified_by\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": \"pending\",\n            \"url\": \"https://mVJpLGYJsNsaHrPAkFIncvsF.widmJd6WJRtc8X8Fc7CPVfabDP5.JpHagRyQxPbvoQWprQk9\",\n            \"share_url\": \"https://byKwHXolLotrPtFYUuhSeBGIgPAD.aijnlP0oazEtdQrxLw,FTNFr\",\n            \"source\": \"string\",\n            \"pinned\": false,\n            \"cosigned_by\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"authors\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"created_at\": \"2025-08-20T08:33:11.713Z\"\n          }\n        ]\n      },\n      \"recording_location\": \"string\",\n      \"producer_artists\": [\n        {\n          \"id\": 1421,\n          \"name\": \"Kendrick Lamar\",\n          \"url\": \"http://l.yjtPZ8LYA1Y19,ZOOgzVjNaDiP74zt9b\",\n          \"api_path\": \"string\",\n          \"image_url\": \"http://M.lquR2KsN7YK9QrBOudRym,WfLrxtK\",\n          \"header_image_url\": \"https://kJtiXXoAJ.zdxvME0,ne+WmUgxM1hU+pC\",\n          \"is_meme_verified\": true,\n          \"is_verified\": true,\n          \"followers_count\": 6129,\n          \"iq\": 9803,\n          \"slug\": \"string\",\n          \"description\": {\n            \"dom\": {\n              \"key_0\": \"string\",\n              \"key_1\": 6946.877878994457,\n              \"key_2\": \"string\"\n            },\n            \"html\": \"string\",\n            \"markdown\": \"string\",\n            \"plain\": \"string\"\n          },\n          \"alternate_names\": [\n            \"string\",\n            \"string\"\n          ],\n          \"instagram_name\": \"string\",\n          \"twitter_name\": \"string\",\n          \"facebook_name\": \"string\"\n        },\n        {\n          \"id\": 1421,\n          \"name\": \"Kendrick Lamar\",\n          \"url\": \"https://yzSexbbSJsnuxt.nkqdtjsgQZO+HVy4TYEL45,GzYKj\",\n          \"api_path\": \"string\",\n          \"image_url\": \"http://cor.zhzUAbDU\",\n          \"header_image_url\": \"http://ZTlnOtdGPHiiLrDopHQvVccflHfzLN.dgLIzYaEkx.V4fImByQb8A-yEKpbcc+NxRZ1V.SarHZ\",\n          \"is_meme_verified\": false,\n          \"is_verified\": true,\n          \"followers_count\": 5267,\n          \"iq\": 8962,\n          \"slug\": \"string\",\n          \"description\": {\n            \"dom\": {\n              \"key_0\": \"string\",\n              \"key_1\": true,\n              \"key_2\": 209.01287617164255\n            },\n            \"html\": \"string\",\n            \"markdown\": \"string\",\n            \"plain\": \"string\"\n          },\n          \"alternate_names\": [\n            \"string\",\n            \"string\"\n          ],\n          \"instagram_name\": \"string\",\n          \"twitter_name\": \"string\",\n          \"facebook_name\": \"string\"\n        }\n      ],\n      \"writer_artists\": [\n        {\n          \"id\": 1421,\n          \"name\": \"Kendrick Lamar\",\n          \"url\": \"http://HmQEbQTJJQhqjMbhVFpAjjEzefBdoNaa.koeFljQW\",\n          \"api_path\": \"string\",\n          \"image_url\": \"https://WWIdcmo.albkARe9mJzybRVKmn0r5KaOfbWqwMGE\",\n          \"header_image_url\": \"http://YhJnONfFZHcAySiOGYvLutkx.ffmjL,x6HAz1W7P3ZjjvD-ZArqDN8sMehpUwRLpqQOR3DvqiR1q8mcAlDD-b9D-Kb\",\n          \"is_meme_verified\": true,\n          \"is_verified\": false,\n          \"followers_count\": 7019,\n          \"iq\": 1789,\n          \"slug\": \"string\",\n          \"description\": {\n            \"dom\": {\n              \"key_0\": \"string\",\n              \"key_1\": \"string\"\n            },\n            \"html\": \"string\",\n            \"markdown\": \"string\",\n            \"plain\": \"string\"\n          },\n          \"alternate_names\": [\n            \"string\",\n            \"string\"\n          ],\n          \"instagram_name\": \"string\",\n          \"twitter_name\": \"string\",\n          \"facebook_name\": \"string\"\n        },\n        {\n          \"id\": 1421,\n          \"name\": \"Kendrick Lamar\",\n          \"url\": \"https://TldbwQkVBVXbKddOXZbtNYIiwcrkZAc.pgimfIngrvO\",\n          \"api_path\": \"string\",\n          \"image_url\": \"https://JWpyfJFJGLHHwLbeHYtUEXDDTGDY.fghVDQcV3qBiIl0nXMtwoaNb-06PE8DscLtYE-achr5sy1\",\n          \"header_image_url\": \"http://SCnrIhmBHu.jpmF85ZSz9QlWhFfrXMLJWb4Id\",\n          \"is_meme_verified\": true,\n          \"is_verified\": true,\n          \"followers_count\": 668,\n          \"iq\": 4047,\n          \"slug\": \"string\",\n          \"description\": {\n            \"dom\": {\n              \"key_0\": 2947,\n              \"key_1\": true\n            },\n            \"html\": \"string\",\n            \"markdown\": \"string\",\n            \"plain\": \"string\"\n          },\n          \"alternate_names\": [\n            \"string\",\n            \"string\"\n          ],\n          \"instagram_name\": \"string\",\n          \"twitter_name\": \"string\",\n          \"facebook_name\": \"string\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "caaf24ec-5743-4664-8817-c749cefd3f42",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "songs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "text_format",
+                      "value": "dom"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Genius numeric song ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\",\n    \"error\": \"not_found\",\n    \"error_description\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "623fee40-78dd-4f94-ad44-45e9a1c45df6",
+          "name": "Get Song Comments",
+          "request": {
+            "name": "Get Song Comments",
+            "description": {
+              "content": "Lists comments left on a song page.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "songs",
+                ":id",
+                "comments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of results per page (max 50)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page index (1-indexed)."
+                },
+                {
+                  "disabled": false,
+                  "key": "text_format",
+                  "value": "dom",
+                  "description": "Format for textual fields in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Genius numeric song ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "me create_annotation manage_annotation vote"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.genius.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.genius.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "803b630a-51af-4aa2-acee-0a29a20294f6",
+              "name": "Comments on the song",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "songs",
+                    ":id",
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "text_format",
+                      "value": "dom"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Genius numeric song ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\"\n  },\n  \"response\": {\n    \"comments\": [\n      {\n        \"id\": 212,\n        \"body\": {\n          \"dom\": {\n            \"key_0\": false\n          },\n          \"html\": \"string\",\n          \"markdown\": \"string\",\n          \"plain\": \"string\"\n        },\n        \"user\": {\n          \"id\": 8334,\n          \"login\": \"string\",\n          \"name\": \"string\",\n          \"about_me_summary\": \"string\",\n          \"avatar\": {\n            \"tiny\": {\n              \"url\": \"https://qEFRZWAFMeD.drpvo0s6mk51O9bZ1kx5wuH7kg980icb8giht0N,T+NVXk\"\n            },\n            \"thumb\": {\n              \"url\": \"http://BkgD.suefUlVcl0NMxrTHCysFDXEnMIy5crAZaTxFUISyk4pooULzOruR5I8oETm07AyAagp,Dgx2\"\n            },\n            \"small\": {\n              \"url\": \"http://UJfjlDIcD.emtsh.W+7fkMh7HBRauj2s9U8MIPh9tPyLWzO6XQmYbJoT,pK-qH6A\"\n            },\n            \"medium\": {\n              \"url\": \"https://sJldEQPUjGbZAhMwOTxK.vxanJ+6.qVoQ1ad\"\n            }\n          },\n          \"header_image_url\": \"http://jKtrAGbWOxFpKwNGWFvRvS.mmk1PNahLuAlCiHtiAWzyQH6vOdINTlf0Ox6dFNo22VnZlPeCGwy3jRTD\",\n          \"human_readable_role_for_display\": \"string\",\n          \"iq\": 2227,\n          \"identity_provider\": \"string\",\n          \"roles_for_display\": [\n            \"string\",\n            \"string\"\n          ],\n          \"url\": \"http://mCTAbZpiNus.jpkdlp\",\n          \"api_path\": \"string\"\n        },\n        \"created_at\": \"2013-12-09T01:59:38.580Z\",\n        \"votes_total\": 8450,\n        \"has_voters\": false\n      },\n      {\n        \"id\": 7403,\n        \"body\": {\n          \"dom\": {\n            \"key_0\": false,\n            \"key_1\": 7774\n          },\n          \"html\": \"string\",\n          \"markdown\": \"string\",\n          \"plain\": \"string\"\n        },\n        \"user\": {\n          \"id\": 5474,\n          \"login\": \"string\",\n          \"name\": \"string\",\n          \"about_me_summary\": \"string\",\n          \"avatar\": {\n            \"tiny\": {\n              \"url\": \"https://iLOo.bruyLSI+,AoAcG9d.rgozYaIZH4c3ET-CTPajQDRQsBQ5heffIuD\"\n            },\n            \"thumb\": {\n              \"url\": \"https://rSHNaaZ.xxmxPXG6o+JEVRkCIjjh0HV\"\n            },\n            \"small\": {\n              \"url\": \"https://CaulaScMOgFm.lwziJf2dTlibFNAa-6RNwoU+cnm+UxL.rzUhMI9lxBVVyV3-XisgGITcz6UxnCpYqwn75\"\n            },\n            \"medium\": {\n              \"url\": \"http://ZZYddqKrvhN.segrwIkaFq6RqERxOW-X4ys2s2tR8Z-T1a,wyCfy3LjXGKfbsGoX0E\"\n            }\n          },\n          \"header_image_url\": \"http://ntPfNRYRtGIE.cjxpcuhNTwyOTQMV04Fq,jxnGBH97piAFbHsr59+G8BFi6Qsiy3MRNZUSiXu\",\n          \"human_readable_role_for_display\": \"string\",\n          \"iq\": 8659,\n          \"identity_provider\": \"string\",\n          \"roles_for_display\": [\n            \"string\",\n            \"string\"\n          ],\n          \"url\": \"http://NamrlbGyUfMFxaIN.jugochyWlM+GVq3WUNYNKQEOA-bxrfvwjpzldsoPUMGMDK9SzmAoV,Ci6\",\n          \"api_path\": \"string\"\n        },\n        \"created_at\": \"1966-05-19T01:55:03.845Z\",\n        \"votes_total\": 5320,\n        \"has_voters\": false\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9009f321-1bed-4641-894b-6abad4882869",
+          "name": "Get Song Activity",
+          "request": {
+            "name": "Get Song Activity",
+            "description": {
+              "content": "Activity stream for a song (annotations created, comments posted, edits, etc.).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "songs",
+                ":id",
+                "activity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of results per page (max 50)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page index (1-indexed)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Genius numeric song ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "me create_annotation manage_annotation vote"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.genius.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.genius.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "311f1bac-2495-4194-abf6-92e73913083a",
+              "name": "Activity feed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "songs",
+                    ":id",
+                    "activity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Genius numeric song ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\"\n  },\n  \"response\": {\n    \"activities\": [\n      {\n        \"id\": 4894,\n        \"type\": \"string\",\n        \"created_at\": \"1963-06-07T05:58:16.415Z\",\n        \"objects\": [\n          {\n            \"key_0\": 4036\n          },\n          {\n            \"key_0\": \"string\"\n          }\n        ]\n      },\n      {\n        \"id\": 5959,\n        \"type\": \"string\",\n        \"created_at\": \"2008-03-15T21:46:58.864Z\",\n        \"objects\": [\n          {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": false\n          },\n          {\n            \"key_0\": false,\n            \"key_1\": 2599.08215858343,\n            \"key_2\": false\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "96b123e3-01ba-43ab-8a3d-6a9eca29d186",
+          "name": "Get Song Contributors",
+          "request": {
+            "name": "Get Song Contributors",
+            "description": {
+              "content": "List of users who have contributed to the song (transcribers, annotators, editors).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "songs",
+                ":id",
+                "contributors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Genius numeric song ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "me create_annotation manage_annotation vote"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.genius.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.genius.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "425fe625-526b-4319-9d25-cde0837c4576",
+              "name": "Contributors",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "songs",
+                    ":id",
+                    "contributors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Genius numeric song ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\"\n  },\n  \"response\": {\n    \"contributors\": [\n      {\n        \"attribution\": 545.377168747997,\n        \"contributions\": [\n          \"string\",\n          \"string\"\n        ],\n        \"artist\": {\n          \"id\": 1421,\n          \"name\": \"Kendrick Lamar\",\n          \"url\": \"https://lMfdYdrXO.akfn7vcNV.tUZtJp-Ob,SSx.KVVUuYAY2v9sEOCy\",\n          \"api_path\": \"string\",\n          \"image_url\": \"http://WZBUzNArDmiGxIRPurBfTJzHabXW.jacVZQgFtZbnxjwzeL\",\n          \"header_image_url\": \"http://tcqUdjCmBHNHyluWImEbIXnGBZPHPdaoB.eluGyWlY0p.aTyFwOaAPWXBwodlp\",\n          \"is_meme_verified\": true,\n          \"is_verified\": true,\n          \"followers_count\": 2770,\n          \"iq\": 7121,\n          \"slug\": \"string\",\n          \"description\": {\n            \"dom\": {\n              \"key_0\": 5637.077212027706,\n              \"key_1\": \"string\"\n            },\n            \"html\": \"string\",\n            \"markdown\": \"string\",\n            \"plain\": \"string\"\n          },\n          \"alternate_names\": [\n            \"string\",\n            \"string\"\n          ],\n          \"instagram_name\": \"string\",\n          \"twitter_name\": \"string\",\n          \"facebook_name\": \"string\"\n        },\n        \"user\": {\n          \"id\": 3571,\n          \"login\": \"string\",\n          \"name\": \"string\",\n          \"about_me_summary\": \"string\",\n          \"avatar\": {\n            \"tiny\": {\n              \"url\": \"http://FxRMzAhzsl.fhduWcEcfzhV.C-9S6qvV4b9vRzcUBct..ETuTvU,yVg\"\n            },\n            \"thumb\": {\n              \"url\": \"http://ngwOdkBtBdL.cwakx+PRlpjd4eGQuKaBL3bELIW10.I+nW,,jOV43P1A\"\n            },\n            \"small\": {\n              \"url\": \"http://AZhVkEmrLBYMguvBL.skbykkOJxdcyzsEWufh65YmspopBNRC4eF,zgdf26H+thflT9NA4sIQLfb0V\"\n            },\n            \"medium\": {\n              \"url\": \"https://iQOiOwtGTrD.dgrKfpoa-yh+Wi2nqu2me7OZCy4FP5Fib4lsouHrsFgOw56xOSw2x2VJO0g5o8Ac2KS0dfEuMM72iNxKJQ5xyuH\"\n            }\n          },\n          \"header_image_url\": \"http://JB.zmwirA8el+FfX2Obrf0XL3fFipRmipl,1\",\n          \"human_readable_role_for_display\": \"string\",\n          \"iq\": 8887,\n          \"identity_provider\": \"string\",\n          \"roles_for_display\": [\n            \"string\",\n            \"string\"\n          ],\n          \"url\": \"https://pR.vhWKeu1GI8-cDj9okOxx9EvGn4g0\",\n          \"api_path\": \"string\"\n        },\n        \"pinned_role\": \"string\"\n      },\n      {\n        \"attribution\": 3873.976801609993,\n        \"contributions\": [\n          \"string\",\n          \"string\"\n        ],\n        \"artist\": {\n          \"id\": 1421,\n          \"name\": \"Kendrick Lamar\",\n          \"url\": \"http://zcJrcrTgtobssqPuwVqWCwPMKqiCuL.swDNY7lKWzS7+S8nQPQ\",\n          \"api_path\": \"string\",\n          \"image_url\": \"http://OZZWc.psNCX75CMw+khR--,eyISLTNwPzMRajkxorWW,uj6rowv90hUDmkAlUNlnlU0\",\n          \"header_image_url\": \"https://YiyMEYLOnhWpSRYMMIPLgmWyAUy.wsfoXrNwGlINNpzwkNOT-SWwINx668JtqxOocS3n\",\n          \"is_meme_verified\": true,\n          \"is_verified\": false,\n          \"followers_count\": 4978,\n          \"iq\": 5881,\n          \"slug\": \"string\",\n          \"description\": {\n            \"dom\": {\n              \"key_0\": \"string\",\n              \"key_1\": 5641,\n              \"key_2\": 1949\n            },\n            \"html\": \"string\",\n            \"markdown\": \"string\",\n            \"plain\": \"string\"\n          },\n          \"alternate_names\": [\n            \"string\",\n            \"string\"\n          ],\n          \"instagram_name\": \"string\",\n          \"twitter_name\": \"string\",\n          \"facebook_name\": \"string\"\n        },\n        \"user\": {\n          \"id\": 3740,\n          \"login\": \"string\",\n          \"name\": \"string\",\n          \"about_me_summary\": \"string\",\n          \"avatar\": {\n            \"tiny\": {\n              \"url\": \"https://AAPurOtoFdfKXD.epomNen901kSHDXosD5axlEHfmvhCToqPQgfCPFB1ntT8P\"\n            },\n            \"thumb\": {\n              \"url\": \"https://SlAdQllgTnS.zuawrvlYedVGTPE1\"\n            },\n            \"small\": {\n              \"url\": \"https://XpIvdBOnVwINhwlVHdiZFPVunXGTKR.gqkjpcwcZuOqDEUNnUH4qT9J8MzcvQ7dkku-VG5NBEG\"\n            },\n            \"medium\": {\n              \"url\": \"http://sIpUTIWQhFEsTEEflHKxu.orsiU5SlOfVEf4Q9HGpS+ilDQnxez-rciC,K9D0zMkQP644e\"\n            }\n          },\n          \"header_image_url\": \"https://x.tirmX+XbbLnHVs.Z\",\n          \"human_readable_role_for_display\": \"string\",\n          \"iq\": 8931,\n          \"identity_provider\": \"string\",\n          \"roles_for_display\": [\n            \"string\",\n            \"string\"\n          ],\n          \"url\": \"http://lMjDErSbIzXybgHLyrCh.hrtcnb8p6rvhAX6RmeDxxq.3m-IAAPJO2UiU+1eSjfAhhvpfKSSu+OR+rEugkECoChc9smKKX\",\n          \"api_path\": \"string\"\n        },\n        \"pinned_role\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.genius.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c3260822-92a6-46ca-b06a-6f0dd50516fd",
+    "name": "Genius Account Songs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Genius API exposes the Genius/Rap Genius crowdsourced music knowledge\nbase — songs, artists, albums, annotations, and referents. Responses are\nJSON. The API does NOT serve raw lyric text directly (those must be scraped\nfrom the public song page); it returns rich song, artist, album, annotation\nmetadata, scoring, and the URLs needed to locate lyrics on genius.com.\n\n\nContact Support:\n Name: Genius API Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,755 @@
+{
+  "item": [
+    {
+      "id": "e8331f3b-5ee8-4375-944f-d23ab3004cfa",
+      "name": "Albums",
+      "description": {
+        "content": "Album metadata, tracks, cover art, and leaderboards.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ffb848c6-698c-4fa8-b8c5-1ba5f0337773",
+          "name": "Get Album",
+          "request": {
+            "name": "Get Album",
+            "description": {
+              "content": "Returns album metadata including title, artist, release date, and cover art.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "albums",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "text_format",
+                  "value": "dom",
+                  "description": "Format for textual fields in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Genius numeric album ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "me create_annotation manage_annotation vote"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.genius.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.genius.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c74ef50d-216d-4770-bf02-6192b30c60c5",
+              "name": "Album details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "albums",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "text_format",
+                      "value": "dom"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Genius numeric album ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\"\n  },\n  \"response\": {\n    \"album\": {\n      \"id\": 7959,\n      \"name\": \"string\",\n      \"full_title\": \"string\",\n      \"url\": \"https://hnelNghpRkQ.icYgQLYYzTLtrjJ\",\n      \"api_path\": \"string\",\n      \"cover_art_url\": \"http://eDLJLgbJxrWJqAs.stoLE5VAuZ+tfSqK7jtOCn-vahYsD\",\n      \"cover_art_thumbnail_url\": \"https://ktMwOGCXl.ldmLeWZIPO0IuzJfSw18waa42a\",\n      \"release_date_for_display\": \"string\",\n      \"artist\": {\n        \"id\": 1421,\n        \"name\": \"Kendrick Lamar\",\n        \"url\": \"http://SABIyGopmTROaBddAZoRCBNmgoLtoSXV.cqR0S9-agr4hvzH-YKPjFS\",\n        \"api_path\": \"string\",\n        \"image_url\": \"http://bcBrvX.cqjdLSVo64GSPTwc-frH.JUqDTbJ2Vg2hSIWVNh50d\",\n        \"header_image_url\": \"https://lnGTXCvdyv.ehrjgrljH\",\n        \"is_meme_verified\": true,\n        \"is_verified\": true,\n        \"followers_count\": 1758,\n        \"iq\": 8172,\n        \"slug\": \"string\",\n        \"description\": {\n          \"dom\": {\n            \"key_0\": 821\n          },\n          \"html\": \"string\",\n          \"markdown\": \"string\",\n          \"plain\": \"string\"\n        },\n        \"alternate_names\": [\n          \"string\",\n          \"string\"\n        ],\n        \"instagram_name\": \"string\",\n        \"twitter_name\": \"string\",\n        \"facebook_name\": \"string\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bbd3ec36-10c0-4333-9afa-e6f5046c4a4d",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "albums",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "text_format",
+                      "value": "dom"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Genius numeric album ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\",\n    \"error\": \"not_found\",\n    \"error_description\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "235c8b0c-b771-4b2a-89a1-183890031b41",
+          "name": "List Album Tracks",
+          "request": {
+            "name": "List Album Tracks",
+            "description": {
+              "content": "Returns the album's tracklist in order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "albums",
+                ":id",
+                "tracks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of results per page (max 50)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page index (1-indexed)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Genius numeric album ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "me create_annotation manage_annotation vote"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.genius.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.genius.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b1ea7629-ac40-414a-b3e2-0cb1d5cfc859",
+              "name": "Tracks",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "albums",
+                    ":id",
+                    "tracks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Genius numeric album ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\"\n  },\n  \"response\": {\n    \"tracks\": [\n      {\n        \"number\": 4836,\n        \"song\": {\n          \"id\": 378195,\n          \"title\": \"Alright\",\n          \"title_with_featured\": \"string\",\n          \"full_title\": \"Alright by Kendrick Lamar\",\n          \"artist_names\": \"string\",\n          \"primary_artist\": {\n            \"id\": 1421,\n            \"name\": \"Kendrick Lamar\",\n            \"url\": \"http://JTrpFJfGphBYpAW.eaciblvJvKhgOXSh,478tyteITCV.M7gkDSxDNch1le6J1D4IrLIZ+NOhJvgFvA2LL2CQSpGS-fCo-i\",\n            \"api_path\": \"string\",\n            \"image_url\": \"https://NCujzDLTntvtwkZa.lnXd+Zsr\",\n            \"header_image_url\": \"https://kVoSTaYSNDbOlKGJrKZuFFMigMD.axzRVbDjidt1C\",\n            \"is_meme_verified\": true,\n            \"is_verified\": true,\n            \"followers_count\": 4100,\n            \"iq\": 5262,\n            \"slug\": \"string\",\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"alternate_names\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"instagram_name\": \"string\",\n            \"twitter_name\": \"string\",\n            \"facebook_name\": \"string\"\n          },\n          \"featured_artists\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"api_path\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"header_image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_meme_verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"followers_count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iq\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"slug\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"alternate_names\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"instagram_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"twitter_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"facebook_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"api_path\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"header_image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_meme_verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"followers_count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iq\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"slug\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"alternate_names\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"instagram_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"twitter_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"facebook_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"album\": {\n            \"id\": 3617,\n            \"name\": \"string\",\n            \"full_title\": \"string\",\n            \"url\": \"https://zUy.uxeaVwZdsB6m\",\n            \"api_path\": \"string\",\n            \"cover_art_url\": \"https://QjMxWlEQXAcggEJAgPwaZQCRXB.jxTBAVVj,-XqlP6+AJ-puXkrI6r,nD.oYcI,4c-lqAoArholleaBbfI+tRq3Ao\",\n            \"cover_art_thumbnail_url\": \"http://sTKDFggsZtEKUcmluFGvuEwprutgw.dibkZSlAj7hAaIx1Lp48L\",\n            \"release_date_for_display\": \"string\",\n            \"artist\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"url\": \"https://xMuFt.ijY1aJnMR6rYRa-pqRQj5VtmzLLLBpwTRUOntb3bG\",\n          \"path\": \"string\",\n          \"release_date\": \"1978-05-14\",\n          \"release_date_for_display\": \"string\",\n          \"song_art_image_url\": \"https://QgwXVFCORPJmtZQs.gsujfa.hqanWcz,ft6zp-Ybsp1t1mc63vdiquUZF,MIyCZowZELoL\",\n          \"song_art_image_thumbnail_url\": \"https://TJtdvbfOtvzhLtxfZXtcI.lobcjU+67l4r2C7\",\n          \"header_image_url\": \"http://sWvlGub.xpkpLOHiaaxiBWcSpDlu4USFdNxQu6dm79TIUmFW1IP,9XATmbY\",\n          \"header_image_thumbnail_url\": \"http://PnzMFcTZzXSjXAyEzZlkCAA.gpezM+9Votu0qimL3zpcBeDUfvTeh5FyF\",\n          \"lyrics_state\": \"string\",\n          \"lyrics_owner_id\": 2314,\n          \"annotation_count\": 5871,\n          \"api_path\": \"string\",\n          \"pyongs_count\": 4377,\n          \"stats\": {\n            \"unreviewed_annotations\": 8916,\n            \"hot\": true,\n            \"pageviews\": 8116\n          },\n          \"media\": [\n            {\n              \"provider\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"start\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"native_uri\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"provider\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"start\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"native_uri\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"description\": {\n            \"dom\": {\n              \"key_0\": 2915,\n              \"key_1\": 9327\n            },\n            \"html\": \"string\",\n            \"markdown\": \"string\",\n            \"plain\": \"string\"\n          },\n          \"description_annotation\": {\n            \"id\": 6037,\n            \"annotator_id\": 1058,\n            \"annotator_login\": \"string\",\n            \"api_path\": \"string\",\n            \"classification\": \"accepted\",\n            \"fragment\": \"string\",\n            \"is_description\": false,\n            \"path\": \"string\",\n            \"range\": {\n              \"key_0\": 5159,\n              \"key_1\": 4995\n            },\n            \"song_id\": 2072,\n            \"url\": \"http://hMA.xvcnl9TXThv+u8y3-dU\",\n            \"verified_annotator_ids\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"annotatable\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"annotations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"recording_location\": \"string\",\n          \"producer_artists\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"api_path\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"header_image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_meme_verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"followers_count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iq\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"slug\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"alternate_names\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"instagram_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"twitter_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"facebook_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"api_path\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"header_image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_meme_verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"followers_count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iq\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"slug\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"alternate_names\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"instagram_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"twitter_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"facebook_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"writer_artists\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"api_path\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"header_image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_meme_verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"followers_count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iq\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"slug\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"alternate_names\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"instagram_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"twitter_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"facebook_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"api_path\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"header_image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_meme_verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"followers_count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iq\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"slug\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"alternate_names\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"instagram_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"twitter_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"facebook_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      },\n      {\n        \"number\": 2506,\n        \"song\": {\n          \"id\": 378195,\n          \"title\": \"Alright\",\n          \"title_with_featured\": \"string\",\n          \"full_title\": \"Alright by Kendrick Lamar\",\n          \"artist_names\": \"string\",\n          \"primary_artist\": {\n            \"id\": 1421,\n            \"name\": \"Kendrick Lamar\",\n            \"url\": \"https://iMsKz.gyLsw2qVjICk+zgeYdmKQZa5+\",\n            \"api_path\": \"string\",\n            \"image_url\": \"https://JaEFVaFOWFx.ffNmx6nCk6x9mNsQr\",\n            \"header_image_url\": \"http://jMxrM.ednSvGJGu174X2wllPccVlNkQBqn66ioz+Xqf51keYvt\",\n            \"is_meme_verified\": false,\n            \"is_verified\": false,\n            \"followers_count\": 2731,\n            \"iq\": 9902,\n            \"slug\": \"string\",\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"alternate_names\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"instagram_name\": \"string\",\n            \"twitter_name\": \"string\",\n            \"facebook_name\": \"string\"\n          },\n          \"featured_artists\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"api_path\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"header_image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_meme_verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"followers_count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iq\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"slug\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"alternate_names\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"instagram_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"twitter_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"facebook_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"api_path\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"header_image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_meme_verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"followers_count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iq\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"slug\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"alternate_names\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"instagram_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"twitter_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"facebook_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"album\": {\n            \"id\": 9873,\n            \"name\": \"string\",\n            \"full_title\": \"string\",\n            \"url\": \"http://acay.qdjsBl7yLICnzo-b\",\n            \"api_path\": \"string\",\n            \"cover_art_url\": \"https://tDhPeqLDJgolLloicUFVSErRVC.tridAd+OZJDVvjSjUuer91\",\n            \"cover_art_thumbnail_url\": \"http://wqrutMKiiupKHeHe.pjdqYdjLBI8kxAauFVlI1ZhOxovxd\",\n            \"release_date_for_display\": \"string\",\n            \"artist\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"url\": \"http://KtkxmVWT.btfJOBUegmFcJuGehcB.TWRySit83JKM8yTsjsFKWiUgoA5O4nUpKl,gyBc221AX6z\",\n          \"path\": \"string\",\n          \"release_date\": \"1973-02-03\",\n          \"release_date_for_display\": \"string\",\n          \"song_art_image_url\": \"https://MAvqDtAcMkbQ.ycsfVKygv-KQm\",\n          \"song_art_image_thumbnail_url\": \"https://HMbpfxxOPblPdhwfbbJzNpqSYkdeFui.wzvgddA0GGrBv,uNHhXCW\",\n          \"header_image_url\": \"https://fwAIkSHedizwRFCxwnuDDCVQM.teoCm,YT4b+Lh-Qv6fZb-HFZtULHvCFR+xE,QDP2tv6-9\",\n          \"header_image_thumbnail_url\": \"https://gEkhXmaHlq.ewgcqCT34NxfbUwjWEfP\",\n          \"lyrics_state\": \"string\",\n          \"lyrics_owner_id\": 8847,\n          \"annotation_count\": 7526,\n          \"api_path\": \"string\",\n          \"pyongs_count\": 9989,\n          \"stats\": {\n            \"unreviewed_annotations\": 4884,\n            \"hot\": true,\n            \"pageviews\": 2780\n          },\n          \"media\": [\n            {\n              \"provider\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"start\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"native_uri\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"provider\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"start\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"native_uri\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"description\": {\n            \"dom\": {\n              \"key_0\": 2875.7678313206225,\n              \"key_1\": 8855,\n              \"key_2\": 3364.1201970799316\n            },\n            \"html\": \"string\",\n            \"markdown\": \"string\",\n            \"plain\": \"string\"\n          },\n          \"description_annotation\": {\n            \"id\": 8943,\n            \"annotator_id\": 9878,\n            \"annotator_login\": \"string\",\n            \"api_path\": \"string\",\n            \"classification\": \"accepted\",\n            \"fragment\": \"string\",\n            \"is_description\": false,\n            \"path\": \"string\",\n            \"range\": {\n              \"key_0\": \"string\",\n              \"key_1\": true,\n              \"key_2\": 7331.075153420063\n            },\n            \"song_id\": 7841,\n            \"url\": \"https://jinjUYCIaoiFtDcYcKuAmojqk.qrlsFBHIW\",\n            \"verified_annotator_ids\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"annotatable\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"annotations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"recording_location\": \"string\",\n          \"producer_artists\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"api_path\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"header_image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_meme_verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"followers_count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iq\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"slug\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"alternate_names\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"instagram_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"twitter_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"facebook_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"api_path\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"header_image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_meme_verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"followers_count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iq\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"slug\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"alternate_names\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"instagram_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"twitter_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"facebook_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"writer_artists\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"api_path\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"header_image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_meme_verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"followers_count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iq\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"slug\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"alternate_names\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"instagram_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"twitter_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"facebook_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"api_path\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"header_image_url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_meme_verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_verified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"followers_count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iq\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"slug\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"alternate_names\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"instagram_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"twitter_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"facebook_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1f9d54cf-abe5-466f-9d49-3e965db0a5ff",
+          "name": "Get Album Comments",
+          "request": {
+            "name": "Get Album Comments",
+            "description": {
+              "content": "Comments left on the album page.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "albums",
+                ":id",
+                "comments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of results per page (max 50)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page index (1-indexed)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Genius numeric album ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "me create_annotation manage_annotation vote"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.genius.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.genius.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6dd86ae7-bb1b-40c1-9c62-96dc22622b23",
+              "name": "Album comments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "albums",
+                    ":id",
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Genius numeric album ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\"\n  },\n  \"response\": {\n    \"comments\": [\n      {\n        \"id\": 2430,\n        \"body\": {\n          \"dom\": {\n            \"key_0\": \"string\",\n            \"key_1\": 9546.563172329219\n          },\n          \"html\": \"string\",\n          \"markdown\": \"string\",\n          \"plain\": \"string\"\n        },\n        \"user\": {\n          \"id\": 652,\n          \"login\": \"string\",\n          \"name\": \"string\",\n          \"about_me_summary\": \"string\",\n          \"avatar\": {\n            \"tiny\": {\n              \"url\": \"http://OMBlzxgDWtWyd.jslzo1eXXRsNC0RYpdKXJ4O-W77cwqCgFYqv6CkyCB0f2-FjG\"\n            },\n            \"thumb\": {\n              \"url\": \"https://XFSTUsqVInxxWXdgGBBdwdMKlZ.nibi0MxySXm4-hrr+l05P7q3TiBu+dkHRdodJVcxofs2F8mgLv+HHuT,2eQhQdTalEjwo3RbtOoaS2cXIKNOSDuy4MYn\"\n            },\n            \"small\": {\n              \"url\": \"https://CL.uvfKPjriQvaGS\"\n            },\n            \"medium\": {\n              \"url\": \"http://nOFGVUorlnmvTvZQPyuJ.rhXjRalO+3C6AWXEJglJo6m33DnGhuYCRZNc5gIdodm9E\"\n            }\n          },\n          \"header_image_url\": \"https://uPmSbcbzzPjcuJnhTSUiBzCNOa.rmxdDZNlggMWkxTe-xDFK-vosUzm365\",\n          \"human_readable_role_for_display\": \"string\",\n          \"iq\": 8610,\n          \"identity_provider\": \"string\",\n          \"roles_for_display\": [\n            \"string\",\n            \"string\"\n          ],\n          \"url\": \"https://gEOgxRTE.btsfI0lFpLilbAZCl-ekdz90\",\n          \"api_path\": \"string\"\n        },\n        \"created_at\": \"1977-06-26T11:40:13.578Z\",\n        \"votes_total\": 1329,\n        \"has_voters\": true\n      },\n      {\n        \"id\": 535,\n        \"body\": {\n          \"dom\": {\n            \"key_0\": true\n          },\n          \"html\": \"string\",\n          \"markdown\": \"string\",\n          \"plain\": \"string\"\n        },\n        \"user\": {\n          \"id\": 1393,\n          \"login\": \"string\",\n          \"name\": \"string\",\n          \"about_me_summary\": \"string\",\n          \"avatar\": {\n            \"tiny\": {\n              \"url\": \"https://VdgFxUmOERvZJjev.dqsgRx7GRMMN4jlOs8NP6Maaarg1NExzNROKj6TIa6S1.QvnsqWQ7jl\"\n            },\n            \"thumb\": {\n              \"url\": \"http://bEEAhQMfpCTShuhIQSBGW.mxdsDNh+oyLJ6BwwF80bKWtiya6mZj,Ed\"\n            },\n            \"small\": {\n              \"url\": \"http://maFreduJbofkCNpmywTigeHxsK.grzQsw.dxRHp7rc.BAQzcp6\"\n            },\n            \"medium\": {\n              \"url\": \"http://eRYYldZFeEbQJsJIWUIUVZz.fwtdV-bi63xHM-yLJ4vfyZzo+-B\"\n            }\n          },\n          \"header_image_url\": \"http://gBxbbanLGhtfdZUXoKQVKpBSSMAouNqjg.ipawlhVYiUhop\",\n          \"human_readable_role_for_display\": \"string\",\n          \"iq\": 7816,\n          \"identity_provider\": \"string\",\n          \"roles_for_display\": [\n            \"string\",\n            \"string\"\n          ],\n          \"url\": \"https://QzjDpNOKT.vdjmj0loFrwjszTu-KhaWAMESfIhiKs64YJ3wnyXTt55.+IMfoTI4dxcELamDjc7KE2HdINg-jVVCMDR+LuakXCdrQvwIEfS\",\n          \"api_path\": \"string\"\n        },\n        \"created_at\": \"1949-05-14T10:15:10.721Z\",\n        \"votes_total\": 221,\n        \"has_voters\": true\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd1d4a74-1c03-4077-adb2-00a2884cd3b2",
+          "name": "Get Album Cover Arts",
+          "request": {
+            "name": "Get Album Cover Arts",
+            "description": {
+              "content": "Returns all cover-art images attached to the album.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "albums",
+                ":id",
+                "cover_arts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Genius numeric album ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "me create_annotation manage_annotation vote"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.genius.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.genius.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "04582e77-2272-47d7-b40d-acd09b10255c",
+              "name": "Cover arts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "albums",
+                    ":id",
+                    "cover_arts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Genius numeric album ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\"\n  },\n  \"response\": {\n    \"cover_arts\": [\n      {\n        \"id\": 6420,\n        \"image_url\": \"http://RoY.nicaPhcO.,HYze8XqAo,Sac631A0AOe.+pAJ-,Hm8c\",\n        \"thumbnail_image_url\": \"https://vehtqtjpGepuhbjLIp.ygvl6csZI8SsTpxxfoZiRCYsExA1ZNARXNttm7xu91mPxu18cB\",\n        \"annotated\": true,\n        \"api_path\": \"string\"\n      },\n      {\n        \"id\": 3821,\n        \"image_url\": \"http://DsiNZHYJiQEMRfaQHor.tirYs+2y8YikVztb,ZW0BOf.Y6+mFFwMzUGOT9V4Wn3nbgJ5M.BBP1.j\",\n        \"thumbnail_image_url\": \"http://mXfLnHvdUKKTIxX.wvoqeOkiCQZz7oVNpUv6X1HxDY1x8kW9PkL3m+4k6faB,r6.l\",\n        \"annotated\": true,\n        \"api_path\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c364c1d7-33bd-46ce-805a-08e8b68270e9",
+          "name": "Get Album Leaderboard",
+          "request": {
+            "name": "Get Album Leaderboard",
+            "description": {
+              "content": "Top contributors to the album.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "albums",
+                ":id",
+                "leaderboard"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of results per page (max 50)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page index (1-indexed)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Genius numeric album ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "me create_annotation manage_annotation vote"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.genius.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.genius.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fca380f1-415c-40c4-a1c0-ecd885a38a14",
+              "name": "Leaderboard",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "albums",
+                    ":id",
+                    "leaderboard"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Genius numeric album ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\"\n  },\n  \"response\": {\n    \"leaderboard\": [\n      {\n        \"attribution\": 4621.610856648925,\n        \"user\": {\n          \"id\": 1913,\n          \"login\": \"string\",\n          \"name\": \"string\",\n          \"about_me_summary\": \"string\",\n          \"avatar\": {\n            \"tiny\": {\n              \"url\": \"http://snKdJlLppxUx.aufuXIL1v1BI4X\"\n            },\n            \"thumb\": {\n              \"url\": \"http://XlWgugJXRpZeoHzjvyfsLj.pliwZlgwhYEy+j.6eqYlt0-AAKDd1L+xqoHAtmTCk8B2qgTBRvUsMtKITn\"\n            },\n            \"small\": {\n              \"url\": \"https://GMwKeuQWDimCSmfNQle.swStLdnUSZ6NT6NXkrZOYOdK\"\n            },\n            \"medium\": {\n              \"url\": \"http://pOpmyYrwoKLX.zcFgv0vD9K2eqLB47hTtEep1ReXE9CZHTlHyGX\"\n            }\n          },\n          \"header_image_url\": \"http://FgkAfKfLFfuPckGLqcxlHAaxPCnAigkau.tfx2Du.iInJqpkPZjpD3,xJns132AjFKJpNJBRBOOspJmtZMh4q.j3X\",\n          \"human_readable_role_for_display\": \"string\",\n          \"iq\": 1320,\n          \"identity_provider\": \"string\",\n          \"roles_for_display\": [\n            \"string\",\n            \"string\"\n          ],\n          \"url\": \"http://bmYJKDBOUsC.kmtIAIpeyiUGc5kFXV\",\n          \"api_path\": \"string\"\n        }\n      },\n      {\n        \"attribution\": 8993.656849410725,\n        \"user\": {\n          \"id\": 6542,\n          \"login\": \"string\",\n          \"name\": \"string\",\n          \"about_me_summary\": \"string\",\n          \"avatar\": {\n            \"tiny\": {\n              \"url\": \"http://CNRWduQFKSqvtXKJ.ctmzxTS.dwmSOhp1sVdM-nnFcohwRFiwG5iOcKjG-\"\n            },\n            \"thumb\": {\n              \"url\": \"http://wqtRZBHN.ojNxH.epAqeK27efNRUseVjaM6urvwmjrsPiGnjuaCYFYHSTEBcNOHrYFZS\"\n            },\n            \"small\": {\n              \"url\": \"http://ynJnRsZYqaMhNzM.fdDV4J,sO4v9afHyN6l2mzIcuhhxarfXviEdXk+FjQGoshzLyes81wh6h+Ilpc8YF\"\n            },\n            \"medium\": {\n              \"url\": \"https://KYPsqsAsqvZRDJJyQXQPDFfkrM.ongzLfnvIYSfvGZeH\"\n            }\n          },\n          \"header_image_url\": \"http://qNbapeducEZeAwRNZ.qzqpMy.klQKHLRuKL395CjmUV0DftYSxQxwPLEka+\",\n          \"human_readable_role_for_display\": \"string\",\n          \"iq\": 9573,\n          \"identity_provider\": \"string\",\n          \"roles_for_display\": [\n            \"string\",\n            \"string\"\n          ],\n          \"url\": \"http://KdzFViRPNurPqiaWFJvw.tgteHqWs-Kw6aqUbqXHj8WP-4NSj+hD\",\n          \"api_path\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.genius.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2c213046-4c0d-4fd0-a4bb-4a08f79d73a3",
+    "name": "Genius Account Albums API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Genius API exposes the Genius/Rap Genius crowdsourced music knowledge\nbase — songs, artists, albums, annotations, and referents. Responses are\nJSON. The API does NOT serve raw lyric text directly (those must be scraped\nfrom the public song page); it returns rich song, artist, album, annotation\nmetadata, scoring, and the URLs needed to locate lyrics on genius.com.\n\n\nContact Support:\n Name: Genius API Support",
+      "type": "text/plain"
+    }
+  }
+}

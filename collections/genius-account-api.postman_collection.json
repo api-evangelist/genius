@@ -1,0 +1,190 @@
+{
+  "item": [
+    {
+      "id": "5ec6a53c-a9bd-4b88-8511-f7ef7457d2a9",
+      "name": "Account",
+      "description": {
+        "content": "Authenticated user account.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "67c55698-5c05-4f64-bf4f-ff76b4bea5b7",
+          "name": "Get Current Account",
+          "request": {
+            "name": "Get Current Account",
+            "description": {
+              "content": "Returns details about the authenticated user. Requires the `me` scope.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "account"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "text_format",
+                  "value": "dom",
+                  "description": "Format for textual fields in the response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "me create_annotation manage_annotation vote"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.genius.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.genius.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "99723fdd-c66b-4030-b161-efe2f0ccb200",
+              "name": "Account details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "text_format",
+                      "value": "dom"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\"\n  },\n  \"response\": {\n    \"user\": {\n      \"id\": 9141,\n      \"login\": \"string\",\n      \"name\": \"string\",\n      \"about_me_summary\": \"string\",\n      \"avatar\": {\n        \"tiny\": {\n          \"url\": \"https://Ec.ymQLSPUCx6sY\"\n        },\n        \"thumb\": {\n          \"url\": \"http://gEXfiJrvspTG.ksdJAfkSJaqIquPZC-IVJQWBUceQ9nsSDTZz2uXXNmmoA5IpsUkxv+lWsRYc8C0nD5pS\"\n        },\n        \"small\": {\n          \"url\": \"http://WmAtuupcDoEqFxWIQVyXTqiXAMK.ftyWW8rEuduqUE2HYm7w1cCxyBaNOkjliEgZ7arkBy3XiUpoZSo\"\n        },\n        \"medium\": {\n          \"url\": \"https://yDzIsZrIMGneuTPXHalFMvJakdxYAupfY.nsafCG,G6gMEXJk16Kp.bUlZN2bZqa4lYAK8h\"\n        }\n      },\n      \"header_image_url\": \"http://PtIMiJzOOLxHyADzwNofI.wrnC,FlLswd+jcpjtdKcsgD7NQa.mTyV1u\",\n      \"human_readable_role_for_display\": \"string\",\n      \"iq\": 3478,\n      \"identity_provider\": \"string\",\n      \"roles_for_display\": [\n        \"string\",\n        \"string\"\n      ],\n      \"url\": \"http://c.kmkVTx6okORcguDN8suiv28rGPdXeYC9s4H0e8Wmzh,F27RxkF3k1Fk0VGptej+-VFMPl,96BzzPVZA\",\n      \"api_path\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99231b24-ded2-4b20-b201-958db1308efc",
+              "name": "Missing or invalid access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "text_format",
+                      "value": "dom"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status\": 200,\n    \"message\": \"string\",\n    \"error\": \"not_found\",\n    \"error_description\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.genius.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8de653f3-fb3c-4386-9e0a-6369e85f4a50",
+    "name": "Genius Account API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Genius API exposes the Genius/Rap Genius crowdsourced music knowledge\nbase — songs, artists, albums, annotations, and referents. Responses are\nJSON. The API does NOT serve raw lyric text directly (those must be scraped\nfrom the public song page); it returns rich song, artist, album, annotation\nmetadata, scoring, and the URLs needed to locate lyrics on genius.com.\n\n\nContact Support:\n Name: Genius API Support",
+      "type": "text/plain"
+    }
+  }
+}

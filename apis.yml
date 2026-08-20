@@ -517,6 +517,8 @@ apis:
   humanURL: https://docs.genius.com/
   baseURL: https://api.genius.com
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI

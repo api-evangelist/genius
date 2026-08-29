@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Genius Account Referents API
   description: 'The Genius API exposes the Genius/Rap Genius crowdsourced music knowledge
@@ -106,6 +106,36 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    PerPage:
+      name: per_page
+      in: query
+      description: Number of results per page (max 50).
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 20
+    TextFormat:
+      name: text_format
+      in: query
+      description: Format for textual fields in the response.
+      schema:
+        type: string
+        enum:
+        - dom
+        - html
+        - markdown
+        - plain
+        default: dom
+    Page:
+      name: page
+      in: query
+      description: Page index (1-indexed).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
   schemas:
     RichText:
       type: object
@@ -124,23 +154,75 @@ components:
           type: string
         plain:
           type: string
-    ErrorResponse:
+    Annotation:
       type: object
       properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          - type: object
-            properties:
-              error:
-                type: string
-                description: Short machine error code.
-                example: not_found
-              error_description:
-                type: string
-                description: Human-readable error description.
-      required:
-      - meta
+        id:
+          type: integer
+        api_path:
+          type: string
+        body:
+          $ref: '#/components/schemas/RichText'
+        comment_count:
+          type: integer
+        community:
+          type: boolean
+          description: True if the annotation was authored by the community rather than an artist or editor.
+        custom_preview:
+          type:
+          - string
+          - 'null'
+        has_voters:
+          type: boolean
+        votes_total:
+          type: integer
+        verified:
+          type: boolean
+          description: True if the annotation has been verified by a trusted editor or artist.
+        verified_by:
+          $ref: '#/components/schemas/User'
+        state:
+          type: string
+          enum:
+          - accepted
+          - pending
+          - deleted
+          - needs_exegesis
+        url:
+          type: string
+          format: uri
+        share_url:
+          type: string
+          format: uri
+        source:
+          type:
+          - string
+          - 'null'
+        pinned:
+          type: boolean
+        cosigned_by:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        authors:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnnotationAuthor'
+        created_at:
+          type: string
+          format: date-time
+    AnnotationAuthor:
+      type: object
+      properties:
+        attribution:
+          type: number
+          format: float
+        pinned_role:
+          type:
+          - string
+          - 'null'
+        user:
+          $ref: '#/components/schemas/User'
     Meta:
       type: object
       description: Wrapper metadata included on every response.
@@ -154,18 +236,26 @@ components:
           description: Optional human-readable status message.
       required:
       - status
-    ReferentListResponse:
+    Annotatable:
       type: object
       properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        response:
-          type: object
-          properties:
-            referents:
-              type: array
-              items:
-                $ref: '#/components/schemas/Referent'
+        id:
+          type: integer
+        type:
+          type: string
+          example: song
+        title:
+          type: string
+        url:
+          type: string
+          format: uri
+        api_path:
+          type: string
+        image_url:
+          type: string
+          format: uri
+        context:
+          type: string
     Referent:
       type: object
       description: A referent is a fragment of text on a page that one or more annotations are attached to.
@@ -193,8 +283,9 @@ components:
           additionalProperties: true
           description: DOM range describing the location of the fragment on the source page.
         song_id:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         url:
           type: string
           format: uri
@@ -208,61 +299,35 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Annotation'
-    Annotation:
+    ErrorResponse:
       type: object
       properties:
-        id:
-          type: integer
-        api_path:
-          type: string
-        body:
-          $ref: '#/components/schemas/RichText'
-        comment_count:
-          type: integer
-        community:
-          type: boolean
-          description: True if the annotation was authored by the community rather than an artist or editor.
-        custom_preview:
-          type: string
-          nullable: true
-        has_voters:
-          type: boolean
-        votes_total:
-          type: integer
-        verified:
-          type: boolean
-          description: True if the annotation has been verified by a trusted editor or artist.
-        verified_by:
-          $ref: '#/components/schemas/User'
-        state:
-          type: string
-          enum:
-          - accepted
-          - pending
-          - deleted
-          - needs_exegesis
-        url:
-          type: string
-          format: uri
-        share_url:
-          type: string
-          format: uri
-        source:
-          type: string
-          nullable: true
-        pinned:
-          type: boolean
-        cosigned_by:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
-        authors:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnnotationAuthor'
-        created_at:
-          type: string
-          format: date-time
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          - type: object
+            properties:
+              error:
+                type: string
+                description: Short machine error code.
+                example: not_found
+              error_description:
+                type: string
+                description: Human-readable error description.
+      required:
+      - meta
+    ReferentListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            referents:
+              type: array
+              items:
+                $ref: '#/components/schemas/Referent'
     User:
       type: object
       properties:
@@ -273,8 +338,9 @@ components:
         name:
           type: string
         about_me_summary:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         avatar:
           type: object
           properties:
@@ -306,13 +372,15 @@ components:
           type: string
           format: uri
         human_readable_role_for_display:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         iq:
           type: integer
         identity_provider:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         roles_for_display:
           type: array
           items:
@@ -322,76 +390,15 @@ components:
           format: uri
         api_path:
           type: string
-    Annotatable:
-      type: object
-      properties:
-        id:
-          type: integer
-        type:
-          type: string
-          example: song
-        title:
-          type: string
-        url:
-          type: string
-          format: uri
-        api_path:
-          type: string
-        image_url:
-          type: string
-          format: uri
-        context:
-          type: string
-    AnnotationAuthor:
-      type: object
-      properties:
-        attribution:
-          type: number
-          format: float
-        pinned_role:
-          type: string
-          nullable: true
-        user:
-          $ref: '#/components/schemas/User'
-  parameters:
-    PerPage:
-      name: per_page
-      in: query
-      description: Number of results per page (max 50).
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 50
-        default: 20
-    Page:
-      name: page
-      in: query
-      description: Page index (1-indexed).
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-    TextFormat:
-      name: text_format
-      in: query
-      description: Format for textual fields in the response.
-      schema:
-        type: string
-        enum:
-        - dom
-        - html
-        - markdown
-        - plain
-        default: dom
   responses:
-    NotFound:
-      description: Resource not found.
+    BadRequest:
+      description: Malformed request.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Malformed request.
+    NotFound:
+      description: Resource not found.
       content:
         application/json:
           schema:

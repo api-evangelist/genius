@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Genius Account API
   description: 'The Genius API exposes the Genius/Rap Genius crowdsourced music knowledge
@@ -54,13 +54,19 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: Missing or invalid access token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    TextFormat:
+      name: text_format
+      in: query
+      description: Format for textual fields in the response.
+      schema:
+        type: string
+        enum:
+        - dom
+        - html
+        - markdown
+        - plain
+        default: dom
   schemas:
     AccountResponse:
       type: object
@@ -85,6 +91,23 @@ components:
           description: Optional human-readable status message.
       required:
       - status
+    ErrorResponse:
+      type: object
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          - type: object
+            properties:
+              error:
+                type: string
+                description: Short machine error code.
+                example: not_found
+              error_description:
+                type: string
+                description: Human-readable error description.
+      required:
+      - meta
     User:
       type: object
       properties:
@@ -95,8 +118,9 @@ components:
         name:
           type: string
         about_me_summary:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         avatar:
           type: object
           properties:
@@ -128,13 +152,15 @@ components:
           type: string
           format: uri
         human_readable_role_for_display:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         iq:
           type: integer
         identity_provider:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         roles_for_display:
           type: array
           items:
@@ -144,36 +170,13 @@ components:
           format: uri
         api_path:
           type: string
-    ErrorResponse:
-      type: object
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          - type: object
-            properties:
-              error:
-                type: string
-                description: Short machine error code.
-                example: not_found
-              error_description:
-                type: string
-                description: Human-readable error description.
-      required:
-      - meta
-  parameters:
-    TextFormat:
-      name: text_format
-      in: query
-      description: Format for textual fields in the response.
-      schema:
-        type: string
-        enum:
-        - dom
-        - html
-        - markdown
-        - plain
-        default: dom
+  responses:
+    Unauthorized:
+      description: Missing or invalid access token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     GeniusOAuth2:
       type: oauth2

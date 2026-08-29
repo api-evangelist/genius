@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Genius Account Web Pages API
   description: 'The Genius API exposes the Genius/Rap Genius crowdsourced music knowledge
@@ -77,19 +77,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    BadRequest:
-      description: Malformed request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     WebPage:
       type: object
@@ -111,9 +98,10 @@ components:
         annotation_count:
           type: integer
         canonical_url:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uri
-          nullable: true
         normalized_url:
           type: string
           format: uri
@@ -134,16 +122,6 @@ components:
                 description: Human-readable error description.
       required:
       - meta
-    WebPageResponse:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        response:
-          type: object
-          properties:
-            web_page:
-              $ref: '#/components/schemas/WebPage'
     Meta:
       type: object
       description: Wrapper metadata included on every response.
@@ -157,6 +135,29 @@ components:
           description: Optional human-readable status message.
       required:
       - status
+    WebPageResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            web_page:
+              $ref: '#/components/schemas/WebPage'
+  responses:
+    BadRequest:
+      description: Malformed request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     GeniusOAuth2:
       type: oauth2

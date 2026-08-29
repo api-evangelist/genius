@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Genius Account Users API
   description: 'The Genius API exposes the Genius/Rap Genius crowdsourced music knowledge
@@ -91,7 +91,65 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    PerPage:
+      name: per_page
+      in: query
+      description: Number of results per page (max 50).
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 20
+    TextFormat:
+      name: text_format
+      in: query
+      description: Format for textual fields in the response.
+      schema:
+        type: string
+        enum:
+        - dom
+        - html
+        - markdown
+        - plain
+        default: dom
+    UserId:
+      name: id
+      in: path
+      required: true
+      description: Genius numeric user ID.
+      schema:
+        type: integer
+        example: 1
+    Page:
+      name: page
+      in: query
+      description: Page index (1-indexed).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    Meta:
+      type: object
+      description: Wrapper metadata included on every response.
+      properties:
+        status:
+          type: integer
+          description: HTTP status code echoed in the payload.
+          example: 200
+        message:
+          type: string
+          description: Optional human-readable status message.
+      required:
+      - status
     ErrorResponse:
       type: object
       properties:
@@ -109,19 +167,40 @@ components:
                 description: Human-readable error description.
       required:
       - meta
-    Meta:
+    UserResponse:
       type: object
-      description: Wrapper metadata included on every response.
       properties:
-        status:
-          type: integer
-          description: HTTP status code echoed in the payload.
-          example: 200
-        message:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            user:
+              $ref: '#/components/schemas/User'
+    UserContributionListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            contribution_groups:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContributionGroup'
+    ContributionGroup:
+      type: object
+      properties:
+        contribution_type:
           type: string
-          description: Optional human-readable status message.
-      required:
-      - status
+        total:
+          type: integer
+        contributions:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
     User:
       type: object
       properties:
@@ -132,8 +211,9 @@ components:
         name:
           type: string
         about_me_summary:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         avatar:
           type: object
           properties:
@@ -165,13 +245,15 @@ components:
           type: string
           format: uri
         human_readable_role_for_display:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         iq:
           type: integer
         identity_provider:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         roles_for_display:
           type: array
           items:
@@ -181,85 +263,6 @@ components:
           format: uri
         api_path:
           type: string
-    UserResponse:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        response:
-          type: object
-          properties:
-            user:
-              $ref: '#/components/schemas/User'
-    ContributionGroup:
-      type: object
-      properties:
-        contribution_type:
-          type: string
-        total:
-          type: integer
-        contributions:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-    UserContributionListResponse:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        response:
-          type: object
-          properties:
-            contribution_groups:
-              type: array
-              items:
-                $ref: '#/components/schemas/ContributionGroup'
-  parameters:
-    UserId:
-      name: id
-      in: path
-      required: true
-      description: Genius numeric user ID.
-      schema:
-        type: integer
-        example: 1
-    Page:
-      name: page
-      in: query
-      description: Page index (1-indexed).
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-    PerPage:
-      name: per_page
-      in: query
-      description: Number of results per page (max 50).
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 50
-        default: 20
-    TextFormat:
-      name: text_format
-      in: query
-      description: Format for textual fields in the response.
-      schema:
-        type: string
-        enum:
-        - dom
-        - html
-        - markdown
-        - plain
-        default: dom
-  responses:
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     GeniusOAuth2:
       type: oauth2

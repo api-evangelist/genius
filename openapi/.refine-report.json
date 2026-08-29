@@ -25,6 +25,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "genius-account-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "genius-albums-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "genius-annotations-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "genius-artists-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "genius-referents-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "genius-search-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "genius-songs-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "genius-users-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "genius-web-pages-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }

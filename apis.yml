@@ -5,6 +5,18 @@ description: >-
   artists, albums, annotations, referents, and contributors. Raw lyric text is not served by the API; consumers receive
   the public song page URL and scrape lyrics from there.
 url: https://docs.genius.com/
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: self-serve

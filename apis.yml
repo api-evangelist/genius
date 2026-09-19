@@ -42,6 +42,13 @@ x-tier-reason: enriched-with-openapi-capabilities-and-schemas
 tags:
   - Music
   - Lyrics
+  - Annotation
+  - Crowdsourced
+  - Reference Data
+  - Public APIs
+tags_raw:
+  - Music
+  - Lyrics
   - Annotations
   - Crowdsourced
   - Reference Data
@@ -189,6 +196,8 @@ apis:
   humanURL: https://docs.genius.com/
   baseURL: https://api.genius.com
   tags:
+  - Annotation
+  tags_raw:
   - Annotations
   properties:
   - type: OpenAPI

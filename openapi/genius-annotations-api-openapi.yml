@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Genius Account Annotations API
+  title: Genius Annotations API
   description: 'The Genius API exposes the Genius/Rap Genius crowdsourced music knowledge
 
     base — songs, artists, albums, annotations, and referents. Responses are
@@ -9,9 +9,7 @@ info:
 
     from the public song page); it returns rich song, artist, album, annotation
 
-    metadata, scoring, and the URLs needed to locate lyrics on genius.com.
-
-    '
+    metadata, scoring, and the URLs needed to locate lyrics on genius.com.'
   version: 1.0.0
   termsOfService: https://genius.com/static/terms
   contact:
@@ -222,122 +220,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    AnnotationVersion:
-      type: object
-      properties:
-        id:
-          type: integer
-        body:
-          $ref: '#/components/schemas/RichText'
-        major:
-          type: boolean
-        created_at:
-          type: string
-          format: date-time
-        user:
-          $ref: '#/components/schemas/User'
-    CommentListResponse:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        response:
-          type: object
-          properties:
-            comments:
-              type: array
-              items:
-                $ref: '#/components/schemas/Comment'
-    RichText:
-      type: object
-      description: 'Genius represents textual content in multiple formats. Which key is
-
-        present depends on the `text_format` query parameter.
-
-        '
-      properties:
-        dom:
-          type: object
-          additionalProperties: true
-        html:
-          type: string
-        markdown:
-          type: string
-        plain:
-          type: string
-    Comment:
-      type: object
-      properties:
-        id:
-          type: integer
-        body:
-          $ref: '#/components/schemas/RichText'
-        user:
-          $ref: '#/components/schemas/User'
-        created_at:
-          type: string
-          format: date-time
-        votes_total:
-          type: integer
-        has_voters:
-          type: boolean
-    Annotation:
-      type: object
-      properties:
-        id:
-          type: integer
-        api_path:
-          type: string
-        body:
-          $ref: '#/components/schemas/RichText'
-        comment_count:
-          type: integer
-        community:
-          type: boolean
-          description: True if the annotation was authored by the community rather than an artist or editor.
-        custom_preview:
-          type:
-          - string
-          - 'null'
-        has_voters:
-          type: boolean
-        votes_total:
-          type: integer
-        verified:
-          type: boolean
-          description: True if the annotation has been verified by a trusted editor or artist.
-        verified_by:
-          $ref: '#/components/schemas/User'
-        state:
-          type: string
-          enum:
-          - accepted
-          - pending
-          - deleted
-          - needs_exegesis
-        url:
-          type: string
-          format: uri
-        share_url:
-          type: string
-          format: uri
-        source:
-          type:
-          - string
-          - 'null'
-        pinned:
-          type: boolean
-        cosigned_by:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
-        authors:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnnotationAuthor'
-        created_at:
-          type: string
-          format: date-time
     ErrorResponse:
       type: object
       properties:
@@ -355,16 +237,132 @@ components:
                 description: Human-readable error description.
       required:
       - meta
-    AnnotationAuthor:
+    CommentListResponse:
       type: object
       properties:
-        attribution:
-          type: number
-          format: float
-        pinned_role:
-          type:
-          - string
-          - 'null'
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            comments:
+              type: array
+              items:
+                $ref: '#/components/schemas/Comment'
+    VoteResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            referent:
+              $ref: '#/components/schemas/Referent'
+            annotation:
+              $ref: '#/components/schemas/Annotation'
+    RichText:
+      type: object
+      description: 'Genius represents textual content in multiple formats. Which key is
+
+        present depends on the `text_format` query parameter.
+
+        '
+      properties:
+        dom:
+          type: object
+          additionalProperties: true
+        html:
+          type: string
+        markdown:
+          type: string
+        plain:
+          type: string
+    Meta:
+      type: object
+      description: Wrapper metadata included on every response.
+      properties:
+        status:
+          type: integer
+          description: HTTP status code echoed in the payload.
+          example: 200
+        message:
+          type: string
+          description: Optional human-readable status message.
+      required:
+      - status
+    AnnotationResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            annotation:
+              $ref: '#/components/schemas/Annotation'
+            referent:
+              $ref: '#/components/schemas/Referent'
+    AnnotationEditListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            annotation_versions:
+              type: array
+              items:
+                $ref: '#/components/schemas/AnnotationVersion'
+    Annotatable:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+          example: song
+        title:
+          type: string
+        url:
+          type: string
+          format: uri
+        api_path:
+          type: string
+        image_url:
+          type: string
+          format: uri
+        context:
+          type: string
+    Comment:
+      type: object
+      properties:
+        id:
+          type: integer
+        body:
+          $ref: '#/components/schemas/RichText'
+        user:
+          $ref: '#/components/schemas/User'
+        created_at:
+          type: string
+          format: date-time
+        votes_total:
+          type: integer
+        has_voters:
+          type: boolean
+    AnnotationVersion:
+      type: object
+      properties:
+        id:
+          type: integer
+        body:
+          $ref: '#/components/schemas/RichText'
+        major:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
         user:
           $ref: '#/components/schemas/User'
     Referent:
@@ -410,18 +408,68 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Annotation'
-    AnnotationResponse:
+    AnnotationAuthor:
       type: object
       properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        response:
+        attribution:
+          type: number
+          format: float
+        pinned_role:
+          type:
+          - string
+          - 'null'
+        user:
+          $ref: '#/components/schemas/User'
+    CreateAnnotationRequest:
+      type: object
+      required:
+      - annotation
+      - referent
+      - web_page
+      properties:
+        annotation:
+          type: object
+          required:
+          - body
+          properties:
+            body:
+              type: object
+              required:
+              - markdown
+              properties:
+                markdown:
+                  type: string
+                  description: Annotation body in Markdown.
+        referent:
+          type: object
+          required:
+          - raw_annotatable_url
+          - fragment
+          properties:
+            raw_annotatable_url:
+              type: string
+              format: uri
+              description: URL of the page the annotation lives on.
+            fragment:
+              type: string
+              description: The exact text fragment being annotated.
+            before_html:
+              type: string
+              description: HTML context that precedes the fragment.
+            after_html:
+              type: string
+              description: HTML context that follows the fragment.
+        web_page:
           type: object
           properties:
-            annotation:
-              $ref: '#/components/schemas/Annotation'
-            referent:
-              $ref: '#/components/schemas/Referent'
+            canonical_url:
+              type: string
+              format: uri
+            og_url:
+              type: string
+              format: uri
+            title:
+              type: string
     User:
       type: object
       properties:
@@ -484,126 +532,83 @@ components:
           format: uri
         api_path:
           type: string
-    VoteResponse:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        response:
-          type: object
-          properties:
-            referent:
-              $ref: '#/components/schemas/Referent'
-            annotation:
-              $ref: '#/components/schemas/Annotation'
-    Meta:
-      type: object
-      description: Wrapper metadata included on every response.
-      properties:
-        status:
-          type: integer
-          description: HTTP status code echoed in the payload.
-          example: 200
-        message:
-          type: string
-          description: Optional human-readable status message.
-      required:
-      - status
-    Annotatable:
+    Annotation:
       type: object
       properties:
         id:
           type: integer
-        type:
+        api_path:
           type: string
-          example: song
-        title:
+        body:
+          $ref: '#/components/schemas/RichText'
+        comment_count:
+          type: integer
+        community:
+          type: boolean
+          description: True if the annotation was authored by the community rather than an artist or editor.
+        custom_preview:
+          type:
+          - string
+          - 'null'
+        has_voters:
+          type: boolean
+        votes_total:
+          type: integer
+        verified:
+          type: boolean
+          description: True if the annotation has been verified by a trusted editor or artist.
+        verified_by:
+          $ref: '#/components/schemas/User'
+        state:
           type: string
+          enum:
+          - accepted
+          - pending
+          - deleted
+          - needs_exegesis
         url:
           type: string
           format: uri
-        api_path:
-          type: string
-        image_url:
+        share_url:
           type: string
           format: uri
-        context:
+        source:
+          type:
+          - string
+          - 'null'
+        pinned:
+          type: boolean
+        cosigned_by:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        authors:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnnotationAuthor'
+        created_at:
           type: string
-    CreateAnnotationRequest:
-      type: object
-      required:
-      - annotation
-      - referent
-      - web_page
-      properties:
-        annotation:
-          type: object
-          required:
-          - body
-          properties:
-            body:
-              type: object
-              required:
-              - markdown
-              properties:
-                markdown:
-                  type: string
-                  description: Annotation body in Markdown.
-        referent:
-          type: object
-          required:
-          - raw_annotatable_url
-          - fragment
-          properties:
-            raw_annotatable_url:
-              type: string
-              format: uri
-              description: URL of the page the annotation lives on.
-            fragment:
-              type: string
-              description: The exact text fragment being annotated.
-            before_html:
-              type: string
-              description: HTML context that precedes the fragment.
-            after_html:
-              type: string
-              description: HTML context that follows the fragment.
-        web_page:
-          type: object
-          properties:
-            canonical_url:
-              type: string
-              format: uri
-            og_url:
-              type: string
-              format: uri
-            title:
-              type: string
-    AnnotationEditListResponse:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        response:
-          type: object
-          properties:
-            annotation_versions:
-              type: array
-              items:
-                $ref: '#/components/schemas/AnnotationVersion'
+          format: date-time
+  responses:
+    Unauthorized:
+      description: Missing or invalid access token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Malformed request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    TextFormat:
-      name: text_format
-      in: query
-      description: Format for textual fields in the response.
-      schema:
-        type: string
-        enum:
-        - dom
-        - html
-        - markdown
-        - plain
-        default: dom
     Page:
       name: page
       in: query
@@ -629,25 +634,18 @@ components:
       schema:
         type: integer
         example: 10225840
-  responses:
-    BadRequest:
-      description: Malformed request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Missing or invalid access token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    TextFormat:
+      name: text_format
+      in: query
+      description: Format for textual fields in the response.
+      schema:
+        type: string
+        enum:
+        - dom
+        - html
+        - markdown
+        - plain
+        default: dom
   securitySchemes:
     GeniusOAuth2:
       type: oauth2

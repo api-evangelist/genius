@@ -9,9 +9,7 @@ info:
 
     from the public song page); it returns rich song, artist, album, annotation
 
-    metadata, scoring, and the URLs needed to locate lyrics on genius.com.
-
-    '
+    metadata, scoring, and the URLs needed to locate lyrics on genius.com.'
   version: 1.0.0
   termsOfService: https://genius.com/static/terms
   contact:
@@ -54,30 +52,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    TextFormat:
-      name: text_format
-      in: query
-      description: Format for textual fields in the response.
-      schema:
-        type: string
-        enum:
-        - dom
-        - html
-        - markdown
-        - plain
-        default: dom
   schemas:
-    AccountResponse:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        response:
-          type: object
-          properties:
-            user:
-              $ref: '#/components/schemas/User'
     Meta:
       type: object
       description: Wrapper metadata included on every response.
@@ -108,6 +83,16 @@ components:
                 description: Human-readable error description.
       required:
       - meta
+    AccountResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            user:
+              $ref: '#/components/schemas/User'
     User:
       type: object
       properties:
@@ -170,6 +155,19 @@ components:
           format: uri
         api_path:
           type: string
+  parameters:
+    TextFormat:
+      name: text_format
+      in: query
+      description: Format for textual fields in the response.
+      schema:
+        type: string
+        enum:
+        - dom
+        - html
+        - markdown
+        - plain
+        default: dom
   responses:
     Unauthorized:
       description: Missing or invalid access token.

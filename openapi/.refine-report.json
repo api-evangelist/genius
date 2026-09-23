@@ -1,15 +1,7 @@
 {
   "provider": "genius",
   "sources": [
-    "genius-account-api-openapi.yml",
-    "genius-albums-api-openapi.yml",
-    "genius-annotations-api-openapi.yml",
-    "genius-artists-api-openapi.yml",
-    "genius-referents-api-openapi.yml",
-    "genius-search-api-openapi.yml",
-    "genius-songs-api-openapi.yml",
-    "genius-users-api-openapi.yml",
-    "genius-web-pages-api-openapi.yml"
+    "_ae-authored/genius-openapi.yml"
   ],
   "outputs": [
     "genius-account-api-openapi.yml",
@@ -26,16 +18,19 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "genius-account-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "genius-albums-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "genius-annotations-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "genius-artists-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "genius-referents-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "genius-search-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "genius-songs-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "genius-users-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "genius-web-pages-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "genius-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "genius-account-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "genius-albums-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "genius-annotations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "genius-artists-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "genius-referents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "genius-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "genius-songs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "genius-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "genius-web-pages-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

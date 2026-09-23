@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Genius Account Web Pages API
+  title: Genius Web Pages API
   description: 'The Genius API exposes the Genius/Rap Genius crowdsourced music knowledge
 
     base — songs, artists, albums, annotations, and referents. Responses are
@@ -9,9 +9,7 @@ info:
 
     from the public song page); it returns rich song, artist, album, annotation
 
-    metadata, scoring, and the URLs needed to locate lyrics on genius.com.
-
-    '
+    metadata, scoring, and the URLs needed to locate lyrics on genius.com.'
   version: 1.0.0
   termsOfService: https://genius.com/static/terms
   contact:
@@ -37,9 +35,7 @@ paths:
       summary: Lookup Web Page
       description: 'Looks up a web page record (the surface on which Genius annotations live)
 
-        by one of `raw_annotatable_url`, `canonical_url`, or `og_url`.
-
-        '
+        by one of `raw_annotatable_url`, `canonical_url`, or `og_url`.'
       security:
       - GeniusOAuth2: []
       - ClientAccessToken: []
@@ -105,6 +101,19 @@ components:
         normalized_url:
           type: string
           format: uri
+    Meta:
+      type: object
+      description: Wrapper metadata included on every response.
+      properties:
+        status:
+          type: integer
+          description: HTTP status code echoed in the payload.
+          example: 200
+        message:
+          type: string
+          description: Optional human-readable status message.
+      required:
+      - status
     ErrorResponse:
       type: object
       properties:
@@ -122,19 +131,6 @@ components:
                 description: Human-readable error description.
       required:
       - meta
-    Meta:
-      type: object
-      description: Wrapper metadata included on every response.
-      properties:
-        status:
-          type: integer
-          description: HTTP status code echoed in the payload.
-          example: 200
-        message:
-          type: string
-          description: Optional human-readable status message.
-      required:
-      - status
     WebPageResponse:
       type: object
       properties:

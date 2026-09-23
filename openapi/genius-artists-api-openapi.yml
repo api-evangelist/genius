@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Genius Account Artists API
+  title: Genius Artists API
   description: 'The Genius API exposes the Genius/Rap Genius crowdsourced music knowledge
 
     base — songs, artists, albums, annotations, and referents. Responses are
@@ -9,9 +9,7 @@ info:
 
     from the public song page); it returns rich song, artist, album, annotation
 
-    metadata, scoring, and the URLs needed to locate lyrics on genius.com.
-
-    '
+    metadata, scoring, and the URLs needed to locate lyrics on genius.com.'
   version: 1.0.0
   termsOfService: https://genius.com/static/terms
   contact:
@@ -182,192 +180,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Album:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        full_title:
-          type: string
-        url:
-          type: string
-          format: uri
-        api_path:
-          type: string
-        cover_art_url:
-          type: string
-          format: uri
-        cover_art_thumbnail_url:
-          type: string
-          format: uri
-        release_date_for_display:
-          type:
-          - string
-          - 'null'
-        artist:
-          $ref: '#/components/schemas/Artist'
-    SongListResponse:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        response:
-          type: object
-          properties:
-            songs:
-              type: array
-              items:
-                $ref: '#/components/schemas/Song'
-            next_page:
-              type:
-              - integer
-              - 'null'
-    AlbumListResponse:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        response:
-          type: object
-          properties:
-            albums:
-              type: array
-              items:
-                $ref: '#/components/schemas/Album'
-            next_page:
-              type:
-              - integer
-              - 'null'
-    RichText:
-      type: object
-      description: 'Genius represents textual content in multiple formats. Which key is
-
-        present depends on the `text_format` query parameter.
-
-        '
-      properties:
-        dom:
-          type: object
-          additionalProperties: true
-        html:
-          type: string
-        markdown:
-          type: string
-        plain:
-          type: string
-    Annotation:
-      type: object
-      properties:
-        id:
-          type: integer
-        api_path:
-          type: string
-        body:
-          $ref: '#/components/schemas/RichText'
-        comment_count:
-          type: integer
-        community:
-          type: boolean
-          description: True if the annotation was authored by the community rather than an artist or editor.
-        custom_preview:
-          type:
-          - string
-          - 'null'
-        has_voters:
-          type: boolean
-        votes_total:
-          type: integer
-        verified:
-          type: boolean
-          description: True if the annotation has been verified by a trusted editor or artist.
-        verified_by:
-          $ref: '#/components/schemas/User'
-        state:
-          type: string
-          enum:
-          - accepted
-          - pending
-          - deleted
-          - needs_exegesis
-        url:
-          type: string
-          format: uri
-        share_url:
-          type: string
-          format: uri
-        source:
-          type:
-          - string
-          - 'null'
-        pinned:
-          type: boolean
-        cosigned_by:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
-        authors:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnnotationAuthor'
-        created_at:
-          type: string
-          format: date-time
-    ErrorResponse:
-      type: object
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          - type: object
-            properties:
-              error:
-                type: string
-                description: Short machine error code.
-                example: not_found
-              error_description:
-                type: string
-                description: Human-readable error description.
-      required:
-      - meta
-    ActivityListResponse:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        response:
-          type: object
-          properties:
-            activities:
-              type: array
-              items:
-                $ref: '#/components/schemas/ActivityItem'
-    ActivityItem:
-      type: object
-      properties:
-        id:
-          type: integer
-        type:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        objects:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-    ArtistResponse:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        response:
-          type: object
-          properties:
-            artist:
-              $ref: '#/components/schemas/Artist'
     LeaderboardEntry:
       type: object
       properties:
@@ -376,111 +188,6 @@ components:
           format: float
         user:
           $ref: '#/components/schemas/User'
-    Artist:
-      type: object
-      properties:
-        id:
-          type: integer
-          example: 1421
-        name:
-          type: string
-          example: Kendrick Lamar
-        url:
-          type: string
-          format: uri
-        api_path:
-          type: string
-        image_url:
-          type: string
-          format: uri
-        header_image_url:
-          type: string
-          format: uri
-        is_meme_verified:
-          type: boolean
-        is_verified:
-          type: boolean
-        followers_count:
-          type: integer
-        iq:
-          type:
-          - integer
-          - 'null'
-        slug:
-          type: string
-        description:
-          $ref: '#/components/schemas/RichText'
-        alternate_names:
-          type: array
-          items:
-            type: string
-        instagram_name:
-          type:
-          - string
-          - 'null'
-        twitter_name:
-          type:
-          - string
-          - 'null'
-        facebook_name:
-          type:
-          - string
-          - 'null'
-    AnnotationAuthor:
-      type: object
-      properties:
-        attribution:
-          type: number
-          format: float
-        pinned_role:
-          type:
-          - string
-          - 'null'
-        user:
-          $ref: '#/components/schemas/User'
-    Referent:
-      type: object
-      description: A referent is a fragment of text on a page that one or more annotations are attached to.
-      properties:
-        id:
-          type: integer
-        annotator_id:
-          type: integer
-        annotator_login:
-          type: string
-        api_path:
-          type: string
-        classification:
-          type: string
-          example: accepted
-        fragment:
-          type: string
-          description: The exact text being annotated.
-        is_description:
-          type: boolean
-        path:
-          type: string
-        range:
-          type: object
-          additionalProperties: true
-          description: DOM range describing the location of the fragment on the source page.
-        song_id:
-          type:
-          - integer
-          - 'null'
-        url:
-          type: string
-          format: uri
-        verified_annotator_ids:
-          type: array
-          items:
-            type: integer
-        annotatable:
-          $ref: '#/components/schemas/Annotatable'
-        annotations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Annotation'
     Song:
       type: object
       description: A Genius song record.
@@ -568,6 +275,265 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Artist'
+    ErrorResponse:
+      type: object
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          - type: object
+            properties:
+              error:
+                type: string
+                description: Short machine error code.
+                example: not_found
+              error_description:
+                type: string
+                description: Human-readable error description.
+      required:
+      - meta
+    AlbumListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            albums:
+              type: array
+              items:
+                $ref: '#/components/schemas/Album'
+            next_page:
+              type:
+              - integer
+              - 'null'
+    RichText:
+      type: object
+      description: 'Genius represents textual content in multiple formats. Which key is
+
+        present depends on the `text_format` query parameter.
+
+        '
+      properties:
+        dom:
+          type: object
+          additionalProperties: true
+        html:
+          type: string
+        markdown:
+          type: string
+        plain:
+          type: string
+    Meta:
+      type: object
+      description: Wrapper metadata included on every response.
+      properties:
+        status:
+          type: integer
+          description: HTTP status code echoed in the payload.
+          example: 200
+        message:
+          type: string
+          description: Optional human-readable status message.
+      required:
+      - status
+    Media:
+      type: object
+      properties:
+        provider:
+          type: string
+          example: youtube
+        type:
+          type: string
+          example: video
+        url:
+          type: string
+          format: uri
+        start:
+          type:
+          - integer
+          - 'null'
+        native_uri:
+          type:
+          - string
+          - 'null'
+    Artist:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1421
+        name:
+          type: string
+          example: Kendrick Lamar
+        url:
+          type: string
+          format: uri
+        api_path:
+          type: string
+        image_url:
+          type: string
+          format: uri
+        header_image_url:
+          type: string
+          format: uri
+        is_meme_verified:
+          type: boolean
+        is_verified:
+          type: boolean
+        followers_count:
+          type: integer
+        iq:
+          type:
+          - integer
+          - 'null'
+        slug:
+          type: string
+        description:
+          $ref: '#/components/schemas/RichText'
+        alternate_names:
+          type: array
+          items:
+            type: string
+        instagram_name:
+          type:
+          - string
+          - 'null'
+        twitter_name:
+          type:
+          - string
+          - 'null'
+        facebook_name:
+          type:
+          - string
+          - 'null'
+    Annotatable:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+          example: song
+        title:
+          type: string
+        url:
+          type: string
+          format: uri
+        api_path:
+          type: string
+        image_url:
+          type: string
+          format: uri
+        context:
+          type: string
+    SongStats:
+      type: object
+      properties:
+        unreviewed_annotations:
+          type: integer
+        hot:
+          type: boolean
+        pageviews:
+          type:
+          - integer
+          - 'null'
+    Referent:
+      type: object
+      description: A referent is a fragment of text on a page that one or more annotations are attached to.
+      properties:
+        id:
+          type: integer
+        annotator_id:
+          type: integer
+        annotator_login:
+          type: string
+        api_path:
+          type: string
+        classification:
+          type: string
+          example: accepted
+        fragment:
+          type: string
+          description: The exact text being annotated.
+        is_description:
+          type: boolean
+        path:
+          type: string
+        range:
+          type: object
+          additionalProperties: true
+          description: DOM range describing the location of the fragment on the source page.
+        song_id:
+          type:
+          - integer
+          - 'null'
+        url:
+          type: string
+          format: uri
+        verified_annotator_ids:
+          type: array
+          items:
+            type: integer
+        annotatable:
+          $ref: '#/components/schemas/Annotatable'
+        annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Annotation'
+    SongListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            songs:
+              type: array
+              items:
+                $ref: '#/components/schemas/Song'
+            next_page:
+              type:
+              - integer
+              - 'null'
+    AnnotationAuthor:
+      type: object
+      properties:
+        attribution:
+          type: number
+          format: float
+        pinned_role:
+          type:
+          - string
+          - 'null'
+        user:
+          $ref: '#/components/schemas/User'
+    ActivityListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            activities:
+              type: array
+              items:
+                $ref: '#/components/schemas/ActivityItem'
+    LeaderboardResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            leaderboard:
+              type: array
+              items:
+                $ref: '#/components/schemas/LeaderboardEntry'
     UserListResponse:
       type: object
       properties:
@@ -580,6 +546,21 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/User'
+    ActivityItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        objects:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
     User:
       type: object
       properties:
@@ -642,71 +623,7 @@ components:
           format: uri
         api_path:
           type: string
-    Media:
-      type: object
-      properties:
-        provider:
-          type: string
-          example: youtube
-        type:
-          type: string
-          example: video
-        url:
-          type: string
-          format: uri
-        start:
-          type:
-          - integer
-          - 'null'
-        native_uri:
-          type:
-          - string
-          - 'null'
-    Meta:
-      type: object
-      description: Wrapper metadata included on every response.
-      properties:
-        status:
-          type: integer
-          description: HTTP status code echoed in the payload.
-          example: 200
-        message:
-          type: string
-          description: Optional human-readable status message.
-      required:
-      - status
-    Annotatable:
-      type: object
-      properties:
-        id:
-          type: integer
-        type:
-          type: string
-          example: song
-        title:
-          type: string
-        url:
-          type: string
-          format: uri
-        api_path:
-          type: string
-        image_url:
-          type: string
-          format: uri
-        context:
-          type: string
-    SongStats:
-      type: object
-      properties:
-        unreviewed_annotations:
-          type: integer
-        hot:
-          type: boolean
-        pageviews:
-          type:
-          - integer
-          - 'null'
-    LeaderboardResponse:
+    ArtistResponse:
       type: object
       properties:
         meta:
@@ -714,31 +631,92 @@ components:
         response:
           type: object
           properties:
-            leaderboard:
-              type: array
-              items:
-                $ref: '#/components/schemas/LeaderboardEntry'
+            artist:
+              $ref: '#/components/schemas/Artist'
+    Annotation:
+      type: object
+      properties:
+        id:
+          type: integer
+        api_path:
+          type: string
+        body:
+          $ref: '#/components/schemas/RichText'
+        comment_count:
+          type: integer
+        community:
+          type: boolean
+          description: True if the annotation was authored by the community rather than an artist or editor.
+        custom_preview:
+          type:
+          - string
+          - 'null'
+        has_voters:
+          type: boolean
+        votes_total:
+          type: integer
+        verified:
+          type: boolean
+          description: True if the annotation has been verified by a trusted editor or artist.
+        verified_by:
+          $ref: '#/components/schemas/User'
+        state:
+          type: string
+          enum:
+          - accepted
+          - pending
+          - deleted
+          - needs_exegesis
+        url:
+          type: string
+          format: uri
+        share_url:
+          type: string
+          format: uri
+        source:
+          type:
+          - string
+          - 'null'
+        pinned:
+          type: boolean
+        cosigned_by:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        authors:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnnotationAuthor'
+        created_at:
+          type: string
+          format: date-time
+    Album:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        full_title:
+          type: string
+        url:
+          type: string
+          format: uri
+        api_path:
+          type: string
+        cover_art_url:
+          type: string
+          format: uri
+        cover_art_thumbnail_url:
+          type: string
+          format: uri
+        release_date_for_display:
+          type:
+          - string
+          - 'null'
+        artist:
+          $ref: '#/components/schemas/Artist'
   parameters:
-    TextFormat:
-      name: text_format
-      in: query
-      description: Format for textual fields in the response.
-      schema:
-        type: string
-        enum:
-        - dom
-        - html
-        - markdown
-        - plain
-        default: dom
-    ArtistId:
-      name: id
-      in: path
-      required: true
-      description: Genius numeric artist ID.
-      schema:
-        type: integer
-        example: 16775
     Page:
       name: page
       in: query
@@ -756,6 +734,26 @@ components:
         minimum: 1
         maximum: 50
         default: 20
+    ArtistId:
+      name: id
+      in: path
+      required: true
+      description: Genius numeric artist ID.
+      schema:
+        type: integer
+        example: 16775
+    TextFormat:
+      name: text_format
+      in: query
+      description: Format for textual fields in the response.
+      schema:
+        type: string
+        enum:
+        - dom
+        - html
+        - markdown
+        - plain
+        default: dom
   responses:
     NotFound:
       description: Resource not found.

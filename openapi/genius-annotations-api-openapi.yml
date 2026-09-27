@@ -220,121 +220,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          - type: object
-            properties:
-              error:
-                type: string
-                description: Short machine error code.
-                example: not_found
-              error_description:
-                type: string
-                description: Human-readable error description.
-      required:
-      - meta
-    CommentListResponse:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        response:
-          type: object
-          properties:
-            comments:
-              type: array
-              items:
-                $ref: '#/components/schemas/Comment'
-    VoteResponse:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        response:
-          type: object
-          properties:
-            referent:
-              $ref: '#/components/schemas/Referent'
-            annotation:
-              $ref: '#/components/schemas/Annotation'
-    RichText:
-      type: object
-      description: 'Genius represents textual content in multiple formats. Which key is
-
-        present depends on the `text_format` query parameter.
-
-        '
-      properties:
-        dom:
-          type: object
-          additionalProperties: true
-        html:
-          type: string
-        markdown:
-          type: string
-        plain:
-          type: string
-    Meta:
-      type: object
-      description: Wrapper metadata included on every response.
-      properties:
-        status:
-          type: integer
-          description: HTTP status code echoed in the payload.
-          example: 200
-        message:
-          type: string
-          description: Optional human-readable status message.
-      required:
-      - status
-    AnnotationResponse:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        response:
-          type: object
-          properties:
-            annotation:
-              $ref: '#/components/schemas/Annotation'
-            referent:
-              $ref: '#/components/schemas/Referent'
-    AnnotationEditListResponse:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        response:
-          type: object
-          properties:
-            annotation_versions:
-              type: array
-              items:
-                $ref: '#/components/schemas/AnnotationVersion'
-    Annotatable:
-      type: object
-      properties:
-        id:
-          type: integer
-        type:
-          type: string
-          example: song
-        title:
-          type: string
-        url:
-          type: string
-          format: uri
-        api_path:
-          type: string
-        image_url:
-          type: string
-          format: uri
-        context:
-          type: string
     Comment:
       type: object
       properties:
@@ -351,20 +236,6 @@ components:
           type: integer
         has_voters:
           type: boolean
-    AnnotationVersion:
-      type: object
-      properties:
-        id:
-          type: integer
-        body:
-          $ref: '#/components/schemas/RichText'
-        major:
-          type: boolean
-        created_at:
-          type: string
-          format: date-time
-        user:
-          $ref: '#/components/schemas/User'
     Referent:
       type: object
       description: A referent is a fragment of text on a page that one or more annotations are attached to.
@@ -408,68 +279,42 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Annotation'
-    AnnotationAuthor:
+    VoteResponse:
       type: object
       properties:
-        attribution:
-          type: number
-          format: float
-        pinned_role:
-          type:
-          - string
-          - 'null'
-        user:
-          $ref: '#/components/schemas/User'
-    CreateAnnotationRequest:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            referent:
+              $ref: '#/components/schemas/Referent'
+            annotation:
+              $ref: '#/components/schemas/Annotation'
+    AnnotationResponse:
       type: object
-      required:
-      - annotation
-      - referent
-      - web_page
       properties:
-        annotation:
-          type: object
-          required:
-          - body
-          properties:
-            body:
-              type: object
-              required:
-              - markdown
-              properties:
-                markdown:
-                  type: string
-                  description: Annotation body in Markdown.
-        referent:
-          type: object
-          required:
-          - raw_annotatable_url
-          - fragment
-          properties:
-            raw_annotatable_url:
-              type: string
-              format: uri
-              description: URL of the page the annotation lives on.
-            fragment:
-              type: string
-              description: The exact text fragment being annotated.
-            before_html:
-              type: string
-              description: HTML context that precedes the fragment.
-            after_html:
-              type: string
-              description: HTML context that follows the fragment.
-        web_page:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
           type: object
           properties:
-            canonical_url:
-              type: string
-              format: uri
-            og_url:
-              type: string
-              format: uri
-            title:
-              type: string
+            annotation:
+              $ref: '#/components/schemas/Annotation'
+            referent:
+              $ref: '#/components/schemas/Referent'
+    AnnotationEditListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            annotation_versions:
+              type: array
+              items:
+                $ref: '#/components/schemas/AnnotationVersion'
     User:
       type: object
       properties:
@@ -532,6 +377,111 @@ components:
           format: uri
         api_path:
           type: string
+    AnnotationAuthor:
+      type: object
+      properties:
+        attribution:
+          type: number
+          format: float
+        pinned_role:
+          type:
+          - string
+          - 'null'
+        user:
+          $ref: '#/components/schemas/User'
+    AnnotationVersion:
+      type: object
+      properties:
+        id:
+          type: integer
+        body:
+          $ref: '#/components/schemas/RichText'
+        major:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        user:
+          $ref: '#/components/schemas/User'
+    CreateAnnotationRequest:
+      type: object
+      required:
+      - annotation
+      - referent
+      - web_page
+      properties:
+        annotation:
+          type: object
+          required:
+          - body
+          properties:
+            body:
+              type: object
+              required:
+              - markdown
+              properties:
+                markdown:
+                  type: string
+                  description: Annotation body in Markdown.
+        referent:
+          type: object
+          required:
+          - raw_annotatable_url
+          - fragment
+          properties:
+            raw_annotatable_url:
+              type: string
+              format: uri
+              description: URL of the page the annotation lives on.
+            fragment:
+              type: string
+              description: The exact text fragment being annotated.
+            before_html:
+              type: string
+              description: HTML context that precedes the fragment.
+            after_html:
+              type: string
+              description: HTML context that follows the fragment.
+        web_page:
+          type: object
+          properties:
+            canonical_url:
+              type: string
+              format: uri
+            og_url:
+              type: string
+              format: uri
+            title:
+              type: string
+    CommentListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            comments:
+              type: array
+              items:
+                $ref: '#/components/schemas/Comment'
+    ErrorResponse:
+      type: object
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          - type: object
+            properties:
+              error:
+                type: string
+                description: Short machine error code.
+                example: not_found
+              error_description:
+                type: string
+                description: Human-readable error description.
+      required:
+      - meta
     Annotation:
       type: object
       properties:
@@ -589,25 +539,56 @@ components:
         created_at:
           type: string
           format: date-time
-  responses:
-    Unauthorized:
-      description: Missing or invalid access token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Malformed request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    Meta:
+      type: object
+      description: Wrapper metadata included on every response.
+      properties:
+        status:
+          type: integer
+          description: HTTP status code echoed in the payload.
+          example: 200
+        message:
+          type: string
+          description: Optional human-readable status message.
+      required:
+      - status
+    Annotatable:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+          example: song
+        title:
+          type: string
+        url:
+          type: string
+          format: uri
+        api_path:
+          type: string
+        image_url:
+          type: string
+          format: uri
+        context:
+          type: string
+    RichText:
+      type: object
+      description: 'Genius represents textual content in multiple formats. Which key is
+
+        present depends on the `text_format` query parameter.
+
+        '
+      properties:
+        dom:
+          type: object
+          additionalProperties: true
+        html:
+          type: string
+        markdown:
+          type: string
+        plain:
+          type: string
   parameters:
     Page:
       name: page
@@ -617,23 +598,6 @@ components:
         type: integer
         minimum: 1
         default: 1
-    PerPage:
-      name: per_page
-      in: query
-      description: Number of results per page (max 50).
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 50
-        default: 20
-    AnnotationId:
-      name: id
-      in: path
-      required: true
-      description: Genius numeric annotation ID.
-      schema:
-        type: integer
-        example: 10225840
     TextFormat:
       name: text_format
       in: query
@@ -646,6 +610,42 @@ components:
         - markdown
         - plain
         default: dom
+    AnnotationId:
+      name: id
+      in: path
+      required: true
+      description: Genius numeric annotation ID.
+      schema:
+        type: integer
+        example: 10225840
+    PerPage:
+      name: per_page
+      in: query
+      description: Number of results per page (max 50).
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 20
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Malformed request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing or invalid access token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     GeniusOAuth2:
       type: oauth2

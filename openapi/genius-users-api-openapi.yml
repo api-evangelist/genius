@@ -90,53 +90,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Meta:
-      type: object
-      description: Wrapper metadata included on every response.
-      properties:
-        status:
-          type: integer
-          description: HTTP status code echoed in the payload.
-          example: 200
-        message:
-          type: string
-          description: Optional human-readable status message.
-      required:
-      - status
-    UserContributionListResponse:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        response:
-          type: object
-          properties:
-            contribution_groups:
-              type: array
-              items:
-                $ref: '#/components/schemas/ContributionGroup'
-    UserResponse:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        response:
-          type: object
-          properties:
-            user:
-              $ref: '#/components/schemas/User'
-    ContributionGroup:
-      type: object
-      properties:
-        contribution_type:
-          type: string
-        total:
-          type: integer
-        contributions:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
     ErrorResponse:
       type: object
       properties:
@@ -154,6 +107,31 @@ components:
                 description: Human-readable error description.
       required:
       - meta
+    Meta:
+      type: object
+      description: Wrapper metadata included on every response.
+      properties:
+        status:
+          type: integer
+          description: HTTP status code echoed in the payload.
+          example: 200
+        message:
+          type: string
+          description: Optional human-readable status message.
+      required:
+      - status
+    ContributionGroup:
+      type: object
+      properties:
+        contribution_type:
+          type: string
+        total:
+          type: integer
+        contributions:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
     User:
       type: object
       properties:
@@ -216,7 +194,45 @@ components:
           format: uri
         api_path:
           type: string
+    UserContributionListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            contribution_groups:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContributionGroup'
+    UserResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            user:
+              $ref: '#/components/schemas/User'
   parameters:
+    UserId:
+      name: id
+      in: path
+      required: true
+      description: Genius numeric user ID.
+      schema:
+        type: integer
+        example: 1
+    Page:
+      name: page
+      in: query
+      description: Page index (1-indexed).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
     TextFormat:
       name: text_format
       in: query
@@ -238,22 +254,6 @@ components:
         minimum: 1
         maximum: 50
         default: 20
-    UserId:
-      name: id
-      in: path
-      required: true
-      description: Genius numeric user ID.
-      schema:
-        type: integer
-        example: 1
-    Page:
-      name: page
-      in: query
-      description: Page index (1-indexed).
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
   responses:
     NotFound:
       description: Resource not found.

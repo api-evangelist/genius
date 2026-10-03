@@ -76,66 +76,49 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
+    Annotatable:
       type: object
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          - type: object
-            properties:
-              error:
-                type: string
-                description: Short machine error code.
-                example: not_found
-              error_description:
-                type: string
-                description: Human-readable error description.
-      required:
-      - meta
-    Referent:
-      type: object
-      description: A referent is a fragment of text on a page that one or more annotations are attached to.
       properties:
         id:
           type: integer
-        annotator_id:
-          type: integer
-        annotator_login:
+        type:
           type: string
-        api_path:
+          example: song
+        title:
           type: string
-        classification:
-          type: string
-          example: accepted
-        fragment:
-          type: string
-          description: The exact text being annotated.
-        is_description:
-          type: boolean
-        path:
-          type: string
-        range:
-          type: object
-          additionalProperties: true
-          description: DOM range describing the location of the fragment on the source page.
-        song_id:
-          type:
-          - integer
-          - 'null'
         url:
           type: string
           format: uri
-        verified_annotator_ids:
-          type: array
-          items:
-            type: integer
-        annotatable:
-          $ref: '#/components/schemas/Annotatable'
-        annotations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Annotation'
+        api_path:
+          type: string
+        image_url:
+          type: string
+          format: uri
+        context:
+          type: string
+    SongStats:
+      type: object
+      properties:
+        unreviewed_annotations:
+          type: integer
+        hot:
+          type: boolean
+        pageviews:
+          type:
+          - integer
+          - 'null'
+    AnnotationAuthor:
+      type: object
+      properties:
+        attribution:
+          type: number
+          format: float
+        pinned_role:
+          type:
+          - string
+          - 'null'
+        user:
+          $ref: '#/components/schemas/User'
     Annotation:
       type: object
       properties:
@@ -193,37 +176,144 @@ components:
         created_at:
           type: string
           format: date-time
-    AnnotationAuthor:
+    ErrorResponse:
       type: object
       properties:
-        attribution:
-          type: number
-          format: float
-        pinned_role:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          - type: object
+            properties:
+              error:
+                type: string
+                description: Short machine error code.
+                example: not_found
+              error_description:
+                type: string
+                description: Human-readable error description.
+      required:
+      - meta
+    RichText:
+      type: object
+      description: 'Genius represents textual content in multiple formats. Which key is
+
+        present depends on the `text_format` query parameter.
+
+        '
+      properties:
+        dom:
+          type: object
+          additionalProperties: true
+        html:
+          type: string
+        markdown:
+          type: string
+        plain:
+          type: string
+    Referent:
+      type: object
+      description: A referent is a fragment of text on a page that one or more annotations are attached to.
+      properties:
+        id:
+          type: integer
+        annotator_id:
+          type: integer
+        annotator_login:
+          type: string
+        api_path:
+          type: string
+        classification:
+          type: string
+          example: accepted
+        fragment:
+          type: string
+          description: The exact text being annotated.
+        is_description:
+          type: boolean
+        path:
+          type: string
+        range:
+          type: object
+          additionalProperties: true
+          description: DOM range describing the location of the fragment on the source page.
+        song_id:
           type:
-          - string
+          - integer
           - 'null'
-        user:
-          $ref: '#/components/schemas/User'
-    Annotatable:
+        url:
+          type: string
+          format: uri
+        verified_annotator_ids:
+          type: array
+          items:
+            type: integer
+        annotatable:
+          $ref: '#/components/schemas/Annotatable'
+        annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Annotation'
+    User:
       type: object
       properties:
         id:
           type: integer
-        type:
+        login:
           type: string
-          example: song
-        title:
+        name:
           type: string
+        about_me_summary:
+          type:
+          - string
+          - 'null'
+        avatar:
+          type: object
+          properties:
+            tiny:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+            thumb:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+            small:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+            medium:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+        header_image_url:
+          type: string
+          format: uri
+        human_readable_role_for_display:
+          type:
+          - string
+          - 'null'
+        iq:
+          type: integer
+        identity_provider:
+          type:
+          - string
+          - 'null'
+        roles_for_display:
+          type: array
+          items:
+            type: string
         url:
           type: string
           format: uri
         api_path:
-          type: string
-        image_url:
-          type: string
-          format: uri
-        context:
           type: string
     Meta:
       type: object
@@ -238,6 +328,18 @@ components:
           description: Optional human-readable status message.
       required:
       - status
+    SearchResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            hits:
+              type: array
+              items:
+                $ref: '#/components/schemas/SearchHit'
     Song:
       type: object
       description: A Genius song record.
@@ -351,6 +453,17 @@ components:
           - 'null'
         artist:
           $ref: '#/components/schemas/Artist'
+    SearchHit:
+      type: object
+      properties:
+        type:
+          type: string
+          example: song
+        index:
+          type: string
+          example: song
+        result:
+          $ref: '#/components/schemas/Song'
     Media:
       type: object
       properties:
@@ -371,102 +484,6 @@ components:
           type:
           - string
           - 'null'
-    SongStats:
-      type: object
-      properties:
-        unreviewed_annotations:
-          type: integer
-        hot:
-          type: boolean
-        pageviews:
-          type:
-          - integer
-          - 'null'
-    SearchHit:
-      type: object
-      properties:
-        type:
-          type: string
-          example: song
-        index:
-          type: string
-          example: song
-        result:
-          $ref: '#/components/schemas/Song'
-    User:
-      type: object
-      properties:
-        id:
-          type: integer
-        login:
-          type: string
-        name:
-          type: string
-        about_me_summary:
-          type:
-          - string
-          - 'null'
-        avatar:
-          type: object
-          properties:
-            tiny:
-              type: object
-              properties:
-                url:
-                  type: string
-                  format: uri
-            thumb:
-              type: object
-              properties:
-                url:
-                  type: string
-                  format: uri
-            small:
-              type: object
-              properties:
-                url:
-                  type: string
-                  format: uri
-            medium:
-              type: object
-              properties:
-                url:
-                  type: string
-                  format: uri
-        header_image_url:
-          type: string
-          format: uri
-        human_readable_role_for_display:
-          type:
-          - string
-          - 'null'
-        iq:
-          type: integer
-        identity_provider:
-          type:
-          - string
-          - 'null'
-        roles_for_display:
-          type: array
-          items:
-            type: string
-        url:
-          type: string
-          format: uri
-        api_path:
-          type: string
-    SearchResponse:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        response:
-          type: object
-          properties:
-            hits:
-              type: array
-              items:
-                $ref: '#/components/schemas/SearchHit'
     Artist:
       type: object
       properties:
@@ -517,23 +534,6 @@ components:
           type:
           - string
           - 'null'
-    RichText:
-      type: object
-      description: 'Genius represents textual content in multiple formats. Which key is
-
-        present depends on the `text_format` query parameter.
-
-        '
-      properties:
-        dom:
-          type: object
-          additionalProperties: true
-        html:
-          type: string
-        markdown:
-          type: string
-        plain:
-          type: string
   responses:
     BadRequest:
       description: Malformed request.

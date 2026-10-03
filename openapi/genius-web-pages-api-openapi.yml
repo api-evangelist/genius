@@ -104,16 +104,6 @@ components:
           description: Optional human-readable status message.
       required:
       - status
-    WebPageResponse:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        response:
-          type: object
-          properties:
-            web_page:
-              $ref: '#/components/schemas/WebPage'
     WebPage:
       type: object
       properties:
@@ -141,6 +131,16 @@ components:
         normalized_url:
           type: string
           format: uri
+    WebPageResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            web_page:
+              $ref: '#/components/schemas/WebPage'
   responses:
     BadRequest:
       description: Malformed request.

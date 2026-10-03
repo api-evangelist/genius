@@ -103,6 +103,55 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Annotatable:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+          example: song
+        title:
+          type: string
+        url:
+          type: string
+          format: uri
+        api_path:
+          type: string
+        image_url:
+          type: string
+          format: uri
+        context:
+          type: string
+    AnnotationAuthor:
+      type: object
+      properties:
+        attribution:
+          type: number
+          format: float
+        pinned_role:
+          type:
+          - string
+          - 'null'
+        user:
+          $ref: '#/components/schemas/User'
+    RichText:
+      type: object
+      description: 'Genius represents textual content in multiple formats. Which key is
+
+        present depends on the `text_format` query parameter.
+
+        '
+      properties:
+        dom:
+          type: object
+          additionalProperties: true
+        html:
+          type: string
+        markdown:
+          type: string
+        plain:
+          type: string
     ErrorResponse:
       type: object
       properties:
@@ -163,125 +212,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Annotation'
-    Annotation:
-      type: object
-      properties:
-        id:
-          type: integer
-        api_path:
-          type: string
-        body:
-          $ref: '#/components/schemas/RichText'
-        comment_count:
-          type: integer
-        community:
-          type: boolean
-          description: True if the annotation was authored by the community rather than an artist or editor.
-        custom_preview:
-          type:
-          - string
-          - 'null'
-        has_voters:
-          type: boolean
-        votes_total:
-          type: integer
-        verified:
-          type: boolean
-          description: True if the annotation has been verified by a trusted editor or artist.
-        verified_by:
-          $ref: '#/components/schemas/User'
-        state:
-          type: string
-          enum:
-          - accepted
-          - pending
-          - deleted
-          - needs_exegesis
-        url:
-          type: string
-          format: uri
-        share_url:
-          type: string
-          format: uri
-        source:
-          type:
-          - string
-          - 'null'
-        pinned:
-          type: boolean
-        cosigned_by:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
-        authors:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnnotationAuthor'
-        created_at:
-          type: string
-          format: date-time
-    AnnotationAuthor:
-      type: object
-      properties:
-        attribution:
-          type: number
-          format: float
-        pinned_role:
-          type:
-          - string
-          - 'null'
-        user:
-          $ref: '#/components/schemas/User'
-    RichText:
-      type: object
-      description: 'Genius represents textual content in multiple formats. Which key is
-
-        present depends on the `text_format` query parameter.
-
-        '
-      properties:
-        dom:
-          type: object
-          additionalProperties: true
-        html:
-          type: string
-        markdown:
-          type: string
-        plain:
-          type: string
-    Annotatable:
-      type: object
-      properties:
-        id:
-          type: integer
-        type:
-          type: string
-          example: song
-        title:
-          type: string
-        url:
-          type: string
-          format: uri
-        api_path:
-          type: string
-        image_url:
-          type: string
-          format: uri
-        context:
-          type: string
-    Meta:
-      type: object
-      description: Wrapper metadata included on every response.
-      properties:
-        status:
-          type: integer
-          description: HTTP status code echoed in the payload.
-          example: 200
-        message:
-          type: string
-          description: Optional human-readable status message.
-      required:
-      - status
     User:
       type: object
       properties:
@@ -344,6 +274,19 @@ components:
           format: uri
         api_path:
           type: string
+    Meta:
+      type: object
+      description: Wrapper metadata included on every response.
+      properties:
+        status:
+          type: integer
+          description: HTTP status code echoed in the payload.
+          example: 200
+        message:
+          type: string
+          description: Optional human-readable status message.
+      required:
+      - status
     ReferentListResponse:
       type: object
       properties:
@@ -356,28 +299,64 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Referent'
-  responses:
-    BadRequest:
-      description: Malformed request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    Annotation:
+      type: object
+      properties:
+        id:
+          type: integer
+        api_path:
+          type: string
+        body:
+          $ref: '#/components/schemas/RichText'
+        comment_count:
+          type: integer
+        community:
+          type: boolean
+          description: True if the annotation was authored by the community rather than an artist or editor.
+        custom_preview:
+          type:
+          - string
+          - 'null'
+        has_voters:
+          type: boolean
+        votes_total:
+          type: integer
+        verified:
+          type: boolean
+          description: True if the annotation has been verified by a trusted editor or artist.
+        verified_by:
+          $ref: '#/components/schemas/User'
+        state:
+          type: string
+          enum:
+          - accepted
+          - pending
+          - deleted
+          - needs_exegesis
+        url:
+          type: string
+          format: uri
+        share_url:
+          type: string
+          format: uri
+        source:
+          type:
+          - string
+          - 'null'
+        pinned:
+          type: boolean
+        cosigned_by:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        authors:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnnotationAuthor'
+        created_at:
+          type: string
+          format: date-time
   parameters:
-    Page:
-      name: page
-      in: query
-      description: Page index (1-indexed).
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
     PerPage:
       name: per_page
       in: query
@@ -387,6 +366,14 @@ components:
         minimum: 1
         maximum: 50
         default: 20
+    Page:
+      name: page
+      in: query
+      description: Page index (1-indexed).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
     TextFormat:
       name: text_format
       in: query
@@ -399,6 +386,19 @@ components:
         - markdown
         - plain
         default: dom
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Malformed request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     GeniusOAuth2:
       type: oauth2

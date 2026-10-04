@@ -39,6 +39,9 @@ x-category: Music
 x-type: company
 x-tier: 2
 x-tier-reason: enriched-with-openapi-capabilities-and-schemas
+x-docs-platform: slate
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-10-03
 tags:
   - Music
   - Lyrics

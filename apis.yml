@@ -33,7 +33,7 @@ accessModel:
 image: https://assets.genius.com/images/apple-touch-icon.png
 specificationVersion: '0.23'
 created: '2026-05-28'
-modified: '2026-05-29'
+modified: '2026-10-06'
 x-source: public-apis/public-apis
 x-category: Music
 x-type: company
@@ -674,6 +674,8 @@ apis:
   - type: SDKs
     url: https://cran.r-project.org/web/packages/geniusr/
 common:
+  - url: https://genius.com/articles
+    type: BlogRSS
   - type: AgenticAccess
     url: agentic-access/genius-agentic-access.yml
   - type: DomainSecurity

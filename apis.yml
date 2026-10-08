@@ -674,6 +674,10 @@ apis:
   - type: SDKs
     url: https://cran.r-project.org/web/packages/geniusr/
 common:
+  - type: Plans
+    url: plans/genius-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/genius-rate-limits.yml
   - url: https://genius.com/articles
     type: BlogRSS
   - type: AgenticAccess

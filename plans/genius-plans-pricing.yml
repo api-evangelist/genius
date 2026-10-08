@@ -68,3 +68,15 @@ terms:
   notes:
     - "Attribution to Genius is required when displaying scraped lyrics or annotations."
     - "Genius does not license lyrics through this API; lyric licensing is handled separately by music publishers."
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Free Developer
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []

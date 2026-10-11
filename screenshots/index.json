@@ -1,0 +1,11 @@
+[
+  {
+    "repo": "genius",
+    "captured_at": "2026-10-11T185330",
+    "source_url": "https://docs.genius.com/",
+    "source_type": "DeveloperPortal",
+    "file": "genius-2026-10-11T185330.png",
+    "bytes": 146447,
+    "capture": "playwright-local"
+  }
+]

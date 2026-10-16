@@ -1,0 +1,14 @@
+{
+  "repo": "genius",
+  "feeds": [
+    {
+      "source": "https://genius.com/articles",
+      "feed_url": "https://genius.com/articles",
+      "title": "",
+      "saved": 15,
+      "method": "feed"
+    }
+  ],
+  "post_count": 15,
+  "fetched": "2026-10-10T13:15:00Z"
+}

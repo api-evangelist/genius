@@ -73,44 +73,20 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Malformed request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    WebPageResponse:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        response:
-          type: object
-          properties:
-            web_page:
-              $ref: '#/components/schemas/WebPage'
-    WebPage:
-      type: object
-      properties:
-        id:
-          type: integer
-        url:
-          type: string
-          format: uri
-        api_path:
-          type: string
-        share_url:
-          type: string
-          format: uri
-        domain:
-          type: string
-        title:
-          type: string
-        annotation_count:
-          type: integer
-        canonical_url:
-          type:
-          - string
-          - 'null'
-          format: uri
-        normalized_url:
-          type: string
-          format: uri
     Meta:
       type: object
       description: Wrapper metadata included on every response.
@@ -141,19 +117,43 @@ components:
                 description: Human-readable error description.
       required:
       - meta
-  responses:
-    BadRequest:
-      description: Malformed request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    WebPage:
+      type: object
+      properties:
+        id:
+          type: integer
+        url:
+          type: string
+          format: uri
+        api_path:
+          type: string
+        share_url:
+          type: string
+          format: uri
+        domain:
+          type: string
+        title:
+          type: string
+        annotation_count:
+          type: integer
+        canonical_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+        normalized_url:
+          type: string
+          format: uri
+    WebPageResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            web_page:
+              $ref: '#/components/schemas/WebPage'
   securitySchemes:
     GeniusOAuth2:
       type: oauth2

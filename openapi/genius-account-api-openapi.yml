@@ -52,30 +52,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    TextFormat:
-      name: text_format
-      in: query
-      description: Format for textual fields in the response.
-      schema:
-        type: string
-        enum:
-        - dom
-        - html
-        - markdown
-        - plain
-        default: dom
   schemas:
-    AccountResponse:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        response:
-          type: object
-          properties:
-            user:
-              $ref: '#/components/schemas/User'
     User:
       type: object
       properties:
@@ -168,6 +145,16 @@ components:
                 description: Human-readable error description.
       required:
       - meta
+    AccountResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            user:
+              $ref: '#/components/schemas/User'
   responses:
     Unauthorized:
       description: Missing or invalid access token.
@@ -175,6 +162,19 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    TextFormat:
+      name: text_format
+      in: query
+      description: Format for textual fields in the response.
+      schema:
+        type: string
+        enum:
+        - dom
+        - html
+        - markdown
+        - plain
+        default: dom
   securitySchemes:
     GeniusOAuth2:
       type: oauth2

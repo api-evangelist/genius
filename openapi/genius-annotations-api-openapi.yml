@@ -220,36 +220,7 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RichText:
-      type: object
-      description: 'Genius represents textual content in multiple formats. Which key is
-
-        present depends on the `text_format` query parameter.
-
-        '
-      properties:
-        dom:
-          type: object
-          additionalProperties: true
-        html:
-          type: string
-        markdown:
-          type: string
-        plain:
-          type: string
-    AnnotationAuthor:
-      type: object
-      properties:
-        attribution:
-          type: number
-          format: float
-        pinned_role:
-          type:
-          - string
-          - 'null'
-        user:
-          $ref: '#/components/schemas/User'
-    CommentListResponse:
+    AnnotationResponse:
       type: object
       properties:
         meta:
@@ -257,10 +228,10 @@ components:
         response:
           type: object
           properties:
-            comments:
-              type: array
-              items:
-                $ref: '#/components/schemas/Comment'
+            annotation:
+              $ref: '#/components/schemas/Annotation'
+            referent:
+              $ref: '#/components/schemas/Referent'
     VoteResponse:
       type: object
       properties:
@@ -273,22 +244,20 @@ components:
               $ref: '#/components/schemas/Referent'
             annotation:
               $ref: '#/components/schemas/Annotation'
-    Comment:
+    AnnotationVersion:
       type: object
       properties:
         id:
           type: integer
         body:
           $ref: '#/components/schemas/RichText'
-        user:
-          $ref: '#/components/schemas/User'
+        major:
+          type: boolean
         created_at:
           type: string
           format: date-time
-        votes_total:
-          type: integer
-        has_voters:
-          type: boolean
+        user:
+          $ref: '#/components/schemas/User'
     AnnotationEditListResponse:
       type: object
       properties:
@@ -301,83 +270,6 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/AnnotationVersion'
-    Annotation:
-      type: object
-      properties:
-        id:
-          type: integer
-        api_path:
-          type: string
-        body:
-          $ref: '#/components/schemas/RichText'
-        comment_count:
-          type: integer
-        community:
-          type: boolean
-          description: True if the annotation was authored by the community rather than an artist or editor.
-        custom_preview:
-          type:
-          - string
-          - 'null'
-        has_voters:
-          type: boolean
-        votes_total:
-          type: integer
-        verified:
-          type: boolean
-          description: True if the annotation has been verified by a trusted editor or artist.
-        verified_by:
-          $ref: '#/components/schemas/User'
-        state:
-          type: string
-          enum:
-          - accepted
-          - pending
-          - deleted
-          - needs_exegesis
-        url:
-          type: string
-          format: uri
-        share_url:
-          type: string
-          format: uri
-        source:
-          type:
-          - string
-          - 'null'
-        pinned:
-          type: boolean
-        cosigned_by:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
-        authors:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnnotationAuthor'
-        created_at:
-          type: string
-          format: date-time
-    Annotatable:
-      type: object
-      properties:
-        id:
-          type: integer
-        type:
-          type: string
-          example: song
-        title:
-          type: string
-        url:
-          type: string
-          format: uri
-        api_path:
-          type: string
-        image_url:
-          type: string
-          format: uri
-        context:
-          type: string
     CreateAnnotationRequest:
       type: object
       required:
@@ -428,18 +320,42 @@ components:
               format: uri
             title:
               type: string
-    AnnotationResponse:
+    Annotatable:
       type: object
       properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        response:
-          type: object
-          properties:
-            annotation:
-              $ref: '#/components/schemas/Annotation'
-            referent:
-              $ref: '#/components/schemas/Referent'
+        id:
+          type: integer
+        type:
+          type: string
+          example: song
+        title:
+          type: string
+        url:
+          type: string
+          format: uri
+        api_path:
+          type: string
+        image_url:
+          type: string
+          format: uri
+        context:
+          type: string
+    Comment:
+      type: object
+      properties:
+        id:
+          type: integer
+        body:
+          $ref: '#/components/schemas/RichText'
+        user:
+          $ref: '#/components/schemas/User'
+        created_at:
+          type: string
+          format: date-time
+        votes_total:
+          type: integer
+        has_voters:
+          type: boolean
     Meta:
       type: object
       description: Wrapper metadata included on every response.
@@ -453,20 +369,6 @@ components:
           description: Optional human-readable status message.
       required:
       - status
-    AnnotationVersion:
-      type: object
-      properties:
-        id:
-          type: integer
-        body:
-          $ref: '#/components/schemas/RichText'
-        major:
-          type: boolean
-        created_at:
-          type: string
-          format: date-time
-        user:
-          $ref: '#/components/schemas/User'
     Referent:
       type: object
       description: A referent is a fragment of text on a page that one or more annotations are attached to.
@@ -572,6 +474,23 @@ components:
           format: uri
         api_path:
           type: string
+    RichText:
+      type: object
+      description: 'Genius represents textual content in multiple formats. Which key is
+
+        present depends on the `text_format` query parameter.
+
+        '
+      properties:
+        dom:
+          type: object
+          additionalProperties: true
+        html:
+          type: string
+        markdown:
+          type: string
+        plain:
+          type: string
     ErrorResponse:
       type: object
       properties:
@@ -589,7 +508,113 @@ components:
                 description: Human-readable error description.
       required:
       - meta
+    Annotation:
+      type: object
+      properties:
+        id:
+          type: integer
+        api_path:
+          type: string
+        body:
+          $ref: '#/components/schemas/RichText'
+        comment_count:
+          type: integer
+        community:
+          type: boolean
+          description: True if the annotation was authored by the community rather than an artist or editor.
+        custom_preview:
+          type:
+          - string
+          - 'null'
+        has_voters:
+          type: boolean
+        votes_total:
+          type: integer
+        verified:
+          type: boolean
+          description: True if the annotation has been verified by a trusted editor or artist.
+        verified_by:
+          $ref: '#/components/schemas/User'
+        state:
+          type: string
+          enum:
+          - accepted
+          - pending
+          - deleted
+          - needs_exegesis
+        url:
+          type: string
+          format: uri
+        share_url:
+          type: string
+          format: uri
+        source:
+          type:
+          - string
+          - 'null'
+        pinned:
+          type: boolean
+        cosigned_by:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        authors:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnnotationAuthor'
+        created_at:
+          type: string
+          format: date-time
+    CommentListResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        response:
+          type: object
+          properties:
+            comments:
+              type: array
+              items:
+                $ref: '#/components/schemas/Comment'
+    AnnotationAuthor:
+      type: object
+      properties:
+        attribution:
+          type: number
+          format: float
+        pinned_role:
+          type:
+          - string
+          - 'null'
+        user:
+          $ref: '#/components/schemas/User'
   parameters:
+    PerPage:
+      name: per_page
+      in: query
+      description: Number of results per page (max 50).
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 20
+    Page:
+      name: page
+      in: query
+      description: Page index (1-indexed).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    AnnotationId:
+      name: id
+      in: path
+      required: true
+      description: Genius numeric annotation ID.
+      schema:
+        type: integer
+        example: 10225840
     TextFormat:
       name: text_format
       in: query
@@ -602,32 +627,13 @@ components:
         - markdown
         - plain
         default: dom
-    Page:
-      name: page
-      in: query
-      description: Page index (1-indexed).
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-    PerPage:
-      name: per_page
-      in: query
-      description: Number of results per page (max 50).
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 50
-        default: 20
-    AnnotationId:
-      name: id
-      in: path
-      required: true
-      description: Genius numeric annotation ID.
-      schema:
-        type: integer
-        example: 10225840
   responses:
+    Unauthorized:
+      description: Missing or invalid access token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     BadRequest:
       description: Malformed request.
       content:
@@ -636,12 +642,6 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Missing or invalid access token.
       content:
         application/json:
           schema:

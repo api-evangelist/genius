@@ -1,4 +1,4 @@
-# Genius (genius)
+# Genius
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,89 +66,181 @@
 
 Crowdsourced music knowledge — the Genius/Rap Genius platform. The Genius API exposes structured metadata for songs, artists, albums, annotations, referents, and contributors. Raw lyric text is not served by the API; consumers receive the public song page URL and scrape lyrics from there.
 
-**APIs.json:** [https://docs.genius.com/](https://docs.genius.com/)
+**Areas:** Music · Lyrics · Annotation · Crowdsourced · Reference Data · Public APIs
 
-## Tags
+## Genius on APIs.io
 
-- Music
-- Lyrics
-- Annotations
-- Crowdsourced
-- Reference Data
-- Public APIs
+Everything profiled for Genius is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/genius/](https://apis.io/providers/genius/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (9)
 
-- **Created:** 2026-05-28
-- **Modified:** 2026-05-29
+- [Genius Account API](https://apis.io/apis/genius/genius-account-api/) — Authenticated user account.
+- [Genius Albums API](https://apis.io/apis/genius/genius-albums-api/) — Album metadata, tracks, cover art, and leaderboards.
+- [Genius Annotations API](https://apis.io/apis/genius/genius-annotations-api/) — Community annotations attached to lyric fragments.
+- [Genius Artists API](https://apis.io/apis/genius/genius-artists-api/) — Artist profiles, discography, followers, and leaderboards.
+- [Genius Referents API](https://apis.io/apis/genius/genius-referents-api/) — Lyric fragments (referents) and their attached annotations.
+- [Genius Search API](https://apis.io/apis/genius/genius-search-api/) — Full-text search across the Genius corpus.
+- [Genius Songs API](https://apis.io/apis/genius/genius-songs-api/) — Song metadata, contributors, and activity.
+- [Genius Users API](https://apis.io/apis/genius/genius-users-api/) — Genius user profiles and contributions.
+- [Genius Web Pages API](https://apis.io/apis/genius/genius-web-pages-api/) — Web page lookup for the annotation network.
 
-## APIs
+### Published properties
 
-### Genius
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Crowdsourced music knowledge — songs, artists, albums, annotations, referents, and contributor data.
+#### Agentic access (1)
 
-- **Human URL:** [https://docs.genius.com/](https://docs.genius.com/)
-- **Base URL:** `https://api.genius.com`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Genius Agentic Access](https://apis.io/agentic-access/genius/genius-agentic-access/)
 
-- Music
-- Lyrics
-- Annotations
+#### JSON Schema (7)
 
-#### Properties
+The data models the API reads and writes.
 
-- [Documentation](https://docs.genius.com/)
-- [Sign Up](https://genius.com/api-clients)
-- [Authentication](https://docs.genius.com/#/authentication-h1)
-- [Terms of Service](https://genius.com/static/terms)
-- [OpenAPI](openapi/genius-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/genius.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/genius.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/genius-song-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/genius-artist-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/genius-album-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/genius-annotation-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/genius-referent-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/genius-user-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/genius-web-page-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Structure](json-structure/genius-song-structure.json)
-- [JSON Structure](json-structure/genius-annotation-structure.json)
-- [Example](examples/genius-search-example.json)
-- [Example](examples/genius-get-song-example.json)
-- [Example](examples/genius-get-artist-example.json)
-- [Example](examples/genius-list-artist-songs-example.json)
-- [Example](examples/genius-get-referents-example.json)
-- [Example](examples/genius-get-annotation-example.json)
-- [Example](examples/genius-lookup-web-page-example.json)
-- [Plans](plans/genius-plans-pricing.yml)
-- [Rate Limits](rate-limits/genius-rate-limits.yml)
-- [SDK](https://github.com/johnwmillr/LyricsGenius)
-- [SDK](https://github.com/fedecalendino/wrap-genius)
-- [SDK](https://github.com/jahrlin/genius-api)
-- [SDK](https://github.com/bookercodes/node-genius)
-- [SDK](https://github.com/timrogers/genius)
-- [SDK](https://github.com/simivar/Genius-PHP)
-- [SDK](https://cran.r-project.org/web/packages/geniusr/)
+- [GeniusAlbum](https://apis.io/schemas/genius/genius-album/)
+- [GeniusAnnotation](https://apis.io/schemas/genius/genius-annotation/)
+- [GeniusArtist](https://apis.io/schemas/genius/genius-artist/)
+- [GeniusReferent](https://apis.io/schemas/genius/genius-referent/)
+- [GeniusSong](https://apis.io/schemas/genius/genius-song/)
+- [GeniusUser](https://apis.io/schemas/genius/genius-user/)
+- [GeniusWebPage](https://apis.io/schemas/genius/genius-web-page/)
 
-## Common Properties
+#### JSON Structure (2)
+
+Data models expressed in JSON Structure.
+
+- [Genius Annotation Structure](https://apis.io/json-structure/genius/genius-annotation-structure/)
+- [Genius Song Structure](https://apis.io/json-structure/genius/genius-song-structure/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Genius Context](https://apis.io/jsonld/genius/genius-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Genius API Vocabulary](https://apis.io/vocabularies/genius/genius-vocabulary/)
+
+#### Examples (7)
+
+Example requests and responses.
+
+- [Genius Get Annotation Example](https://apis.io/examples/genius/genius-get-annotation-example/)
+- [Genius Get Artist Example](https://apis.io/examples/genius/genius-get-artist-example/)
+- [Genius Get Referents Example](https://apis.io/examples/genius/genius-get-referents-example/)
+- [Genius Get Song Example](https://apis.io/examples/genius/genius-get-song-example/)
+- [Genius List Artist Songs Example](https://apis.io/examples/genius/genius-list-artist-songs-example/)
+- [Genius Lookup Web Page Example](https://apis.io/examples/genius/genius-lookup-web-page-example/)
+- [Genius Search Example](https://apis.io/examples/genius/genius-search-example/)
+
+#### Collections (10)
+
+Postman and Open Collection request collections.
+
+- [Genius API](https://apis.io/collections/genius/open-genius/)
+- [Genius Account API](https://apis.io/collections/genius/open-genius-account-api/)
+- [Genius Account Albums API](https://apis.io/collections/genius/open-genius-albums-api/)
+- [Genius Account Annotations API](https://apis.io/collections/genius/open-genius-annotations-api/)
+- [Genius Account Artists API](https://apis.io/collections/genius/open-genius-artists-api/)
+- [Genius Account Referents API](https://apis.io/collections/genius/open-genius-referents-api/)
+- [Genius Account Search API](https://apis.io/collections/genius/open-genius-search-api/)
+- [Genius Account Songs API](https://apis.io/collections/genius/open-genius-songs-api/)
+- [Genius Account Users API](https://apis.io/collections/genius/open-genius-users-api/)
+- [Genius Account Web Pages API](https://apis.io/collections/genius/open-genius-web-pages-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Genius — jsonschema rules](https://apis.io/rules/genius/genius-jsonschema-spectral-rules/)
+- [Genius API Rules](https://apis.io/rules/genius/genius-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Genius Authentication](https://apis.io/security/genius/genius-authentication/)
+- [Genius Domain Security](https://apis.io/security/genius/genius-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Genius Scopes](https://apis.io/scopes/genius/genius-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Genius Plans Pricing](https://apis.io/plans/genius/genius-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Genius Rate Limits](https://apis.io/rate-limits/genius/genius-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://genius.com/)
-- [Developer Portal](https://docs.genius.com/)
-- [A P I Client Registration](https://genius.com/api-clients)
-- [Terms of Service](https://genius.com/static/terms)
-- [GitHub Organization](https://github.com/Genius)
-- [Spectral Ruleset](rules/genius-rules.yml)
-- [J S O N L D Context](json-ld/genius-context.jsonld)
-- [Vocabulary](vocabulary/genius-vocabulary.yml)
-- [Public APIs Listing](https://github.com/public-apis/public-apis)
-- [Tools](https://github.com/jchoi2x/genius-mcp)
-- [Tools](https://github.com/federicogarciav/genius-mcp)
-- [Tools](https://mcp.so/server/genius-mcp-server/Sergiolm17)
-- [Tools](https://github.com/Genius/omniauth-genius)
+- [Terms of service](https://genius.com/static/terms)
+- [GitHub](https://github.com/Genius)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 34.4** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 78.6 |
+| Contract quality | 28.9 |
+| Contract governance | 27.3 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 41.7 |
+| Access clarity | 28.9 |
+
+**Agent readiness 24.2** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | negotiable (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | documented (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 30.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/genius/](https://apis.io/providers/genius/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Genius: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/genius/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
